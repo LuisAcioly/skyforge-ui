@@ -93,7 +93,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading || undefined}
         data-loading={loading || undefined}
         className={cn(
-          "relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-md border font-body font-semibold leading-none outline-none shadow-none transition duration-sf-fast ease-sf-standard active:translate-y-px focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+          "relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-md border font-body font-semibold leading-none outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
           variantClasses[variant],
           sizeClasses[size],
           fullWidth && "w-full",

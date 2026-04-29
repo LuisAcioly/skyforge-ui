@@ -117,6 +117,10 @@ const config = {
         "sf-2": "var(--shadow-2)",
         "sf-3": "var(--shadow-3)"
       },
+      zIndex: {
+        "sf-overlay": "var(--z-overlay)",
+        "sf-modal": "var(--z-modal)"
+      },
       maxWidth: {
         shell: "var(--shell-max)",
         "modal-sm": "var(--component-modal-width-sm)",

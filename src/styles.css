@@ -59,6 +59,9 @@
     --shadow-2: 0 8px 24px rgb(22 27 30 / 0.1), 0 24px 48px rgb(22 27 30 / 0.08);
     --shadow-3: 0 24px 64px rgb(22 27 30 / 0.18), 0 48px 96px rgb(22 27 30 / 0.14);
 
+    --z-overlay: 40;
+    --z-modal: 50;
+
     --duration-fast: 120ms;
     --duration-normal: 180ms;
     --duration-slow: 240ms;
@@ -224,6 +227,21 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  figcaption {
+    text-wrap: pretty;
+  }
+
   button,
   input,
   textarea,
@@ -241,6 +259,21 @@
     color: rgb(var(--color-link-hover));
   }
 
+  @keyframes sf-input-loading-ring {
+    0%,
+    100% {
+      box-shadow: inset 0 0 0 1px rgb(var(--color-border) / 0.35);
+    }
+
+    50% {
+      box-shadow: inset 0 0 0 1px rgb(var(--color-focus) / 0.72);
+    }
+  }
+
+  .sf-input-control[data-loading="true"] {
+    animation: sf-input-loading-ring 1.6s var(--ease-standard) infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -249,6 +282,10 @@
       transition-duration: 1ms !important;
       animation-duration: 1ms !important;
       animation-iteration-count: 1 !important;
+    }
+
+    .sf-input-control[data-loading="true"] {
+      animation: none !important;
     }
   }
 }
