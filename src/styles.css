@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+    --font-size-3xl: 48px;
+    --font-size-4xl: 64px;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.2;
+    --line-height-normal: 1.5;
+    --letter-spacing-eyebrow: 0.08em;
+
+    --shell-max: 1180px;
+
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-48: 48px;
+    --space-64: 64px;
+    --space-96: 96px;
+    --space-128: 128px;
+
+    --size-20: 20px;
+    --size-40: 40px;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    --border-width-default: 1px;
+    --border-width-strong: 2px;
+
+    --shadow-none: none;
+    --shadow-1: 0 1px 2px rgb(22 27 30 / 0.06), 0 8px 24px rgb(22 27 30 / 0.05);
+    --shadow-2: 0 8px 24px rgb(22 27 30 / 0.1), 0 24px 48px rgb(22 27 30 / 0.08);
+    --shadow-3: 0 24px 64px rgb(22 27 30 / 0.18), 0 48px 96px rgb(22 27 30 / 0.14);
+
+    --duration-fast: 120ms;
+    --duration-normal: 180ms;
+    --duration-slow: 240ms;
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+    --component-button-height-sm: 32px;
+    --component-button-height-md: 40px;
+    --component-button-height-lg: 48px;
+    --component-button-padding-x-sm: 12px;
+    --component-button-padding-x-md: 16px;
+    --component-button-padding-x-lg: 24px;
+    --component-input-height-md: 40px;
+    --component-input-height-lg: 48px;
+    --component-card-padding: 24px;
+    --component-card-padding-editorial: 32px;
+    --component-modal-width-sm: 400px;
+    --component-modal-width-md: 560px;
+    --component-modal-width-lg: 720px;
+    --component-modal-width-xl: 960px;
+    --component-modal-overlay: 22 27 30;
+    --component-tabs-height: 40px;
+    --component-tabs-indicator-height: 2px;
+    --component-badge-height-sm: 20px;
+    --component-badge-height-md: 24px;
+  }
+
+  :root,
+  [data-theme="light"] {
+    color-scheme: light;
+    --color-background: 245 246 246;
+    --color-background-editorial: 228 224 213;
+    --color-surface: 255 255 255;
+    --color-surface-raised: 255 255 255;
+    --color-surface-sunken: 230 231 231;
+    --color-surface-inverse: 22 27 30;
+    --color-border: 207 210 209;
+    --color-border-strong: 173 179 179;
+    --color-divider: 207 210 209;
+    --color-text-primary: 22 27 30;
+    --color-text-secondary: 81 86 86;
+    --color-text-tertiary: 90 96 96;
+    --color-text-inverse: 245 246 246;
+    --color-icon-primary: 22 27 30;
+    --color-icon-secondary: 90 96 96;
+    --color-icon-tertiary: 105 113 112;
+    --color-icon-inverse: 245 246 246;
+    --color-icon-accent: 54 118 86;
+    --color-icon-disabled: 105 113 112;
+    --color-primary: 22 27 30;
+    --color-primary-hover: 50 55 56;
+    --color-primary-active: 22 27 30;
+    --color-primary-foreground: 245 246 246;
+    --color-secondary: 255 255 255;
+    --color-secondary-hover: 230 231 231;
+    --color-secondary-foreground: 22 27 30;
+    --color-focus: 54 118 86;
+    --color-link: 54 118 86;
+    --color-link-hover: 33 72 55;
+    --color-hover-surface: 230 231 231;
+    --color-active-surface: 207 210 209;
+    --color-success-background: 234 246 238;
+    --color-success-border: 183 223 196;
+    --color-success-text: 31 90 56;
+    --color-success-icon: 47 125 79;
+    --color-warning-background: 255 247 214;
+    --color-warning-border: 246 215 122;
+    --color-warning-text: 113 63 18;
+    --color-warning-icon: 161 98 7;
+    --color-error-background: 255 241 240;
+    --color-error-border: 244 183 180;
+    --color-error-text: 142 36 33;
+    --color-error-icon: 194 65 61;
+    --color-info-background: 239 246 255;
+    --color-info-border: 191 219 254;
+    --color-info-text: 30 58 112;
+    --color-info-icon: 37 99 168;
+    --color-disabled-background: 230 231 231;
+    --color-disabled-border: 207 210 209;
+    --color-disabled-text: 90 96 96;
+    --color-success-bg: 234 246 238;
+    --color-warning-bg: 255 247 214;
+    --color-error-bg: 255 241 240;
+    --color-info-bg: 239 246 255;
+    --color-disabled-bg: 230 231 231;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --color-background: 22 27 30;
+    --color-background-editorial: 37 38 39;
+    --color-surface: 50 55 56;
+    --color-surface-raised: 64 68 68;
+    --color-surface-sunken: 22 27 30;
+    --color-surface-inverse: 228 224 213;
+    --color-border: 132 140 139;
+    --color-border-strong: 173 179 179;
+    --color-divider: 132 140 139;
+    --color-text-primary: 245 246 246;
+    --color-text-secondary: 207 210 209;
+    --color-text-tertiary: 173 179 179;
+    --color-text-inverse: 22 27 30;
+    --color-icon-primary: 245 246 246;
+    --color-icon-secondary: 173 179 179;
+    --color-icon-tertiary: 132 140 139;
+    --color-icon-inverse: 22 27 30;
+    --color-icon-accent: 133 183 157;
+    --color-icon-disabled: 173 179 179;
+    --color-primary: 228 224 213;
+    --color-primary-hover: 230 231 231;
+    --color-primary-active: 207 210 209;
+    --color-primary-foreground: 22 27 30;
+    --color-secondary: 50 55 56;
+    --color-secondary-hover: 64 68 68;
+    --color-secondary-foreground: 245 246 246;
+    --color-focus: 133 183 157;
+    --color-link: 133 183 157;
+    --color-link-hover: 191 224 206;
+    --color-hover-surface: 64 68 68;
+    --color-active-surface: 81 86 86;
+    --color-success-background: 16 37 26;
+    --color-success-border: 125 199 154;
+    --color-success-text: 183 223 196;
+    --color-success-icon: 125 199 154;
+    --color-warning-background: 46 34 5;
+    --color-warning-border: 229 184 62;
+    --color-warning-text: 246 215 122;
+    --color-warning-icon: 229 184 62;
+    --color-error-background: 50 18 17;
+    --color-error-border: 229 115 111;
+    --color-error-text: 244 183 180;
+    --color-error-icon: 229 115 111;
+    --color-info-background: 15 30 51;
+    --color-info-border: 126 182 244;
+    --color-info-text: 191 219 254;
+    --color-info-icon: 126 182 244;
+    --color-disabled-background: 37 38 39;
+    --color-disabled-border: 105 113 112;
+    --color-disabled-text: 173 179 179;
+    --color-success-bg: 16 37 26;
+    --color-warning-bg: 46 34 5;
+    --color-error-bg: 50 18 17;
+    --color-info-bg: 15 30 51;
+    --color-disabled-bg: 37 38 39;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    margin: 0;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-text-primary));
+    font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  a {
+    color: rgb(var(--color-link));
+    text-decoration-color: rgb(var(--color-link) / 0.42);
+    text-underline-offset: 0.2em;
+  }
+
+  a:hover {
+    color: rgb(var(--color-link-hover));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 1ms !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}

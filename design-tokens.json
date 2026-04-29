@@ -1,0 +1,1469 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "primitive": {
+    "color": {
+      "base": {
+        "white": {
+          "$type": "color",
+          "$value": "#FFFFFF",
+          "$description": "Technical white for raised surfaces and foregrounds."
+        },
+        "black": {
+          "$type": "color",
+          "$value": "#000000",
+          "$description": "Technical black reserved for alpha overlays and non-UI compositing only. Do not use for visible component states."
+        }
+      },
+      "brand": {
+        "carbon-black": {
+          "$type": "color",
+          "$value": "#161B1E",
+          "$description": "Primary brand authority color used for light theme CTAs and dark theme canvas."
+        },
+        "shadow-ink": {
+          "$type": "color",
+          "$value": "#323738",
+          "$description": "Dark ink surface color separated from neutral 900 for visible dark-mode surfaces."
+        },
+        "charcoal": {
+          "$type": "color",
+          "$value": "#515656",
+          "$description": "Structural brand neutral aligned with neutral 700."
+        },
+        "soft-linen": {
+          "$type": "color",
+          "$value": "#E4E0D5",
+          "$description": "Warm editorial surface color used sparingly for narrative emphasis."
+        },
+        "muted-teal": {
+          "$type": "color",
+          "$value": "#367656",
+          "$description": "Contrast-safe brand accent for links, focus states, and functional emphasis on light surfaces."
+        }
+      },
+      "neutral": {
+        "50": {
+          "$type": "color",
+          "$value": "#F5F6F6",
+          "$description": "Primary light canvas."
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#E6E7E7",
+          "$description": "Subtle light surface and hover tone."
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#CFD2D1",
+          "$description": "Default light border and divider tone."
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#ADB3B3",
+          "$description": "Strong light border and muted dark text."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#848C8B",
+          "$description": "Muted neutral for non-text affordances and low-emphasis decoration."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#697170",
+          "$description": "Secondary content on light backgrounds."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#5A6060",
+          "$description": "Secondary icon and strong content tone."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#515656",
+          "$description": "Strong neutral and brand charcoal alias."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#404444",
+          "$description": "Raised dark surface and active tone with improved contrast against neutral 300 text."
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#252627",
+          "$description": "Deep neutral for low-emphasis dark surfaces, kept distinct from brand shadow ink."
+        }
+      },
+      "teal": {
+        "50": {
+          "$type": "color",
+          "$value": "#F0F7F3",
+          "$description": "Subtle teal background for accents."
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#D9EEE3",
+          "$description": "Soft teal hover and badge background."
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#BFE0CE",
+          "$description": "Teal border and tonal surface."
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#85B79D",
+          "$description": "Light teal accent for dark theme links and non-text accent surfaces."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#66A384",
+          "$description": "Medium teal accent for icons and charts."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#4B8F6E",
+          "$description": "Mid teal interaction tone."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#367656",
+          "$description": "Accessible brand teal for normal text, links, and focus in light theme."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#2B5E47",
+          "$description": "Accessible default link and focus tone in light theme."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#214837",
+          "$description": "Active teal state in light theme."
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#173226",
+          "$description": "Strong teal foreground on light teal surfaces."
+        }
+      },
+      "feedback": {
+        "success": {
+          "50": {
+            "$type": "color",
+            "$value": "#EAF6EE",
+            "$description": "Success background."
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#B7DFC4",
+            "$description": "Success border."
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#2F7D4F",
+            "$description": "Success icon."
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#1F5A38",
+            "$description": "Success text."
+          }
+        },
+        "warning": {
+          "50": {
+            "$type": "color",
+            "$value": "#FFF7D6",
+            "$description": "Warning background."
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#F6D77A",
+            "$description": "Warning border."
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#A16207",
+            "$description": "Warning icon."
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#713F12",
+            "$description": "Warning text."
+          }
+        },
+        "error": {
+          "50": {
+            "$type": "color",
+            "$value": "#FFF1F0",
+            "$description": "Error background."
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#F4B7B4",
+            "$description": "Error border."
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#C2413D",
+            "$description": "Error icon and destructive action."
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#8E2421",
+            "$description": "Error text."
+          }
+        },
+        "info": {
+          "50": {
+            "$type": "color",
+            "$value": "#EFF6FF",
+            "$description": "Info background."
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#BFDBFE",
+            "$description": "Info border."
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#2563A8",
+            "$description": "Info icon."
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#1E3A70",
+            "$description": "Info text."
+          }
+        }
+      }
+    },
+    "font": {
+      "family": {
+        "display": {
+          "$type": "fontFamily",
+          "$value": "Plus Jakarta Sans",
+          "$description": "Display font for headings and editorial moments."
+        },
+        "body": {
+          "$type": "fontFamily",
+          "$value": "Inter",
+          "$description": "Body font for product UI and long-form readability."
+        }
+      },
+      "size": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "12px",
+          "$description": "Caption and metadata size."
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": "14px",
+          "$description": "Small body and compact controls."
+        },
+        "base": {
+          "$type": "dimension",
+          "$value": "16px",
+          "$description": "Default body size."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "20px",
+          "$description": "Small heading size."
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "Medium heading size."
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": "32px",
+          "$description": "Large heading size."
+        },
+        "3xl": {
+          "$type": "dimension",
+          "$value": "48px",
+          "$description": "Display heading size."
+        },
+        "4xl": {
+          "$type": "dimension",
+          "$value": "64px",
+          "$description": "Hero display size."
+        }
+      },
+      "weight": {
+        "regular": {
+          "$type": "fontWeight",
+          "$value": 400,
+          "$description": "Default body text weight."
+        },
+        "medium": {
+          "$type": "fontWeight",
+          "$value": 500,
+          "$description": "Metadata and subtle emphasis."
+        },
+        "semibold": {
+          "$type": "fontWeight",
+          "$value": 600,
+          "$description": "Labels and control text."
+        },
+        "bold": {
+          "$type": "fontWeight",
+          "$value": 700,
+          "$description": "Headings and strong emphasis."
+        }
+      },
+      "line-height": {
+        "tight": {
+          "$type": "number",
+          "$value": 1.1,
+          "$description": "Display and hero line-height."
+        },
+        "snug": {
+          "$type": "number",
+          "$value": 1.2,
+          "$description": "Heading and label line-height."
+        },
+        "normal": {
+          "$type": "number",
+          "$value": 1.5,
+          "$description": "Body copy line-height."
+        }
+      },
+      "letter-spacing": {
+        "normal": {
+          "$type": "dimension",
+          "$value": "0em",
+          "$description": "Default tracking."
+        },
+        "eyebrow": {
+          "$type": "dimension",
+          "$value": "0.08em",
+          "$description": "Uppercase editorial eyebrow tracking."
+        }
+      }
+    },
+    "spacing": {
+      "4": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Micro spacing unit."
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Default inline gap."
+      },
+      "12": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "Compact component padding."
+      },
+      "16": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Default component padding."
+      },
+      "24": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Default card and form spacing."
+      },
+      "32": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "Section and large component spacing."
+      },
+      "48": {
+        "$type": "dimension",
+        "$value": "48px",
+        "$description": "Page section spacing."
+      },
+      "64": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$description": "Large section spacing."
+      },
+      "96": {
+        "$type": "dimension",
+        "$value": "96px",
+        "$description": "Editorial layout spacing."
+      },
+      "128": {
+        "$type": "dimension",
+        "$value": "128px",
+        "$description": "Hero and immersive layout spacing."
+      }
+    },
+    "radius": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Small radius for badges and compact surfaces."
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Default control radius."
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "Card and alert radius."
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Editorial card and popover radius."
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Modal and high-emphasis surface radius."
+      },
+      "full": {
+        "$type": "dimension",
+        "$value": "9999px",
+        "$description": "Fully rounded pills and avatars."
+      }
+    },
+    "border-width": {
+      "default": {
+        "$type": "dimension",
+        "$value": "1px",
+        "$description": "Default structural border width."
+      },
+      "strong": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Focus and selected state border width."
+      }
+    },
+    "shadow": {
+      "none": {
+        "$type": "shadow",
+        "$value": "none",
+        "$description": "No elevation."
+      },
+      "1": {
+        "$type": "shadow",
+        "$value": "0 1px 2px rgb(22 27 30 / 0.04), 0 8px 24px rgb(22 27 30 / 0.035)",
+        "$description": "Subtle elevation for interactive cards and small menus only."
+      },
+      "2": {
+        "$type": "shadow",
+        "$value": "0 8px 24px rgb(22 27 30 / 0.08), 0 24px 48px rgb(22 27 30 / 0.06)",
+        "$description": "Medium elevation for popovers and floating panels."
+      },
+      "3": {
+        "$type": "shadow",
+        "$value": "0 24px 64px rgb(22 27 30 / 0.18), 0 48px 96px rgb(22 27 30 / 0.14)",
+        "$description": "High elevation for modals."
+      }
+    },
+    "motion": {
+      "duration": {
+        "fast": {
+          "$type": "duration",
+          "$value": "120ms",
+          "$description": "Fast state transitions."
+        },
+        "normal": {
+          "$type": "duration",
+          "$value": "180ms",
+          "$description": "Default UI transition duration."
+        },
+        "slow": {
+          "$type": "duration",
+          "$value": "240ms",
+          "$description": "Overlay and modal transition duration."
+        }
+      },
+      "easing": {
+        "standard": {
+          "$type": "cubicBezier",
+          "$value": [0.2, 0, 0, 1],
+          "$description": "Default product easing."
+        }
+      }
+    },
+    "icon": {
+      "library": {
+        "$type": "string",
+        "$value": "Heroicons",
+        "$description": "Official iconography library for the design system."
+      },
+      "style": {
+        "default": {
+          "$type": "string",
+          "$value": "outline",
+          "$description": "Default icon style for navigation, actions, forms, and utility UI."
+        },
+        "emphasis": {
+          "$type": "string",
+          "$value": "solid",
+          "$description": "Use solid icons only for emphasis, filled badges, and feedback states."
+        }
+      },
+      "size": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "16px",
+          "$description": "Dense metadata, small badges, and compact inline affordances."
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": "20px",
+          "$description": "Default inline icon size for controls and inputs."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "Standard navigation, empty-state, and card icon size."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "32px",
+          "$description": "Large illustrative or feature icon size."
+        }
+      },
+      "stroke-width": {
+        "outline": {
+          "$type": "number",
+          "$value": 1.5,
+          "$description": "Consistent Heroicons outline stroke width."
+        }
+      }
+    },
+    "layout": {
+      "breakpoint": {
+        "mobile": {
+          "$type": "dimension",
+          "$value": "720px",
+          "$description": "Single-column mobile layout breakpoint used by the showcase."
+        },
+        "tablet": {
+          "$type": "dimension",
+          "$value": "1040px",
+          "$description": "Intermediate collapse point for navigation and major grids."
+        }
+      },
+      "container": {
+        "shell": {
+          "$type": "dimension",
+          "$value": "1180px",
+          "$description": "Maximum width for the documentation shell container."
+        }
+      }
+    }
+  },
+  "semantic": {
+    "light": {
+      "color": {
+        "structure": {
+          "background": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Default light theme canvas."
+            },
+            "editorial": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.soft-linen}",
+              "$description": "Warm editorial background for narrative sections."
+            }
+          },
+          "surface": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.base.white}",
+              "$description": "Default raised content surface."
+            },
+            "raised": {
+              "$type": "color",
+              "$value": "{primitive.color.base.white}",
+              "$description": "Raised surface for overlays and menus."
+            },
+            "sunken": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.100}",
+              "$description": "Inset or low-emphasis surface."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Inverse high-contrast surface."
+            }
+          },
+          "border": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Default light border."
+            },
+            "strong": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Strong light border."
+            }
+          },
+          "divider": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Default light divider."
+            }
+          }
+        },
+        "content": {
+          "text": {
+            "primary": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Primary text in light theme."
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.700}",
+              "$description": "Secondary text in light theme."
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.600}",
+              "$description": "Tertiary text and metadata in light theme."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Text on inverse dark surfaces."
+            }
+          },
+          "icon": {
+            "primary": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Primary icon in light theme."
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.600}",
+              "$description": "Secondary icon in light theme."
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.500}",
+              "$description": "Low-emphasis icon in light theme."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Icon on inverse dark surfaces in light theme."
+            },
+            "accent": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.muted-teal}",
+              "$description": "Brand accent icon in light theme."
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.500}",
+              "$description": "Disabled icon in light theme."
+            },
+            "success": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.success.600}",
+              "$description": "Success feedback icon in light theme."
+            },
+            "warning": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.warning.600}",
+              "$description": "Warning feedback icon in light theme."
+            },
+            "error": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.error.600}",
+              "$description": "Error feedback icon in light theme."
+            },
+            "info": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.info.600}",
+              "$description": "Info feedback icon in light theme."
+            }
+          }
+        },
+        "interaction": {
+          "primary": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Primary action background in light theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.shadow-ink}",
+              "$description": "Primary action hover in light theme."
+            },
+            "active": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Primary action active in light theme without pure black UI states."
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Foreground on primary action in light theme."
+            }
+          },
+          "secondary": {
+            "default": {
+              "$type": "color",
+              "$value": "{semantic.light.color.structure.surface.default}",
+              "$description": "Secondary action background in light theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.100}",
+              "$description": "Secondary action hover in light theme."
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{semantic.light.color.content.text.primary}",
+              "$description": "Foreground on secondary action in light theme."
+            }
+          },
+          "focus": {
+            "ring": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.muted-teal}",
+              "$description": "Accessible focus ring in light theme."
+            }
+          },
+          "link": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.muted-teal}",
+              "$description": "Accessible link color in light theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.teal.800}",
+              "$description": "Link hover color in light theme."
+            }
+          },
+          "hover": {
+            "surface": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.100}",
+              "$description": "Generic hover surface in light theme."
+            }
+          },
+          "active": {
+            "surface": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Generic active surface in light theme."
+            }
+          }
+        },
+        "feedback": {
+          "success": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.success.50}",
+              "$description": "Success background in light theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.success.200}",
+              "$description": "Success border in light theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.success.700}",
+              "$description": "Success text in light theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.success.600}",
+              "$description": "Success icon in light theme."
+            }
+          },
+          "warning": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.warning.50}",
+              "$description": "Warning background in light theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.warning.200}",
+              "$description": "Warning border in light theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.warning.700}",
+              "$description": "Warning text in light theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.warning.600}",
+              "$description": "Warning icon in light theme."
+            }
+          },
+          "error": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.error.50}",
+              "$description": "Error background in light theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.error.200}",
+              "$description": "Error border in light theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.error.700}",
+              "$description": "Error text in light theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.error.600}",
+              "$description": "Error icon in light theme."
+            }
+          },
+          "info": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.info.50}",
+              "$description": "Info background in light theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.info.200}",
+              "$description": "Info border in light theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.info.700}",
+              "$description": "Info text in light theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "{primitive.color.feedback.info.600}",
+              "$description": "Info icon in light theme."
+            }
+          },
+          "disabled": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.100}",
+              "$description": "Disabled background in light theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Disabled border in light theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.600}",
+              "$description": "Disabled text in light theme."
+            }
+          }
+        }
+      }
+    },
+    "dark": {
+      "color": {
+        "structure": {
+          "background": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Default dark theme canvas."
+            },
+            "editorial": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.900}",
+              "$description": "Dark editorial background."
+            }
+          },
+          "surface": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.shadow-ink}",
+              "$description": "Default dark surface."
+            },
+            "raised": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.800}",
+              "$description": "Raised dark surface."
+            },
+            "sunken": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Inset dark surface."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.soft-linen}",
+              "$description": "Inverse light editorial surface in dark theme."
+            }
+          },
+          "border": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.400}",
+              "$description": "Accessible default dark border for component boundaries."
+            },
+            "strong": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Strong dark border for selected and emphasized boundaries."
+            }
+          },
+          "divider": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.400}",
+              "$description": "Accessible dark divider for visible section separation."
+            }
+          }
+        },
+        "content": {
+          "text": {
+            "primary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Primary text in dark theme."
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Secondary text in dark theme."
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Tertiary text and metadata in dark theme."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Text on inverse light surfaces."
+            }
+          },
+          "icon": {
+            "primary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.50}",
+              "$description": "Primary icon in dark theme."
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Secondary icon in dark theme."
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.400}",
+              "$description": "Low-emphasis icon in dark theme."
+            },
+            "inverse": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Icon on inverse light surfaces in dark theme."
+            },
+            "accent": {
+              "$type": "color",
+              "$value": "{primitive.color.teal.300}",
+              "$description": "Brand accent icon in dark theme."
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Disabled icon in dark theme."
+            },
+            "success": {
+              "$type": "color",
+              "$value": "#7DC79A",
+              "$description": "Success feedback icon in dark theme."
+            },
+            "warning": {
+              "$type": "color",
+              "$value": "#E5B83E",
+              "$description": "Warning feedback icon in dark theme."
+            },
+            "error": {
+              "$type": "color",
+              "$value": "#E5736F",
+              "$description": "Error feedback icon in dark theme."
+            },
+            "info": {
+              "$type": "color",
+              "$value": "#7EB6F4",
+              "$description": "Info feedback icon in dark theme."
+            }
+          }
+        },
+        "interaction": {
+          "primary": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.soft-linen}",
+              "$description": "Primary action background in dark theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.100}",
+              "$description": "Primary action hover in dark theme."
+            },
+            "active": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.200}",
+              "$description": "Primary action active in dark theme."
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{primitive.color.brand.carbon-black}",
+              "$description": "Foreground on primary action in dark theme."
+            }
+          },
+          "secondary": {
+            "default": {
+              "$type": "color",
+              "$value": "{semantic.dark.color.structure.surface.default}",
+              "$description": "Secondary action background in dark theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.800}",
+              "$description": "Secondary action hover in dark theme."
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{semantic.dark.color.content.text.primary}",
+              "$description": "Foreground on secondary action in dark theme."
+            }
+          },
+          "focus": {
+            "ring": {
+              "$type": "color",
+              "$value": "{primitive.color.teal.300}",
+              "$description": "Accessible focus ring in dark theme."
+            }
+          },
+          "link": {
+            "default": {
+              "$type": "color",
+              "$value": "{primitive.color.teal.300}",
+              "$description": "Accessible link color in dark theme."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{primitive.color.teal.200}",
+              "$description": "Link hover color in dark theme."
+            }
+          },
+          "hover": {
+            "surface": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.800}",
+              "$description": "Generic hover surface in dark theme."
+            }
+          },
+          "active": {
+            "surface": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.700}",
+              "$description": "Generic active surface in dark theme."
+            }
+          }
+        },
+        "feedback": {
+          "success": {
+            "background": {
+              "$type": "color",
+              "$value": "#10251A",
+              "$description": "Dark tonal success background with accessible contrast."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "#7DC79A",
+              "$description": "Accessible success border in dark theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "#B7DFC4",
+              "$description": "Accessible success text in dark theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "#7DC79A",
+              "$description": "Accessible success icon in dark theme."
+            }
+          },
+          "warning": {
+            "background": {
+              "$type": "color",
+              "$value": "#2E2205",
+              "$description": "Dark tonal warning background with accessible contrast."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "#E5B83E",
+              "$description": "Accessible warning border in dark theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "#F6D77A",
+              "$description": "Accessible warning text in dark theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "#E5B83E",
+              "$description": "Accessible warning icon in dark theme."
+            }
+          },
+          "error": {
+            "background": {
+              "$type": "color",
+              "$value": "#321211",
+              "$description": "Dark tonal error background with accessible contrast."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "#E5736F",
+              "$description": "Accessible error border in dark theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "#F4B7B4",
+              "$description": "Accessible error text in dark theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "#E5736F",
+              "$description": "Accessible error icon in dark theme."
+            }
+          },
+          "info": {
+            "background": {
+              "$type": "color",
+              "$value": "#0F1E33",
+              "$description": "Dark tonal info background with accessible contrast."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "#7EB6F4",
+              "$description": "Accessible info border in dark theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "#BFDBFE",
+              "$description": "Accessible info text in dark theme."
+            },
+            "icon": {
+              "$type": "color",
+              "$value": "#7EB6F4",
+              "$description": "Accessible info icon in dark theme."
+            }
+          },
+          "disabled": {
+            "background": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.900}",
+              "$description": "Disabled background in dark theme."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.500}",
+              "$description": "Disabled border in dark theme."
+            },
+            "text": {
+              "$type": "color",
+              "$value": "{primitive.color.neutral.300}",
+              "$description": "Disabled text in dark theme."
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "breakpoint": {
+        "mobile": {
+          "$type": "dimension",
+          "$value": "{primitive.layout.breakpoint.mobile}",
+          "$description": "Semantic mobile collapse breakpoint."
+        },
+        "tablet": {
+          "$type": "dimension",
+          "$value": "{primitive.layout.breakpoint.tablet}",
+          "$description": "Semantic intermediate collapse breakpoint."
+        }
+      },
+      "container": {
+        "shell": {
+          "$type": "dimension",
+          "$value": "{primitive.layout.container.shell}",
+          "$description": "Semantic shell max-width for page layouts."
+        }
+      }
+    }
+  },
+  "component": {
+    "button": {
+      "height": {
+        "sm": {
+          "$type": "dimension",
+          "$value": "32px",
+          "$description": "Small button height."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "40px",
+          "$description": "Default button height."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "48px",
+          "$description": "Large button height."
+        }
+      },
+      "padding-x": {
+        "sm": {
+          "$type": "dimension",
+          "$value": "12px",
+          "$description": "Small button horizontal padding."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "16px",
+          "$description": "Default button horizontal padding."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "Large button horizontal padding."
+        }
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.8}",
+        "$description": "Gap between button icon and label."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.md}",
+        "$description": "Default button radius."
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.font.weight.semibold}",
+        "$description": "Button label weight."
+      }
+    },
+    "input": {
+      "height": {
+        "md": {
+          "$type": "dimension",
+          "$value": "40px",
+          "$description": "Default input height."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "48px",
+          "$description": "Large input height."
+        }
+      },
+      "padding-x": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.12}",
+        "$description": "Default input horizontal padding."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.md}",
+        "$description": "Default input radius."
+      },
+      "border-width": {
+        "$type": "dimension",
+        "$value": "{primitive.border-width.default}",
+        "$description": "Default input border width."
+      }
+    },
+    "card": {
+      "padding": {
+        "default": {
+          "$type": "dimension",
+          "$value": "{primitive.spacing.24}",
+          "$description": "Default card padding."
+        },
+        "editorial": {
+          "$type": "dimension",
+          "$value": "{primitive.spacing.32}",
+          "$description": "Editorial card padding."
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.lg}",
+        "$description": "Default card radius."
+      },
+      "border-width": {
+        "$type": "dimension",
+        "$value": "{primitive.border-width.default}",
+        "$description": "Default card border width."
+      },
+      "elevation": {
+        "default": {
+          "$type": "shadow",
+          "$value": "{primitive.shadow.none}",
+          "$description": "Default cards are border-first and do not use elevation."
+        },
+        "interactive": {
+          "$type": "shadow",
+          "$value": "{primitive.shadow.1}",
+          "$description": "Optional subtle elevation for interactive cards only."
+        },
+        "raised": {
+          "$type": "shadow",
+          "$value": "{primitive.shadow.2}",
+          "$description": "Raised card elevation for floating surfaces and documentation previews."
+        }
+      }
+    },
+    "icon": {
+      "size": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "{primitive.icon.size.xs}",
+          "$description": "Compact component icon size."
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": "{primitive.icon.size.sm}",
+          "$description": "Default component icon size."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "{primitive.icon.size.md}",
+          "$description": "Prominent component icon size."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "{primitive.icon.size.lg}",
+          "$description": "Feature and empty-state icon size."
+        }
+      },
+      "stroke-width": {
+        "$type": "number",
+        "$value": "{primitive.icon.stroke-width.outline}",
+        "$description": "Default Heroicons outline stroke width."
+      }
+    },
+    "modal": {
+      "width": {
+        "sm": {
+          "$type": "dimension",
+          "$value": "400px",
+          "$description": "Small modal width."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "560px",
+          "$description": "Default modal width."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "720px",
+          "$description": "Large modal width."
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": "960px",
+          "$description": "Extra large modal width."
+        }
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.32}",
+        "$description": "Default modal panel padding."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.2xl}",
+        "$description": "Default modal panel radius."
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "rgb(22 27 30 / 0.72)",
+        "$description": "Default modal overlay color."
+      }
+    },
+    "tabs": {
+      "height": {
+        "$type": "dimension",
+        "$value": "40px",
+        "$description": "Default tab trigger height."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.4}",
+        "$description": "Gap between tab triggers."
+      },
+      "indicator-height": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Underline tab indicator height."
+      }
+    },
+    "badge": {
+      "height": {
+        "sm": {
+          "$type": "dimension",
+          "$value": "20px",
+          "$description": "Small badge height."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "Default badge height."
+        }
+      },
+      "padding-x": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.8}",
+        "$description": "Default badge horizontal padding."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.full}",
+        "$description": "Default badge pill radius."
+      }
+    },
+    "alert": {
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.16}",
+        "$description": "Default alert padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.spacing.12}",
+        "$description": "Gap between alert icon and content."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.radius.lg}",
+        "$description": "Default alert radius."
+      },
+      "border-width": {
+        "$type": "dimension",
+        "$value": "{primitive.border-width.default}",
+        "$description": "Default alert border width."
+      }
+    }
+  }
+}
