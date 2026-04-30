@@ -1,17 +1,24 @@
 import "./styles.css";
 
 export * from "./components/Alert/Alert";
+export * from "./components/AutoComplete/AutoComplete";
+export * from "./components/Avatar/Avatar";
 export * from "./components/Button/Button";
 export * from "./components/Checkbox/Checkbox";
+export * from "./components/DatePicker/DatePicker";
 export * from "./components/DropdownMenu/DropdownMenu";
+export * from "./components/FormField/FormField";
 export * from "./components/Input/Input";
 export * from "./components/Modal/Modal";
+export * from "./components/MultiSelect/MultiSelect";
 export * from "./components/Pagination/Pagination";
 export * from "./components/Radio/Radio";
 export * from "./components/Select/Select";
 export * from "./components/Skeleton/Skeleton";
 export * from "./components/Spinner/Spinner";
+export * from "./components/Switch/Switch";
 export * from "./components/Tabs/Tabs";
+export * from "./components/Table/Table";
 export * from "./components/Textarea/Textarea";
 export * from "./components/Tooltip/Tooltip";
 export * from "./theme/ThemeProvider";

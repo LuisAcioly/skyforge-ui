@@ -1,7 +1,6 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Pagination, type PaginationProps } from "./Pagination";
+import { Pagination } from "./Pagination";
 
 const meta = {
   title: "Components/Pagination",
@@ -25,14 +24,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-function PaginationDemo(args: PaginationProps) {
-  const [page, setPage] = useState(args.page);
-
-  return <Pagination {...args} page={page} onPageChange={setPage} />;
-}
+const playgroundSource = `<Pagination page={6} totalPages={18} siblingCount={1} onPageChange={(page) => console.log(page)} />`;
 
 export const Playground: Story = {
-  render: (args) => <PaginationDemo {...args} />
+  render: (args) => <Pagination {...args} onPageChange={() => undefined} />,
+  parameters: {
+    docs: {
+      source: {
+        code: playgroundSource
+      }
+    }
+  }
 };
 
 export const Sizes: Story = {
