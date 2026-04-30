@@ -16,6 +16,10 @@ const meta = {
     label: {
       control: "text"
     },
+    locale: {
+      control: "select",
+      options: ["en", "pt-BR"]
+    },
     size: {
       control: "select",
       options: ["md", "lg"]
@@ -29,7 +33,7 @@ const meta = {
     helperText: "Use local release date in DD-MM-YYYY format.",
     label: "Release date",
     size: "md",
-    value: "18-05-2026",
+    defaultValue: "18-05-2026",
     variant: "outline"
   }
 } satisfies Meta<typeof DatePicker>;
@@ -56,6 +60,15 @@ export const States: Story = {
       <DatePicker label="Default" defaultValue="18-05-2026" helperText="Helper text remains connected by aria-describedby." />
       <DatePicker label="Invalid" defaultValue="" errorText="Release date is required." />
       <DatePicker label="Disabled" disabled defaultValue="02-07-2026" helperText="Disabled values remain readable." />
+    </div>
+  )
+};
+
+export const Locales: Story = {
+  render: () => (
+    <div className="grid max-w-modal-md gap-sf-16">
+      <DatePicker label="English" defaultValue="18-05-2026" locale="en" />
+      <DatePicker label="Português do Brasil" defaultValue="18-05-2026" locale="pt-BR" />
     </div>
   )
 };

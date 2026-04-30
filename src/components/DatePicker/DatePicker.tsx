@@ -1,16 +1,18 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { CalendarDaysIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { forwardRef, useId, useState, type ChangeEvent, type InputHTMLAttributes } from "react";
+import { forwardRef, useEffect, useId, useState, type ChangeEvent, type InputHTMLAttributes } from "react";
 
 import { cn } from "../../utils/cn";
 
 export type DatePickerVariant = "outline" | "filled" | "ghost";
 export type DatePickerSize = "md" | "lg";
+export type DatePickerLocale = "en" | "pt-BR";
 
 export interface DatePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   errorText?: string | null;
   helperText?: string | null;
   label?: string | null;
+  locale?: DatePickerLocale;
   onDateChange?: (value: string) => void;
   size?: DatePickerSize;
   variant?: DatePickerVariant;
@@ -62,22 +64,60 @@ function formatCalendarDate(date: Date) {
   return `${day}-${month}-${year}`;
 }
 
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
-const weekDays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+const localeLabels: Record<
+  DatePickerLocale,
+  {
+    monthNames: string[];
+    nextMonth: string;
+    openCalendar: string;
+    previousMonth: string;
+    selectYear: string;
+    weekDays: string[];
+  }
+> = {
+  en: {
+    monthNames: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    nextMonth: "Next month",
+    openCalendar: "Open calendar",
+    previousMonth: "Previous month",
+    selectYear: "Select year",
+    weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+  },
+  "pt-BR": {
+    monthNames: [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro"
+    ],
+    nextMonth: "Próximo mês",
+    openCalendar: "Abrir calendário",
+    previousMonth: "Mês anterior",
+    selectYear: "Selecionar ano",
+    weekDays: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
+  }
+};
 
 const variantClasses: Record<DatePickerVariant, string> = {
   outline: "border-border bg-surface hover:border-border-strong focus-visible:border-border-strong",
@@ -107,6 +147,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       helperText,
       id,
       label,
+      locale = "en",
       onChange,
       onDateChange,
       size = "md",
@@ -119,6 +160,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const generatedId = useId();
     const inputId = id ?? `${generatedId}-date`;
+    const labels = localeLabels[locale];
     const [open, setOpen] = useState(false);
     const formattedDefaultValue = formatDateValue(defaultValue);
     const [internalValue, setInternalValue] = useState(
@@ -127,6 +169,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const formattedValue = formatDateValue(value);
     const currentValue = typeof formattedValue === "string" ? formattedValue : internalValue;
     const selectedDate = parseDateValue(currentValue);
+    const selectedTime = selectedDate?.getTime();
     const [viewDate, setViewDate] = useState(selectedDate ?? new Date());
     const resolvedLabel = typeof label === "string" ? label : undefined;
     const hasLabel = resolvedLabel !== undefined;
@@ -172,6 +215,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       setOpen(false);
     };
 
+    useEffect(() => {
+      if (selectedDate) {
+        setViewDate(selectedDate);
+      }
+    }, [selectedTime]);
+
     const moveMonth = (offset: number) => {
       setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + offset, 1));
     };
@@ -194,8 +243,14 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               <button
                 type="button"
                 disabled={disabled}
-                aria-label="Open calendar"
-                onClick={() => setOpen(true)}
+                aria-label={labels.openCalendar}
+                onClick={() => {
+                  if (selectedDate) {
+                    setViewDate(selectedDate);
+                  }
+
+                  setOpen(true);
+                }}
                 className="absolute left-sf-8 top-1/2 inline-flex h-sf-24 w-sf-24 -translate-y-1/2 items-center justify-center rounded-sf-sm text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:text-disabled-text"
               >
                 <CalendarDaysIcon className={iconSizeClasses[size]} strokeWidth={1.5} />
@@ -213,7 +268,13 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 aria-invalid={isInvalid ? true : ariaInvalid}
                 data-invalid={isInvalid || undefined}
                 onChange={handleInputChange}
-                onFocus={() => setOpen(true)}
+                onFocus={() => {
+                  if (selectedDate) {
+                    setViewDate(selectedDate);
+                  }
+
+                  setOpen(true);
+                }}
                 className={cn(
                   "block w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                   variantClasses[variant],
@@ -234,7 +295,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               <div className="flex items-center justify-between gap-sf-8 pb-sf-12">
                 <button
                   type="button"
-                  aria-label="Previous month"
+                  aria-label={labels.previousMonth}
                   onClick={() => moveMonth(-1)}
                   className="inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-md border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
@@ -242,10 +303,10 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 </button>
                 <div className="flex min-w-0 items-center gap-sf-4 overflow-hidden rounded-sf-md border border-border bg-surface p-sf-4">
                   <span className="rounded-sf-sm bg-active-surface px-sf-8 py-sf-4 text-caption text-content-primary">
-                    {monthNames[viewDate.getMonth()].slice(0, 3)}
+                    {labels.monthNames[viewDate.getMonth()].slice(0, 3)}
                   </span>
                   <select
-                    aria-label="Select year"
+                    aria-label={labels.selectYear}
                     value={viewDate.getFullYear()}
                     onChange={(event) => changeYear(Number(event.target.value))}
                     className="w-auto rounded-sf-sm border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -259,7 +320,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 </div>
                 <button
                   type="button"
-                  aria-label="Next month"
+                  aria-label={labels.nextMonth}
                   onClick={() => moveMonth(1)}
                   className="inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-md border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
@@ -268,7 +329,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               </div>
 
               <div className="grid grid-cols-7 gap-sf-4">
-                {weekDays.map((day) => (
+                {labels.weekDays.map((day) => (
                   <span key={day} className="flex h-sf-24 items-center justify-center rounded-sf-sm bg-surface-sunken text-caption text-content-tertiary">
                     {day}
                   </span>
