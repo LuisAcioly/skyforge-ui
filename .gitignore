@@ -3,3 +3,6 @@ dist/
 storybook-static/
 .DS_Store
 *.log
+DESIGN_SYSTEM_RULES.md
+SKYFORGE-UI.md
+design-tokens.json

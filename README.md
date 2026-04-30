@@ -1,41 +1,33 @@
 # Skyforge UI
 
-React component library for Skyforge products. Built with TypeScript, Tailwind CSS, Storybook, Radix primitives and Heroicons.
+[![npm version](https://img.shields.io/npm/v/%40luiswagnerab%2Fskyforge-ui.svg)](https://www.npmjs.com/package/@luiswagnerab/skyforge-ui)
+[![license](https://img.shields.io/npm/l/%40luiswagnerab%2Fskyforge-ui.svg)](./LICENSE)
+[![types](https://img.shields.io/badge/types-TypeScript-blue.svg)](./dist/index.d.ts)
 
-Skyforge UI provides accessible, themeable product components with a restrained technical visual language: semantic colors, border-first hierarchy, predictable spacing, and dark/light themes.
+React component library for building interfaces in the Skyforge ecosystem. Built with TypeScript, Tailwind CSS, Radix primitives, Heroicons, and Skyforge design tokens.
 
-## Features
-
-- React 18 and TypeScript component API.
-- Tailwind v3 utilities mapped to Skyforge semantic tokens.
-- Light and dark themes through `data-theme`.
-- Accessible behavior powered by Radix primitives where needed.
-- Storybook documentation for component variants, states, and usage.
-- ESM library build with generated TypeScript declarations.
-
-## Requirements
-
-- Node.js compatible with the installed Vite and Storybook versions.
-- React `>=18.2.0`.
-- React DOM `>=18.2.0`.
+Skyforge UI focuses on accessible product interfaces with a restrained technical visual language: semantic colors, border-first hierarchy, predictable spacing, and light/dark themes.
 
 ## Installation
-
-Install dependencies for local development:
-
-```bash
-npm install
-```
-
-If consumed as a package, install it in the host app:
 
 ```bash
 npm install @luiswagnerab/skyforge-ui
 ```
 
-## Usage
+Peer dependencies:
 
-Import components from the package entry point:
+- `react >=18.2.0`
+- `react-dom >=18.2.0`
+
+## Quick Start
+
+Import the stylesheet once in your app entry point:
+
+```tsx
+import "@luiswagnerab/skyforge-ui/styles.css";
+```
+
+Use components from the package entry:
 
 ```tsx
 import { Button, Input, ThemeProvider } from "@luiswagnerab/skyforge-ui";
@@ -59,20 +51,20 @@ export function Example() {
 }
 ```
 
-The library imports its stylesheet from the package entry. If the host setup needs an explicit CSS import, use:
-
-```tsx
-import "@luiswagnerab/skyforge-ui/styles.css";
-```
-
 ## Theming
 
-Use `ThemeProvider` when the app shell does not already set `data-theme`:
+Use `ThemeProvider` when your app shell does not already set `data-theme`:
 
 ```tsx
-<ThemeProvider theme="dark">
-  <App />
-</ThemeProvider>
+import { ThemeProvider } from "@luiswagnerab/skyforge-ui";
+
+export function App() {
+  return (
+    <ThemeProvider theme="dark">
+      <ProductShell />
+    </ThemeProvider>
+  );
+}
 ```
 
 Supported themes:
@@ -80,106 +72,118 @@ Supported themes:
 - `light`
 - `dark`
 
-Design tokens live in `src/styles.css` and are exposed through semantic Tailwind utilities such as `bg-background`, `bg-surface`, `text-content-primary`, `border-border`, `ring-focus`, `px-sf-16`, and `rounded-sf-md`.
+Skyforge UI ships compiled CSS variables and utility classes for tokens such as `bg-background`, `bg-surface`, `text-content-primary`, `border-border`, `ring-focus`, `px-sf-16`, and `rounded-sf-md`.
 
 ## Components
 
-Currently exported components:
+Core:
 
 - `Alert`
-- `AutoComplete`
 - `Avatar`
 - `Button`
+- `Modal`
+- `Tabs`
+- `Tooltip`
+
+Forms:
+
+- `AutoComplete`
 - `Checkbox`
 - `DatePicker`
-- `DropdownMenu`
 - `FormField`
 - `Input`
-- `Modal`
 - `MultiSelect`
-- `Pagination`
 - `RadioGroup`, `Radio`
 - `Select`
+- `Switch`
+- `Textarea`
+
+Data and feedback:
+
+- `DropdownMenu`
+- `Pagination`
 - `Skeleton`
 - `Spinner`
-- `Switch`
-- `Tabs`
 - `Table`
-- `Textarea`
-- `Tooltip`
+
+Theme:
+
 - `ThemeProvider`
 
-Removed or unsupported components should not be used: `Label`, `Loading`, `TableCaption`.
+Unsupported components: `Label`, `Loading`, `TableCaption`.
+
+## Component Notes
+
+- Use `Input` only for `type="text"` and `type="number"`.
+- Use `Textarea` for long text.
+- Use `DatePicker` for dates in `DD-MM-YYYY` format.
+- Use `Skeleton` for layout-shaped loading states.
+- Use `Spinner` for compact inline activity.
+- Use `TableEmpty` and `TableLoading` for table states.
+- Use Heroicons for product icons and keep `strokeWidth={1.5}`.
+- Use semantic tokens instead of hardcoded colors.
+
+## Package Exports
+
+```ts
+import { Button } from "@luiswagnerab/skyforge-ui";
+import "@luiswagnerab/skyforge-ui/styles.css";
+```
+
+Available exports:
+
+- `@luiswagnerab/skyforge-ui` -> ESM bundle and TypeScript declarations.
+- `@luiswagnerab/skyforge-ui/styles.css` -> compiled stylesheet.
+
+Published files are limited to `dist`, `README.md`, `LICENSE`, and `package.json`.
 
 ## Development
 
-Run Storybook locally:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run Storybook:
 
 ```bash
 npm run storybook
 ```
 
-Build static Storybook:
-
-```bash
-npm run build-storybook
-```
-
-Run TypeScript validation:
+Validate TypeScript:
 
 ```bash
 npm run typecheck
 ```
 
-Build library output:
+Build package output:
 
 ```bash
 npm run build
 ```
 
-## Project Structure
+Preview package contents:
 
-```text
-src/
-  components/       React components and Storybook stories
-  theme/            ThemeProvider
-  utils/            Shared utilities
-  index.ts          Public package exports
-  styles.css        Design tokens and component styles
-DESIGN_SYSTEM_RULES.md
-SKYFORGE-UI.md
+```bash
+npm pack --dry-run
 ```
-
-## Design Guidelines
-
-- Use Skyforge UI components before raw HTML controls.
-- Use semantic tokens instead of hardcoded colors.
-- Use Heroicons for product icons and keep `strokeWidth={1.5}`.
-- Use `Input` only for `type="text"` and `type="number"`.
-- Use `Textarea` for long text and `DatePicker` for dates.
-- Use `Skeleton` for layout-shaped loading and `Spinner` for compact inline activity.
-- Use `TableEmpty` and `TableLoading` for table states.
-- Keep labels, helper text, status text, error text, and tooltip content as strings, `null`, or `undefined` unless component API explicitly allows React nodes.
-
-For agent-facing implementation rules, see `SKYFORGE-UI.md`.
 
 ## Quality Gate
 
-Before opening a PR or publishing a build, run:
+Run before publishing:
 
 ```bash
 npm run typecheck
 npm run build
+npm pack --dry-run
 ```
 
-## Package Output
+## Documentation
 
-The package exports:
-
-- `@luiswagnerab/skyforge-ui` -> ESM bundle and TypeScript declarations from `dist`.
-- `@luiswagnerab/skyforge-ui/styles.css` -> built stylesheet.
-
-Only `dist` is included in published package files.
+- `SKYFORGE-UI.md`: implementation guide for agents and product UI work.
+- `DESIGN_SYSTEM_RULES.md`: visual and token governance.
+- Storybook stories in `src/components/**/*.stories.tsx` document variants and states.
 
 ## License
 
