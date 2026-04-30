@@ -1,0 +1,119 @@
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import {
+  forwardRef,
+  useId,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  type ReactNode
+} from "react";
+
+import { cn } from "../../utils/cn";
+
+export type RadioSize = "sm" | "md";
+
+export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
+  fullWidth?: boolean;
+}
+
+export interface RadioProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
+  containerClassName?: string;
+  helperText?: ReactNode;
+  label?: ReactNode;
+  labelClassName?: string;
+  size?: RadioSize;
+}
+
+const itemSizeClasses: Record<RadioSize, string> = {
+  sm: "h-sf-16 w-sf-16",
+  md: "h-sf-20 w-sf-20"
+};
+
+const indicatorSizeClasses: Record<RadioSize, string> = {
+  sm: "h-sf-8 w-sf-8",
+  md: "h-sf-8 w-sf-8"
+};
+
+export const RadioGroup = forwardRef<ElementRef<typeof RadioGroupPrimitive.Root>, RadioGroupProps>(
+  ({ className, fullWidth = false, orientation = "vertical", ...props }, ref) => (
+    <RadioGroupPrimitive.Root
+      ref={ref}
+      orientation={orientation}
+      className={cn(
+        orientation === "horizontal" ? "flex flex-wrap items-start gap-sf-16" : "grid gap-sf-12",
+        fullWidth && "w-full",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+
+RadioGroup.displayName = "RadioGroup";
+
+export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioProps>(
+  (
+    {
+      "aria-describedby": ariaDescribedBy,
+      className,
+      containerClassName,
+      disabled,
+      helperText,
+      id,
+      label,
+      labelClassName,
+      size = "md",
+      ...props
+    },
+    ref
+  ) => {
+    const generatedId = useId();
+    const radioId = id ?? `${generatedId}-radio`;
+    const helperId = helperText ? `${radioId}-helper` : undefined;
+    const describedBy = [ariaDescribedBy, helperId].filter(Boolean).join(" ") || undefined;
+
+    return (
+      <div className={cn("flex items-start gap-sf-12", containerClassName)}>
+        <RadioGroupPrimitive.Item
+          ref={ref}
+          id={radioId}
+          disabled={disabled}
+          aria-describedby={describedBy}
+          className={cn(
+            "inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border border-border bg-surface outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface active:translate-y-px active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:opacity-100 data-[state=checked]:border-primary data-[state=checked]:bg-surface",
+            itemSizeClasses[size],
+            className
+          )}
+          {...props}
+        >
+          <RadioGroupPrimitive.Indicator className="inline-flex items-center justify-center">
+            <span className={cn("block rounded-sf-full bg-primary", indicatorSizeClasses[size])} />
+          </RadioGroupPrimitive.Indicator>
+        </RadioGroupPrimitive.Item>
+
+        {label || helperText ? (
+          <div className="min-w-0 pt-[1px]">
+            {label ? (
+              <label
+                htmlFor={radioId}
+                className={cn(
+                  "block cursor-pointer select-none text-label text-content-primary",
+                  disabled && "cursor-not-allowed text-disabled-text",
+                  labelClassName
+                )}
+              >
+                {label}
+              </label>
+            ) : null}
+            {helperText ? (
+              <p id={helperId} className="m-0 mt-sf-4 text-caption text-content-tertiary">
+                {helperText}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+);
+
+Radio.displayName = "Radio";
