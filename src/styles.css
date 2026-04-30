@@ -274,6 +274,35 @@
     animation: sf-input-loading-ring 1.6s var(--ease-standard) infinite;
   }
 
+  @keyframes sf-skeleton-shimmer {
+    0% {
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  .sf-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: rgb(var(--color-surface-sunken));
+  }
+
+  .sf-skeleton::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-surface-sunken) / 0),
+      rgb(var(--color-surface-raised) / 0.72),
+      rgb(var(--color-surface-sunken) / 0)
+    );
+    animation: sf-skeleton-shimmer 1.4s var(--ease-standard) infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -285,6 +314,10 @@
     }
 
     .sf-input-control[data-loading="true"] {
+      animation: none !important;
+    }
+
+    .sf-skeleton::after {
       animation: none !important;
     }
   }
