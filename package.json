@@ -1,8 +1,29 @@
 {
-  "name": "skyforge-ui",
+  "name": "@luiswagnerab/skyforge-ui",
   "version": "0.1.0",
-  "description": "Skyforge-UI component library based on the Skyforge design system tokens.",
+  "description": "Skyforge-UI component library for building applications in the Skyforge ecosystem.",
+  "license": "MIT",
+  "author": "Luis Wagner Acioly Bastos",
+  "homepage": "https://github.com/LuisAcioly/skyforge-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisAcioly/skyforge-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LuisAcioly/skyforge-ui/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "tailwindcss",
+    "storybook",
+    "design-system",
+    "components",
+    "ui-library"
+  ],
   "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": [
     "**/*.css"
   ],
@@ -16,10 +37,14 @@
     },
     "./styles.css": "./dist/styles.css"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsc -p tsconfig.build.json && vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run typecheck && npm run build",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 # Skyforge UI
 
-React component library for Skyforge products. Built with TypeScript, Tailwind CSS, Storybook, Radix primitives, Heroicons, and Skyforge design tokens.
+React component library for Skyforge products. Built with TypeScript, Tailwind CSS, Storybook, Radix primitives and Heroicons.
 
 Skyforge UI provides accessible, themeable product components with a restrained technical visual language: semantic colors, border-first hierarchy, predictable spacing, and dark/light themes.
 
@@ -30,7 +30,7 @@ npm install
 If consumed as a package, install it in the host app:
 
 ```bash
-npm install skyforge-ui
+npm install @luiswagnerab/skyforge-ui
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ npm install skyforge-ui
 Import components from the package entry point:
 
 ```tsx
-import { Button, Input, ThemeProvider } from "skyforge-ui";
+import { Button, Input, ThemeProvider } from "@luiswagnerab/skyforge-ui";
 
 export function Example() {
   return (
@@ -62,7 +62,7 @@ export function Example() {
 The library imports its stylesheet from the package entry. If the host setup needs an explicit CSS import, use:
 
 ```tsx
-import "skyforge-ui/styles.css";
+import "@luiswagnerab/skyforge-ui/styles.css";
 ```
 
 ## Theming
@@ -176,11 +176,11 @@ npm run build
 
 The package exports:
 
-- `skyforge-ui` -> ESM bundle and TypeScript declarations from `dist`.
-- `skyforge-ui/styles.css` -> built stylesheet.
+- `@luiswagnerab/skyforge-ui` -> ESM bundle and TypeScript declarations from `dist`.
+- `@luiswagnerab/skyforge-ui/styles.css` -> built stylesheet.
 
 Only `dist` is included in published package files.
 
 ## License
 
-No license is defined in `package.json` yet. Define license before public distribution.
+MIT. See `LICENSE`.
