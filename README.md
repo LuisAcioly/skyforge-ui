@@ -179,12 +179,6 @@ npm run build
 npm pack --dry-run
 ```
 
-## Documentation
-
-- `SKYFORGE-UI.md`: implementation guide for agents and product UI work.
-- `DESIGN_SYSTEM_RULES.md`: visual and token governance.
-- Storybook stories in `src/components/**/*.stories.tsx` document variants and states.
-
 ## License
 
 MIT. See `LICENSE`.
