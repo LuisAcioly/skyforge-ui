@@ -21,7 +21,7 @@ Peer dependencies:
 
 ## Quick Start
 
-Import the stylesheet once in your app entry point:
+Most bundlers load the package stylesheet from the component entry automatically. If your app does not apply styles, import the stylesheet once in your app entry point:
 
 ```tsx
 import "@luiswagnerab/skyforge-ui/styles.css";
