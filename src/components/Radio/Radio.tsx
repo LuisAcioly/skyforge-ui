@@ -17,7 +17,7 @@ export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGr
 
 export interface RadioProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
   containerClassName?: string;
-  helperText?: ReactNode;
+  helperText?: string | null;
   label?: ReactNode;
   labelClassName?: string;
   size?: RadioSize;
@@ -68,7 +68,9 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Rad
   ) => {
     const generatedId = useId();
     const radioId = id ?? `${generatedId}-radio`;
-    const helperId = helperText ? `${radioId}-helper` : undefined;
+    const resolvedHelperText = typeof helperText === "string" ? helperText : undefined;
+    const hasHelperText = resolvedHelperText !== undefined;
+    const helperId = hasHelperText ? `${radioId}-helper` : undefined;
     const describedBy = [ariaDescribedBy, helperId].filter(Boolean).join(" ") || undefined;
 
     return (
@@ -90,7 +92,7 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Rad
           </RadioGroupPrimitive.Indicator>
         </RadioGroupPrimitive.Item>
 
-        {label || helperText ? (
+        {label || hasHelperText ? (
           <div className="min-w-0 pt-[1px]">
             {label ? (
               <label
@@ -104,9 +106,9 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Rad
                 {label}
               </label>
             ) : null}
-            {helperText ? (
+            {hasHelperText ? (
               <p id={helperId} className="m-0 mt-sf-4 text-caption text-content-tertiary">
-                {helperText}
+                {resolvedHelperText}
               </p>
             ) : null}
           </div>

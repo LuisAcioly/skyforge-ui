@@ -20,7 +20,7 @@ export type AlertVariant = "info" | "success" | "warning" | "error";
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   action?: ReactNode;
   icon?: ReactNode;
-  title?: ReactNode;
+  title?: string | null;
   variant?: AlertVariant;
 }
 
@@ -69,6 +69,8 @@ function renderAlertIcon(icon: ReactNode | undefined, variant: AlertVariant) {
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ action, children, className, icon, role, title, variant = "info", ...props }, ref) => {
     const renderedIcon = renderAlertIcon(icon, variant);
+    const resolvedTitle = typeof title === "string" ? title : undefined;
+    const hasTitle = resolvedTitle !== undefined;
 
     return (
       <div
@@ -89,9 +91,9 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           ) : null}
 
           <div className="min-w-0 flex-1">
-            {title ? <p className="m-0 text-label text-current">{title}</p> : null}
+            {hasTitle ? <p className="m-0 text-label text-current">{resolvedTitle}</p> : null}
             {children ? (
-              <div className={cn("text-body-sm text-current", title ? "mt-sf-4" : undefined)}>{children}</div>
+              <div className={cn("text-body-sm text-current", hasTitle ? "mt-sf-4" : undefined)}>{children}</div>
             ) : null}
             {action ? <div className="mt-sf-12 flex flex-wrap gap-sf-8">{action}</div> : null}
           </div>

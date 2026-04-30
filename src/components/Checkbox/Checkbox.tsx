@@ -4,8 +4,7 @@ import {
   forwardRef,
   useId,
   type ComponentPropsWithoutRef,
-  type ElementRef,
-  type ReactNode
+  type ElementRef
 } from "react";
 
 import { cn } from "../../utils/cn";
@@ -14,9 +13,9 @@ export type CheckboxSize = "sm" | "md";
 
 export interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   containerClassName?: string;
-  errorText?: ReactNode;
-  helperText?: ReactNode;
-  label?: ReactNode;
+  errorText?: string | null;
+  helperText?: string | null;
+  label?: string | null;
   labelClassName?: string;
   size?: CheckboxSize;
 }
@@ -51,9 +50,15 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
   ) => {
     const generatedId = useId();
     const checkboxId = id ?? `${generatedId}-checkbox`;
-    const helperId = helperText ? `${checkboxId}-helper` : undefined;
-    const errorId = errorText ? `${checkboxId}-error` : undefined;
-    const isInvalid = Boolean(errorText) || ariaInvalid === true || ariaInvalid === "true";
+    const resolvedHelperText = typeof helperText === "string" ? helperText : undefined;
+    const hasHelperText = resolvedHelperText !== undefined;
+    const resolvedErrorText = typeof errorText === "string" ? errorText : undefined;
+    const hasErrorText = resolvedErrorText !== undefined;
+    const resolvedLabel = typeof label === "string" ? label : undefined;
+    const hasLabel = resolvedLabel !== undefined;
+    const helperId = hasHelperText ? `${checkboxId}-helper` : undefined;
+    const errorId = hasErrorText ? `${checkboxId}-error` : undefined;
+    const isInvalid = hasErrorText || ariaInvalid === true || ariaInvalid === "true";
     const describedBy = [ariaDescribedBy, helperId, errorId].filter(Boolean).join(" ") || undefined;
 
     return (
@@ -87,9 +92,9 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             </CheckboxPrimitive.Indicator>
           </CheckboxPrimitive.Root>
 
-          {label || helperText || errorText ? (
+          {hasLabel || hasHelperText || hasErrorText ? (
             <div className="min-w-0 pt-[1px]">
-              {label ? (
+              {hasLabel ? (
                 <label
                   htmlFor={checkboxId}
                   className={cn(
@@ -98,17 +103,17 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     labelClassName
                   )}
                 >
-                  {label}
+                  {resolvedLabel}
                 </label>
               ) : null}
-              {helperText ? (
+              {hasHelperText ? (
                 <p id={helperId} className="m-0 mt-sf-4 text-caption text-content-tertiary">
-                  {helperText}
+                  {resolvedHelperText}
                 </p>
               ) : null}
-              {errorText ? (
+              {hasErrorText ? (
                 <p id={errorId} className="m-0 mt-sf-4 text-caption text-error-text">
-                  {errorText}
+                  {resolvedErrorText}
                 </p>
               ) : null}
             </div>

@@ -8,6 +8,15 @@ const meta = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
+    errorText: {
+      control: "text"
+    },
+    helperText: {
+      control: "text"
+    },
+    label: {
+      control: "text"
+    },
     size: {
       control: "select",
       options: ["md", "lg"]
@@ -15,6 +24,9 @@ const meta = {
     status: {
       control: "select",
       options: ["default", "success", "warning", "error"]
+    },
+    statusText: {
+      control: "text"
     },
     variant: {
       control: "select",

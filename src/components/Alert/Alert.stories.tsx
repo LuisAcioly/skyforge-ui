@@ -11,6 +11,9 @@ const meta = {
     variant: {
       control: "select",
       options: ["info", "success", "warning", "error"]
+    },
+    title: {
+      control: "text"
     }
   },
   args: {

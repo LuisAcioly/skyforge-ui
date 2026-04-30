@@ -20,15 +20,15 @@ export type InputSize = "md" | "lg";
 export type InputStatus = "default" | "success" | "warning" | "error";
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  errorText?: ReactNode;
-  helperText?: ReactNode;
-  label?: ReactNode;
+  errorText?: string | null;
+  helperText?: string | null;
+  label?: string | null;
   leftIcon?: ReactNode;
   loading?: boolean;
   rightIcon?: ReactNode;
   size?: InputSize;
   status?: InputStatus;
-  statusText?: ReactNode;
+  statusText?: string | null;
   variant?: InputVariant;
 }
 
@@ -110,10 +110,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const generatedId = useId();
     const inputId = id ?? `${generatedId}-input`;
-    const helperId = helperText ? `${inputId}-helper` : undefined;
-    const feedbackText = errorText ?? statusText;
-    const feedbackId = feedbackText ? `${inputId}-feedback` : undefined;
-    const isInvalid = Boolean(errorText) || status === "error" || ariaInvalid === true || ariaInvalid === "true";
+    const resolvedHelperText = typeof helperText === "string" ? helperText : undefined;
+    const hasHelperText = resolvedHelperText !== undefined;
+    const resolvedErrorText = typeof errorText === "string" ? errorText : undefined;
+    const resolvedStatusText = typeof statusText === "string" ? statusText : undefined;
+    const resolvedLabel = typeof label === "string" ? label : undefined;
+    const hasLabel = resolvedLabel !== undefined;
+    const helperId = hasHelperText ? `${inputId}-helper` : undefined;
+    const feedbackText = resolvedErrorText ?? resolvedStatusText;
+    const hasFeedbackText = feedbackText !== undefined;
+    const feedbackId = hasFeedbackText ? `${inputId}-feedback` : undefined;
+    const isInvalid = resolvedErrorText !== undefined || status === "error" || ariaInvalid === true || ariaInvalid === "true";
     const ariaInvalidValue = isInvalid ? true : ariaInvalid;
     const resolvedStatus: InputStatus = isInvalid ? "error" : status;
     const describedBy = [ariaDescribedBy, helperId, feedbackId].filter(Boolean).join(" ") || undefined;
@@ -130,9 +137,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="grid w-full gap-sf-8">
-        {label ? (
+        {hasLabel ? (
           <label htmlFor={inputId} className="text-label text-content-primary">
-            {label}
+            {resolvedLabel}
           </label>
         ) : null}
 
@@ -199,13 +206,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ) : null}
         </div>
 
-        {helperText ? (
+        {hasHelperText ? (
           <p id={helperId} className="m-0 text-caption text-content-tertiary">
-            {helperText}
+            {resolvedHelperText}
           </p>
         ) : null}
 
-        {feedbackText ? (
+        {hasFeedbackText ? (
           <p id={feedbackId} className={cn("m-0 text-caption", messageClasses[resolvedStatus])}>
             {feedbackText}
           </p>
