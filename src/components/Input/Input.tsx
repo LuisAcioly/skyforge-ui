@@ -18,8 +18,9 @@ import { cn } from "../../utils/cn";
 export type InputVariant = "outline" | "filled" | "ghost";
 export type InputSize = "md" | "lg";
 export type InputStatus = "default" | "success" | "warning" | "error";
+export type InputType = "text" | "number";
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   errorText?: string | null;
   helperText?: string | null;
   label?: string | null;
@@ -29,6 +30,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   size?: InputSize;
   status?: InputStatus;
   statusText?: string | null;
+  type?: InputType;
   variant?: InputVariant;
 }
 
@@ -103,6 +105,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       size = "md",
       status = "default",
       statusText,
+      type = "text",
       variant = "outline",
       ...props
     },
@@ -110,6 +113,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const generatedId = useId();
     const inputId = id ?? `${generatedId}-input`;
+    const resolvedType: InputType = type === "number" ? "number" : "text";
     const resolvedHelperText = typeof helperText === "string" ? helperText : undefined;
     const hasHelperText = resolvedHelperText !== undefined;
     const resolvedErrorText = typeof errorText === "string" ? errorText : undefined;
@@ -156,6 +160,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
+            type={resolvedType}
             disabled={isDisabled}
             aria-busy={loading || undefined}
             aria-describedby={describedBy}

@@ -28,6 +28,10 @@ const meta = {
     statusText: {
       control: "text"
     },
+    type: {
+      control: "select",
+      options: ["text", "number"]
+    },
     variant: {
       control: "select",
       options: ["outline", "filled", "ghost"]
@@ -39,6 +43,7 @@ const meta = {
     placeholder: "ledger-release-v2",
     size: "md",
     status: "default",
+    type: "text",
     variant: "outline"
   }
 } satisfies Meta<typeof Input>;
@@ -64,6 +69,15 @@ export const SizesAndIcons: Story = {
     <div className="grid max-w-modal-md gap-sf-16">
       <Input label="Medium" defaultValue="ui-foundation" leftIcon={<MagnifyingGlassIcon />} size="md" />
       <Input label="Large" defaultValue="design-review@skyforge.dev" leftIcon={<EnvelopeIcon />} size="lg" />
+    </div>
+  )
+};
+
+export const Types: Story = {
+  render: () => (
+    <div className="grid max-w-modal-md gap-sf-16">
+      <Input label="Text" type="text" defaultValue="release-vault" helperText="Use text for names, keys, and formatted strings." />
+      <Input label="Number" type="number" defaultValue={3} min={1} max={8} helperText="Use number for numeric values only." />
     </div>
   )
 };
