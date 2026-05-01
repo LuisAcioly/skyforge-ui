@@ -136,6 +136,9 @@ const iconSizeClasses: Record<DatePickerSize, string> = {
   lg: "h-sf-20 w-sf-20"
 };
 
+const contentMotionClasses =
+  "will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4";
+
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
@@ -232,7 +235,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     return (
       <div className="grid w-full gap-sf-8">
         {hasLabel ? (
-          <label htmlFor={inputId} className={cn("text-label text-content-primary", disabled && "text-disabled-text")}>
+          <label htmlFor={inputId} className={cn("min-w-0 break-words text-label text-content-primary", disabled && "text-disabled-text")}>
             {resolvedLabel}
           </label>
         ) : null}
@@ -276,7 +279,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                   setOpen(true);
                 }}
                 className={cn(
-                  "block w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                  "block min-w-0 w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                   variantClasses[variant],
                   sizeClasses[size],
                   className
@@ -290,7 +293,10 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               align="start"
               sideOffset={8}
               onOpenAutoFocus={(event) => event.preventDefault()}
-              className="z-sf-modal w-[320px] overflow-hidden rounded-sf-xl border border-border bg-surface-raised p-sf-12 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100"
+              className={cn(
+                "z-sf-modal w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-sf-md border border-border bg-surface-raised p-sf-12 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+                contentMotionClasses
+              )}
             >
               <div className="flex items-center justify-between gap-sf-8 pb-sf-12">
                 <button
@@ -309,7 +315,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                     aria-label={labels.selectYear}
                     value={viewDate.getFullYear()}
                     onChange={(event) => changeYear(Number(event.target.value))}
-                    className="w-auto rounded-sf-sm border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="w-auto rounded-sf-sm border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption tabular-nums text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {yearOptions.map((year) => (
                       <option key={year} value={year}>

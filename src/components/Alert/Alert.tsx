@@ -77,7 +77,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         ref={ref}
         role={role ?? (variant === "error" ? "alert" : "status")}
         className={cn(
-          "rounded-sf-lg border p-sf-16 font-body shadow-none",
+          "relative rounded-sf-md border p-sf-16 pl-sf-20 font-body shadow-none before:absolute before:inset-y-0 before:left-0 before:w-sf-4 before:rounded-l-sf-md before:bg-current before:opacity-70",
           variantClasses[variant],
           className
         )}
@@ -95,7 +95,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             {children ? (
               <div className={cn("text-body-sm text-current", hasTitle ? "mt-sf-4" : undefined)}>{children}</div>
             ) : null}
-            {action ? <div className="mt-sf-12 flex flex-wrap gap-sf-8">{action}</div> : null}
+            {action ? <div className="mt-sf-12 flex flex-wrap items-center gap-sf-8">{action}</div> : null}
           </div>
         </div>
       </div>

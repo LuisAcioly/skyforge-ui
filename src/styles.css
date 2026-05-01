@@ -303,6 +303,65 @@
     animation: sf-skeleton-shimmer 1.4s var(--ease-standard) infinite;
   }
 
+  @keyframes sf-autocomplete-popover-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, var(--sf-autocomplete-y, 4px), 0) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes sf-autocomplete-option-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 3px, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .sf-autocomplete-content {
+    --sf-autocomplete-y: 4px;
+    transform-origin: var(--radix-popover-content-transform-origin);
+    will-change: opacity, transform;
+  }
+
+  .sf-autocomplete-content[data-side="top"] {
+    --sf-autocomplete-y: -4px;
+  }
+
+  .sf-autocomplete-content[data-state="open"] {
+    animation: sf-autocomplete-popover-in var(--duration-slow) var(--ease-standard) both;
+  }
+
+  .sf-autocomplete-option {
+    animation: sf-autocomplete-option-in var(--duration-normal) var(--ease-standard) both;
+    will-change: opacity, transform;
+  }
+
+  .sf-autocomplete-option:nth-child(2) {
+    animation-delay: 18ms;
+  }
+
+  .sf-autocomplete-option:nth-child(3) {
+    animation-delay: 36ms;
+  }
+
+  .sf-autocomplete-option:nth-child(4) {
+    animation-delay: 54ms;
+  }
+
+  .sf-autocomplete-option:nth-child(n + 5) {
+    animation-delay: 72ms;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -319,6 +378,12 @@
 
     .sf-skeleton::after {
       animation: none !important;
+    }
+
+    .sf-autocomplete-content,
+    .sf-autocomplete-option {
+      animation: none !important;
+      transform: none !important;
     }
   }
 }

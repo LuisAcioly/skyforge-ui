@@ -41,6 +41,9 @@ const sizeClasses: Record<MultiSelectSize, string> = {
   lg: "min-h-sf-48 px-sf-16 py-sf-12 text-body-md"
 };
 
+const contentMotionClasses =
+  "will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4";
+
 export const MultiSelect = ({
   "aria-describedby": ariaDescribedBy,
   "aria-invalid": ariaInvalid,
@@ -99,7 +102,7 @@ export const MultiSelect = ({
   return (
     <div className={cn("grid w-full gap-sf-8", className)} {...props}>
       {hasLabel ? (
-        <label htmlFor={triggerId} className={cn("text-label text-content-primary", disabled && "text-disabled-text")}>
+        <label htmlFor={triggerId} className={cn("min-w-0 break-words text-label text-content-primary", disabled && "text-disabled-text")}>
           {resolvedLabel}
         </label>
       ) : null}
@@ -114,7 +117,7 @@ export const MultiSelect = ({
             aria-invalid={isInvalid ? true : ariaInvalid}
             data-invalid={isInvalid || undefined}
             className={cn(
-              "inline-flex w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+              "inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
               variantClasses[variant],
               sizeClasses[size]
             )}
@@ -123,12 +126,12 @@ export const MultiSelect = ({
               {selectedOptions.length > 0 ? (
                 <>
                   {selectedOptions.slice(0, maxVisibleTags).map((option) => (
-                    <span key={option.value} className="rounded-sf-full border border-border bg-surface-raised px-sf-8 py-sf-4 text-caption text-content-primary">
+                    <span key={option.value} className="max-w-full truncate rounded-sf-sm border border-border bg-surface-raised px-sf-8 py-sf-4 text-caption text-content-primary">
                       {option.label}
                     </span>
                   ))}
                   {hiddenCount > 0 ? (
-                    <span className="text-caption text-content-tertiary">+{hiddenCount}</span>
+                    <span className="rounded-sf-sm bg-surface-sunken px-sf-4 text-caption text-content-tertiary">+{hiddenCount}</span>
                   ) : null}
                 </>
               ) : (
@@ -142,7 +145,10 @@ export const MultiSelect = ({
           <PopoverPrimitive.Content
             align="start"
             sideOffset={8}
-            className="z-sf-modal w-[var(--radix-popover-trigger-width)] rounded-sf-lg border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100"
+            className={cn(
+              "z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+              contentMotionClasses
+            )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
               {options.length > 0 ? (

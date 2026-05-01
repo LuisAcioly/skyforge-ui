@@ -73,7 +73,7 @@ export const TabsTrigger = forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "inline-flex h-sf-40 shrink-0 select-none items-center justify-center rounded-sf-md px-sf-12 font-body text-label text-content-secondary outline-none transition duration-sf-normal ease-sf-standard active:translate-y-px focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 data-[state=active]:translate-y-0",
+        "inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-sf-md px-sf-12 font-body text-label text-content-secondary outline-none transition duration-sf-normal ease-sf-standard active:translate-y-px focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 data-[state=active]:translate-y-0",
         triggerClasses[variant],
         className
       )}
@@ -91,7 +91,7 @@ export const TabsContent = forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-sf-16 rounded-sf-lg border border-border bg-surface p-sf-16 text-body-sm text-content-secondary outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+      "mt-sf-16 min-w-0 text-body-sm text-content-secondary outline-none focus-visible:rounded-sf-md focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
       className
     )}
     {...props}

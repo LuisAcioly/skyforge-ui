@@ -43,6 +43,9 @@ const iconSizeClasses: Record<SelectSize, string> = {
   lg: "h-sf-20 w-sf-20"
 };
 
+const contentMotionClasses =
+  "will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4";
+
 const itemClasses =
   "relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 pl-sf-32 font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-active-surface data-[highlighted]:text-content-primary data-[highlighted]:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)]";
 
@@ -87,7 +90,7 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
     return (
       <div className={cn("grid w-full gap-sf-8", containerClassName)}>
         {hasLabel ? (
-          <label htmlFor={triggerId} className={cn("text-label text-content-primary", disabled && "text-disabled-text", labelClassName)}>
+          <label htmlFor={triggerId} className={cn("min-w-0 break-words text-label text-content-primary", disabled && "text-disabled-text", labelClassName)}>
             {resolvedLabel}
           </label>
         ) : null}
@@ -100,7 +103,7 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
           aria-invalid={isInvalid ? true : ariaInvalid}
           data-invalid={isInvalid || undefined}
           className={cn(
-            "inline-flex w-full select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
+            "inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
             variantClasses[variant],
             sizeClasses[size],
             className
@@ -141,7 +144,8 @@ export const SelectContent = forwardRef<
       position={position}
       sideOffset={sideOffset}
       className={cn(
-        "z-sf-modal min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-lg border border-border bg-surface-raised text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+        "z-sf-modal max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-md border border-border bg-surface-raised text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+        contentMotionClasses,
         className
       )}
       {...props}

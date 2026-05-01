@@ -142,7 +142,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="grid w-full gap-sf-8">
         {hasLabel ? (
-          <label htmlFor={inputId} className="text-label text-content-primary">
+          <label htmlFor={inputId} className="min-w-0 break-words text-label text-content-primary">
             {resolvedLabel}
           </label>
         ) : null}
@@ -168,7 +168,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             data-loading={loading || undefined}
             data-status={resolvedStatus}
             className={cn(
-              "sf-input-control block w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
+              "sf-input-control block min-w-0 w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
               variantClasses[variant],
               sizeClasses[size],
               statusClasses[resolvedStatus],

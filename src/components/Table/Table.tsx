@@ -54,7 +54,7 @@ const alignClasses: Record<TableTextAlign, string> = {
 };
 
 const surfaceClasses: Record<TableSurface, string> = {
-  outline: "rounded-sf-lg border border-border bg-surface shadow-none",
+  outline: "rounded-sf-md border border-border bg-surface shadow-none",
   plain: "bg-transparent"
 };
 

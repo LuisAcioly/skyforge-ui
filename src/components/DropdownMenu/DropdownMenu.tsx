@@ -24,7 +24,7 @@ export interface DropdownMenuSubTriggerProps
 }
 
 const contentClasses =
-  "z-sf-modal min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-lg border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100";
+  "z-sf-modal max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4 data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100";
 
 const itemClasses =
   "relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-active-surface data-[highlighted]:text-content-primary data-[highlighted]:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)]";
@@ -42,7 +42,7 @@ export const DropdownMenuTrigger = forwardRef<
   <DropdownMenuPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex h-sf-40 shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-md border border-border bg-secondary px-sf-16 font-body text-label text-secondary-foreground outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-secondary-hover active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+      "inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-md border border-border bg-secondary px-sf-16 font-body text-label text-secondary-foreground outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-secondary-hover active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
       className
     )}
     {...props}

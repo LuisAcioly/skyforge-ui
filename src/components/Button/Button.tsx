@@ -31,7 +31,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   danger:
     "border-error-border bg-error-bg text-error-text hover:border-error-icon hover:bg-error-border/20 active:border-error-icon active:bg-error-border/30",
   editorial:
-    "border-transparent bg-surface-inverse text-content-inverse hover:border-border-strong active:border-border-strong"
+    "border-transparent bg-surface-inverse text-content-inverse hover:border-border-strong hover:bg-surface-inverse/90 active:border-border-strong active:bg-surface-inverse/80"
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -93,7 +93,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading || undefined}
         data-loading={loading || undefined}
         className={cn(
-          "relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-md border font-body font-semibold leading-none outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+          "relative inline-flex max-w-full shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-md border font-body font-semibold leading-none outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
           variantClasses[variant],
           sizeClasses[size],
           fullWidth && "w-full",
@@ -101,15 +101,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        <span className={cn("inline-flex items-center justify-center gap-sf-8", loading && "invisible")}>
+        <span className={cn("inline-flex min-w-0 items-center justify-center gap-sf-8", loading && "invisible")}>
           {renderIcon(leftIcon, size)}
-          {hasChildren ? <span>{children}</span> : null}
+          {hasChildren ? <span className="min-w-0 truncate">{children}</span> : null}
           {renderIcon(rightIcon, size)}
         </span>
         {loading ? (
-          <span className="absolute inset-0 inline-flex items-center justify-center gap-sf-8" aria-hidden="true">
+          <span className="absolute inset-0 inline-flex min-w-0 items-center justify-center gap-sf-8" aria-hidden="true">
             <span className="h-sf-4 w-sf-4 animate-pulse rounded-sf-full bg-current opacity-70" />
-            {hasChildren ? <span>{children}</span> : null}
+            {hasChildren ? <span className="min-w-0 truncate">{children}</span> : null}
           </span>
         ) : null}
       </button>
