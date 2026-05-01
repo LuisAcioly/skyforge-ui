@@ -91,7 +91,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                 <label
                   htmlFor={switchId}
                   className={cn(
-                    "block cursor-pointer select-none text-label text-content-primary",
+                    "block cursor-pointer select-none break-words text-label text-content-primary",
                     disabled && "cursor-not-allowed text-disabled-text",
                     labelClassName
                   )}

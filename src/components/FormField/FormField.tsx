@@ -56,18 +56,18 @@ export const FormField = ({
         <label
           htmlFor={controlId}
           className={cn(
-            "inline-flex items-baseline gap-sf-4 text-label text-content-primary",
+            "inline-flex min-w-0 flex-wrap items-baseline gap-sf-4 text-label text-content-primary",
             disabled && "text-disabled-text"
           )}
         >
-          <span>{resolvedLabel}</span>
+          <span className="min-w-0 break-words">{resolvedLabel}</span>
           {required ? (
             <span aria-hidden="true" className="text-error-text">
               *
             </span>
           ) : null}
           {resolvedOptionalText !== undefined ? (
-            <span className="text-caption text-content-tertiary">{resolvedOptionalText}</span>
+            <span className="shrink-0 text-caption text-content-tertiary">{resolvedOptionalText}</span>
           ) : null}
         </label>
       ) : null}

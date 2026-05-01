@@ -303,6 +303,99 @@
     animation: sf-skeleton-shimmer 1.4s var(--ease-standard) infinite;
   }
 
+  @keyframes sf-autocomplete-popover-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, var(--sf-autocomplete-y, 4px), 0) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes sf-autocomplete-option-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 3px, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .sf-popover-content,
+  .sf-autocomplete-content {
+    --sf-autocomplete-y: 4px;
+    transform-origin: var(--radix-popover-content-transform-origin);
+    will-change: opacity, transform;
+  }
+
+  .sf-popover-content[data-side="top"],
+  .sf-autocomplete-content[data-side="top"] {
+    --sf-autocomplete-y: -4px;
+  }
+
+  .sf-popover-content[data-state="open"],
+  .sf-popover-content[data-state="delayed-open"],
+  .sf-popover-content[data-state="instant-open"],
+  .sf-autocomplete-content[data-state="open"] {
+    animation: sf-autocomplete-popover-in var(--duration-slow) var(--ease-standard) both;
+  }
+
+  .sf-autocomplete-option {
+    animation: sf-autocomplete-option-in var(--duration-normal) var(--ease-standard) both;
+    will-change: opacity, transform;
+  }
+
+  .sf-autocomplete-option:nth-child(2) {
+    animation-delay: 18ms;
+  }
+
+  .sf-autocomplete-option:nth-child(3) {
+    animation-delay: 36ms;
+  }
+
+  .sf-autocomplete-option:nth-child(4) {
+    animation-delay: 54ms;
+  }
+
+  .sf-autocomplete-option:nth-child(n + 5) {
+    animation-delay: 72ms;
+  }
+
+  .sf-year-list {
+    --sf-year-scrollbar-track: 230 231 231;
+    --sf-year-scrollbar-thumb: 173 179 179;
+    --sf-year-scrollbar-thumb-hover: 132 140 139;
+
+    scrollbar-color: rgb(var(--sf-year-scrollbar-thumb)) rgb(var(--sf-year-scrollbar-track));
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .sf-year-list::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .sf-year-list::-webkit-scrollbar-track {
+    background: rgb(var(--sf-year-scrollbar-track));
+    border-radius: var(--radius-full);
+  }
+
+  .sf-year-list::-webkit-scrollbar-thumb {
+    background: rgb(var(--sf-year-scrollbar-thumb));
+    border: 2px solid rgb(var(--sf-year-scrollbar-track));
+    border-radius: var(--radius-full);
+  }
+
+  .sf-year-list::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--sf-year-scrollbar-thumb-hover));
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -319,6 +412,13 @@
 
     .sf-skeleton::after {
       animation: none !important;
+    }
+
+    .sf-popover-content,
+    .sf-autocomplete-content,
+    .sf-autocomplete-option {
+      animation: none !important;
+      transform: none !important;
     }
   }
 }

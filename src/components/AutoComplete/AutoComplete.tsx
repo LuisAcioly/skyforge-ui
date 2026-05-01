@@ -127,7 +127,7 @@ export const AutoComplete = ({
   return (
     <div className={cn("grid w-full gap-sf-8", className)} {...props}>
       {hasLabel ? (
-        <label htmlFor={inputId} className={cn("text-label text-content-primary", disabled && "text-disabled-text")}>
+        <label htmlFor={inputId} className={cn("min-w-0 break-words text-label text-content-primary", disabled && "text-disabled-text")}>
           {resolvedLabel}
         </label>
       ) : null}
@@ -160,7 +160,7 @@ export const AutoComplete = ({
               }}
               onClick={() => setOpen(true)}
               className={cn(
-                "block w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                "block min-w-0 w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                 variantClasses[variant],
                 sizeClasses[size]
               )}
@@ -174,7 +174,9 @@ export const AutoComplete = ({
             align="start"
             sideOffset={8}
             onOpenAutoFocus={(event) => event.preventDefault()}
-            className="z-sf-modal w-[var(--radix-popover-trigger-width)] rounded-sf-lg border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100"
+            className={cn(
+              "sf-autocomplete-content z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none"
+            )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
               {filteredOptions.length > 0 ? (
@@ -189,7 +191,7 @@ export const AutoComplete = ({
                       disabled={option.disabled}
                       aria-selected={isSelected}
                       onClick={() => selectOption(option)}
-                      className="flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface hover:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] focus-visible:bg-active-surface focus-visible:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
+                      className="sf-autocomplete-option flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface hover:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] focus-visible:bg-active-surface focus-visible:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
                     >
                       <span className="grid min-w-0 flex-1 gap-sf-4">
                         <span className="truncate text-content-primary">{option.label}</span>

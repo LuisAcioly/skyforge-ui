@@ -55,7 +55,7 @@ export const ModalContent = forwardRef<ElementRef<typeof DialogPrimitive.Content
       >
         {children}
         {showClose ? (
-          <DialogPrimitive.Close className="absolute right-sf-16 top-sf-16 inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-full border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+          <DialogPrimitive.Close className="absolute right-sf-16 top-sf-16 inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-md border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background">
             <XMarkIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
             <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>

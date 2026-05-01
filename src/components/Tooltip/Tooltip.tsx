@@ -30,7 +30,7 @@ export const TooltipContent = forwardRef<ElementRef<typeof TooltipPrimitive.Cont
           ref={ref}
           sideOffset={sideOffset}
           className={cn(
-            "z-sf-modal max-w-[260px] rounded-sf-md border border-border-strong bg-surface-inverse px-sf-12 py-sf-8 font-body text-caption text-content-inverse shadow-sf-2 outline-none transition duration-sf-normal ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=delayed-open]:scale-100 data-[state=delayed-open]:opacity-100 data-[state=instant-open]:scale-100 data-[state=instant-open]:opacity-100",
+            "sf-popover-content z-sf-modal max-w-[calc(100vw-2rem)] break-words rounded-sf-md border border-border-strong bg-surface-inverse px-sf-12 py-sf-8 font-body text-caption text-content-inverse shadow-sf-2 outline-none sm:max-w-[260px]",
             className
           )}
           {...props}

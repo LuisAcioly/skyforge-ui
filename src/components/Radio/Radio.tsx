@@ -98,7 +98,7 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Rad
               <label
                 htmlFor={radioId}
                 className={cn(
-                  "block cursor-pointer select-none text-label text-content-primary",
+                  "block cursor-pointer select-none break-words text-label text-content-primary",
                   disabled && "cursor-not-allowed text-disabled-text",
                   labelClassName
                 )}
