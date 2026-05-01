@@ -41,9 +41,6 @@ const sizeClasses: Record<MultiSelectSize, string> = {
   lg: "min-h-sf-48 px-sf-16 py-sf-12 text-body-md"
 };
 
-const contentMotionClasses =
-  "will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4";
-
 export const MultiSelect = ({
   "aria-describedby": ariaDescribedBy,
   "aria-invalid": ariaInvalid,
@@ -146,8 +143,7 @@ export const MultiSelect = ({
             align="start"
             sideOffset={8}
             className={cn(
-              "z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
-              contentMotionClasses
+              "sf-popover-content z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none"
             )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">

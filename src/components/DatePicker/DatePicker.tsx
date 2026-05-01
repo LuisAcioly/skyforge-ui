@@ -136,9 +136,6 @@ const iconSizeClasses: Record<DatePickerSize, string> = {
   lg: "h-sf-20 w-sf-20"
 };
 
-const contentMotionClasses =
-  "will-change-transform data-[state=closed]:data-[side=top]:-translate-y-sf-4 data-[state=closed]:data-[side=bottom]:translate-y-sf-4 data-[state=closed]:data-[side=left]:-translate-x-sf-4 data-[state=closed]:data-[side=right]:translate-x-sf-4";
-
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
@@ -165,6 +162,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     const inputId = id ?? `${generatedId}-date`;
     const labels = localeLabels[locale];
     const [open, setOpen] = useState(false);
+    const [yearListOpen, setYearListOpen] = useState(false);
     const formattedDefaultValue = formatDateValue(defaultValue);
     const [internalValue, setInternalValue] = useState(
       typeof formattedDefaultValue === "string" ? formattedDefaultValue : ""
@@ -194,7 +192,10 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       return new Date(viewDate.getFullYear(), viewDate.getMonth(), dayOffset);
     });
     const today = new Date();
-    const yearOptions = Array.from({ length: 21 }, (_, index) => viewDate.getFullYear() - 10 + index);
+    const currentYear = today.getFullYear();
+    const firstYear = currentYear - 100;
+    const lastYear = currentYear + 10;
+    const yearOptions = Array.from({ length: lastYear - firstYear + 1 }, (_, index) => firstYear + index);
 
     const commitValue = (nextValue: string) => {
       if (value === undefined) {
@@ -226,10 +227,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
     const moveMonth = (offset: number) => {
       setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + offset, 1));
+      setYearListOpen(false);
     };
 
     const changeYear = (year: number) => {
       setViewDate(new Date(year, viewDate.getMonth(), 1));
+      setYearListOpen(false);
     };
 
     return (
@@ -294,8 +297,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               sideOffset={8}
               onOpenAutoFocus={(event) => event.preventDefault()}
               className={cn(
-                "z-sf-modal w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-sf-md border border-border bg-surface-raised p-sf-12 text-content-primary shadow-sf-2 outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.98] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
-                contentMotionClasses
+                "sf-popover-content z-sf-modal w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-sf-md border border-border bg-surface-raised p-sf-12 text-content-primary shadow-sf-2 outline-none"
               )}
             >
               <div className="flex items-center justify-between gap-sf-8 pb-sf-12">
@@ -307,22 +309,54 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                 >
                   <ChevronLeftIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
                 </button>
-                <div className="flex min-w-0 items-center gap-sf-4 overflow-hidden rounded-sf-md border border-border bg-surface p-sf-4">
+                <div
+                  className="relative flex min-w-0 items-center gap-sf-4 rounded-sf-md border border-border bg-surface p-sf-4"
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget)) {
+                      setYearListOpen(false);
+                    }
+                  }}
+                >
                   <span className="rounded-sf-sm bg-active-surface px-sf-8 py-sf-4 text-caption text-content-primary">
                     {labels.monthNames[viewDate.getMonth()].slice(0, 3)}
                   </span>
-                  <select
+                  <button
+                    type="button"
                     aria-label={labels.selectYear}
-                    value={viewDate.getFullYear()}
-                    onChange={(event) => changeYear(Number(event.target.value))}
+                    aria-expanded={yearListOpen}
+                    aria-haspopup="listbox"
+                    onClick={() => setYearListOpen((current) => !current)}
                     className="w-auto rounded-sf-sm border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption tabular-nums text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
-                    {yearOptions.map((year) => (
-                      <option key={year} value={year}>
-                        {year}
-                      </option>
-                    ))}
-                  </select>
+                    {viewDate.getFullYear()}
+                  </button>
+                  {yearListOpen ? (
+                    <div
+                      role="listbox"
+                      aria-label={labels.selectYear}
+                      className="sf-popover-content sf-year-list absolute left-1/2 top-[calc(100%+var(--space-4))] z-sf-modal grid max-h-[144px] w-[104px] -translate-x-1/2 gap-sf-4 overflow-y-auto rounded-sf-md border border-border bg-surface-raised p-sf-4 shadow-sf-2 outline-none"
+                    >
+                      {yearOptions.map((year) => {
+                        const isSelectedYear = year === viewDate.getFullYear();
+
+                        return (
+                          <button
+                            key={year}
+                            type="button"
+                            role="option"
+                            aria-selected={isSelectedYear}
+                            onClick={() => changeYear(year)}
+                            className={cn(
+                              "inline-flex min-h-sf-32 items-center justify-center rounded-sf-sm px-sf-8 text-center font-body text-caption tabular-nums outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface focus-visible:bg-active-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                              isSelectedYear ? "bg-primary text-primary-foreground" : "text-content-primary"
+                            )}
+                          >
+                            {year}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </div>
                 <button
                   type="button"
