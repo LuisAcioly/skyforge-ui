@@ -12,6 +12,7 @@ export * from "./components/Input/Input";
 export * from "./components/Modal/Modal";
 export * from "./components/MultiSelect/MultiSelect";
 export * from "./components/Pagination/Pagination";
+export * from "./components/Progress/Progress";
 export * from "./components/Radio/Radio";
 export * from "./components/Select/Select";
 export * from "./components/Skeleton/Skeleton";

@@ -33,7 +33,7 @@ Labels, helper text, status text, error text, tooltip content, and similar user-
 
 Every interactive surface must include hover, active, focus-visible, disabled, and invalid states where relevant.
 
-Use skeleton loaders that match layout shape. Use `Spinner` only for compact inline activity.
+Use `Progress` for determinate progress. Use skeleton loaders that match layout shape. Use `Spinner` only for compact inline indeterminate activity.
 
 Use `FormField` for composed custom field layouts. Use built-in `label`, `helperText`, and `errorText` props on simple fields.
 
@@ -41,17 +41,37 @@ Prefer `TableEmpty` and `TableLoading` for table empty/loading states.
 
 Do not use removed or unsupported components: `Label`, `Loading`, `TableCaption`.
 
-## Setup
+## Package Installation
 
-Import package CSS once at app entry. Library export already imports `src/styles.css` internally for bundle builds.
+Install Skyforge UI from npm:
+
+```bash
+npm install @luiswagnerab/skyforge-ui
+```
+
+Peer dependencies required by the host app:
+
+- `react >=18.2.0`
+- `react-dom >=18.2.0`
+
+Import package stylesheet once at app entry if your bundler does not apply styles automatically:
+
+```tsx
+import "@luiswagnerab/skyforge-ui/styles.css";
+```
+
+Import components from the package entry:
 
 ```tsx
 import {
   Button,
   Input,
+  Progress,
   ThemeProvider
-} from "skyforge-ui";
+} from "@luiswagnerab/skyforge-ui";
 ```
+
+## Setup
 
 Wrap themed surfaces with `ThemeProvider` when app shell does not already set `data-theme`.
 
@@ -91,6 +111,7 @@ Use radius tokens: `sf-sm`, `sf-md`, `sf-lg`, `sf-xl`, `sf-2xl`, `sf-full`.
 | `Modal` | Focus-trapped dialogs | `Modal`, `ModalTrigger`, `ModalContent`, title and description |
 | `MultiSelect` | Multi-choice selection | `options`, `value`, `defaultValue`, `onValueChange` |
 | `Pagination` | Page navigation | `page`, `totalPages`, `onPageChange`, `siblingCount` |
+| `Progress` | Determinate task completion or measurable loading | `value`, `max`, `label`, `showValue`, `size`, `tone` |
 | `RadioGroup`, `Radio` | Single-choice groups | `orientation`, `label`, `helperText` |
 | `Select` | Single-choice dropdown | Radix-style compound API |
 | `Skeleton` | Shape-matched loading state | `variant`, `size`, `lines` |
@@ -392,13 +413,24 @@ Use `Alert` for inline system feedback.
 </Alert>
 ```
 
+Use `Progress` for measurable completion. Pass `value={null}` only when progress exists but current measurement is unavailable.
+
+```tsx
+<Progress
+  label="Release progress"
+  helperText="Validation passed in two of three environments."
+  value={64}
+  showValue
+/>
+```
+
 Use `Skeleton` for loading shapes.
 
 ```tsx
 <Skeleton variant="text" lines={4} label="Loading release notes" />
 ```
 
-Use `Spinner` only for compact inline progress.
+Use `Spinner` only for compact inline indeterminate activity.
 
 ```tsx
 <Spinner size="sm" label="Loading" />
@@ -426,7 +458,7 @@ Every new UI surface built with Skyforge UI must consider these states:
 | Active | Subtle translate or scale for tactile feedback |
 | Focus visible | `ring-focus` with offset |
 | Disabled | Non-interactive but readable |
-| Loading | `Skeleton`, `TableLoading`, `Spinner`, or component loading prop |
+| Loading | `Progress`, `Skeleton`, `TableLoading`, `Spinner`, or component loading prop |
 | Invalid | `errorText`, `aria-invalid`, error token styling |
 | Empty | Composed empty state with useful next step |
 | Danger | Error semantics, not arbitrary red values |
