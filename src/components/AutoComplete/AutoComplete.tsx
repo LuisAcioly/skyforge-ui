@@ -32,10 +32,10 @@ export interface AutoCompleteProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 }
 
 const variantClasses: Record<AutoCompleteVariant, string> = {
-  outline: "border-border bg-surface hover:border-border-strong focus-visible:border-border-strong",
+  outline: "border-border bg-surface-raised hover:border-border-strong focus-visible:border-border-strong",
   filled:
-    "border-transparent bg-hover-surface hover:border-border hover:bg-active-surface focus-visible:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-hover-surface focus-visible:border-border-strong"
+    "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
 };
 
 const sizeClasses: Record<AutoCompleteSize, string> = {
@@ -160,7 +160,7 @@ export const AutoComplete = ({
               }}
               onClick={() => setOpen(true)}
               className={cn(
-                "block min-w-0 w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                 variantClasses[variant],
                 sizeClasses[size]
               )}
@@ -175,7 +175,7 @@ export const AutoComplete = ({
             sideOffset={8}
             onOpenAutoFocus={(event) => event.preventDefault()}
             className={cn(
-              "sf-autocomplete-content z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none"
+              "sf-autocomplete-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
             )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
@@ -191,7 +191,7 @@ export const AutoComplete = ({
                       disabled={option.disabled}
                       aria-selected={isSelected}
                       onClick={() => selectOption(option)}
-                      className="sf-autocomplete-option flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface hover:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] focus-visible:bg-active-surface focus-visible:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
+                      className="sf-autocomplete-option sf-premium-item flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface focus-visible:bg-hover-surface disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
                     >
                       <span className="grid min-w-0 flex-1 gap-sf-4">
                         <span className="truncate text-content-primary">{option.label}</span>

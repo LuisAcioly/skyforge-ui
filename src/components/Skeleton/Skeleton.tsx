@@ -51,7 +51,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
           {Array.from({ length: lineCount }).map((_, index) => (
             <span
               key={index}
-              className={cn("sf-skeleton block rounded-sf-md", textSizeClasses[size], lineWidthClasses[index % lineWidthClasses.length])}
+              className={cn("sf-skeleton block rounded-sf-full", textSizeClasses[size], lineWidthClasses[index % lineWidthClasses.length])}
             />
           ))}
         </div>
@@ -67,7 +67,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
         aria-hidden={resolvedLabel ? undefined : true}
         className={cn(
           "sf-skeleton block",
-          variant === "avatar" ? "rounded-sf-full" : "rounded-sf-md",
+          variant === "avatar" ? "rounded-sf-xl" : variant === "text" ? "rounded-sf-full" : "rounded-sf-xl",
           variant === "avatar" ? avatarSizeClasses[size] : variant === "text" ? textSizeClasses[size] : blockSizeClasses[size],
           className
         )}

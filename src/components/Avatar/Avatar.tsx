@@ -39,7 +39,7 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
     <AvatarPrimitive.Root
       ref={ref}
       className={cn(
-        "relative inline-flex shrink-0 select-none items-center justify-center overflow-visible rounded-sf-full border border-border bg-surface-sunken font-body font-semibold text-content-secondary shadow-none",
+        "sf-premium-control relative inline-flex shrink-0 select-none items-center justify-center overflow-visible rounded-sf-xl border border-border bg-surface-raised font-body font-semibold text-content-secondary",
         sizeClasses[size],
         className
       )}
@@ -66,7 +66,7 @@ export const AvatarImage = forwardRef<
   ElementRef<typeof AvatarPrimitive.Image>,
   ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
 >(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image ref={ref} className={cn("h-full w-full rounded-sf-full object-cover", className)} {...props} />
+  <AvatarPrimitive.Image ref={ref} className={cn("h-full w-full rounded-sf-xl object-cover", className)} {...props} />
 ));
 
 AvatarImage.displayName = "AvatarImage";
@@ -79,7 +79,7 @@ export const AvatarFallback = forwardRef<ElementRef<typeof AvatarPrimitive.Fallb
       <AvatarPrimitive.Fallback
         ref={ref}
         delayMs={delayMs}
-        className={cn("flex h-full w-full items-center justify-center rounded-sf-full bg-surface-sunken text-current", className)}
+        className={cn("flex h-full w-full items-center justify-center rounded-sf-xl bg-surface-sunken text-current", className)}
         {...props}
       >
         {resolvedChildren}
@@ -91,7 +91,7 @@ export const AvatarFallback = forwardRef<ElementRef<typeof AvatarPrimitive.Fallb
 AvatarFallback.displayName = "AvatarFallback";
 
 export const AvatarGroup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex -space-x-sf-8 [&>*]:ring-2 [&>*]:ring-background", className)} {...props} />
+  <div className={cn("flex -space-x-sf-8 [&>*]:ring-2 [&>*]:ring-background [&>*]:transition-transform [&>*]:duration-sf-slow [&>*]:ease-sf-standard [&>*:hover]:-translate-y-px", className)} {...props} />
 );
 
 AvatarGroup.displayName = "AvatarGroup";

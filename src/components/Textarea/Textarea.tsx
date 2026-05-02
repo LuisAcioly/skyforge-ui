@@ -23,10 +23,10 @@ export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaE
 }
 
 const variantClasses: Record<TextareaVariant, string> = {
-  outline: "border-border bg-surface hover:border-border-strong focus-visible:border-border-strong",
+  outline: "border-border bg-surface-raised hover:border-border-strong focus-visible:border-border-strong",
   filled:
-    "border-transparent bg-hover-surface hover:border-border hover:bg-active-surface focus-visible:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-hover-surface focus-visible:border-border-strong"
+    "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
 };
 
 const sizeClasses: Record<TextareaSize, string> = {
@@ -120,7 +120,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             data-loading={loading || undefined}
             data-status={resolvedStatus}
             className={cn(
-              "sf-input-control block min-w-0 w-full resize-y rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
+              "sf-input-control sf-premium-control block min-w-0 w-full resize-y rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
               variantClasses[variant],
               sizeClasses[size],
               statusClasses[resolvedStatus],

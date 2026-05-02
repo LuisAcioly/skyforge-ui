@@ -24,10 +24,10 @@ export interface DropdownMenuSubTriggerProps
 }
 
 const contentClasses =
-  "sf-popover-content z-sf-modal max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none";
+  "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none";
 
 const itemClasses =
-  "relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-active-surface data-[highlighted]:text-content-primary data-[highlighted]:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)]";
+  "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";
 
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
@@ -42,7 +42,7 @@ export const DropdownMenuTrigger = forwardRef<
   <DropdownMenuPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-md border border-border bg-secondary px-sf-16 font-body text-label text-secondary-foreground outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-secondary-hover active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+      "sf-premium-control inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-full border border-border bg-surface-raised px-sf-16 font-body text-label text-secondary-foreground outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-secondary-hover active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
       className
     )}
     {...props}
@@ -75,7 +75,7 @@ export const DropdownMenuItem = forwardRef<ElementRef<typeof DropdownMenuPrimiti
       className={cn(
         itemClasses,
         inset && "pl-sf-32",
-        danger && "text-error-text data-[highlighted]:bg-error-bg data-[highlighted]:text-error-text data-[highlighted]:shadow-[inset_0_0_0_1px_rgb(var(--color-error-border)_/_0.72)]",
+        danger && "text-error-text data-[highlighted]:bg-error-bg data-[highlighted]:text-error-text data-[highlighted]:outline data-[highlighted]:outline-1 data-[highlighted]:-outline-offset-1 data-[highlighted]:outline-error-border",
         className
       )}
       {...props}
@@ -125,7 +125,7 @@ export const DropdownMenuLabel = forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-sf-12 py-sf-8 font-body text-label text-content-secondary", className)}
+    className={cn("px-sf-12 py-sf-8 font-body text-label tracking-[0.04em] text-content-secondary", className)}
     {...props}
   />
 ));

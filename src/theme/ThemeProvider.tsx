@@ -10,7 +10,7 @@ export interface ThemeProviderProps extends HTMLAttributes<HTMLDivElement> {
 
 export function ThemeProvider({ children, className, theme = "light", ...props }: ThemeProviderProps) {
   return (
-    <div data-theme={theme} className={cn("bg-background text-content-primary", className)} {...props}>
+    <div data-theme={theme} className={cn("bg-background text-content-primary antialiased", className)} {...props}>
       {children}
     </div>
   );

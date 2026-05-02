@@ -31,9 +31,9 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 }
 
 const variantClasses: Record<MultiSelectVariant, string> = {
-  outline: "border-border bg-surface hover:border-border-strong data-[state=open]:border-border-strong",
-  filled: "border-transparent bg-hover-surface hover:border-border hover:bg-active-surface data-[state=open]:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong"
+  outline: "border-border bg-surface-raised hover:border-border-strong data-[state=open]:border-border-strong",
+  filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<MultiSelectSize, string> = {
@@ -114,7 +114,7 @@ export const MultiSelect = ({
             aria-invalid={isInvalid ? true : ariaInvalid}
             data-invalid={isInvalid || undefined}
             className={cn(
-              "inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+              "sf-premium-control inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
               variantClasses[variant],
               sizeClasses[size]
             )}
@@ -123,12 +123,12 @@ export const MultiSelect = ({
               {selectedOptions.length > 0 ? (
                 <>
                   {selectedOptions.slice(0, maxVisibleTags).map((option) => (
-                    <span key={option.value} className="max-w-full truncate rounded-sf-sm border border-border bg-surface-raised px-sf-8 py-sf-4 text-caption text-content-primary">
+                    <span key={option.value} className="max-w-full truncate rounded-sf-full border border-border bg-surface-raised px-sf-8 py-sf-4 text-caption text-content-primary">
                       {option.label}
                     </span>
                   ))}
                   {hiddenCount > 0 ? (
-                    <span className="rounded-sf-sm bg-surface-sunken px-sf-4 text-caption text-content-tertiary">+{hiddenCount}</span>
+                    <span className="rounded-sf-full bg-surface-sunken px-sf-8 py-sf-4 text-caption text-content-tertiary">+{hiddenCount}</span>
                   ) : null}
                 </>
               ) : (
@@ -143,7 +143,7 @@ export const MultiSelect = ({
             align="start"
             sideOffset={8}
             className={cn(
-              "sf-popover-content z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-md border border-border bg-surface-raised p-sf-4 text-content-primary shadow-sf-2 outline-none"
+              "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
             )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
@@ -158,7 +158,7 @@ export const MultiSelect = ({
                       disabled={option.disabled}
                       aria-pressed={isSelected}
                       onClick={() => toggleValue(option.value)}
-                      className="flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface hover:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] focus-visible:bg-active-surface focus-visible:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)] disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
+                      className="sf-premium-item flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface focus-visible:bg-hover-surface disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
                     >
                       <span className={cn("mt-sf-4 inline-flex h-sf-16 w-sf-16 shrink-0 items-center justify-center rounded-sf-sm border", isSelected ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface")}>
                         {isSelected ? <CheckIcon aria-hidden="true" className="h-sf-12 w-sf-12" strokeWidth={1.5} /> : null}

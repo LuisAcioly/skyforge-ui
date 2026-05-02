@@ -33,7 +33,7 @@ export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
         role={resolvedLabel ? (role ?? "status") : undefined}
         aria-label={resolvedLabel}
         aria-hidden={resolvedLabel ? undefined : true}
-        className={cn("inline-flex shrink-0 rounded-sf-full border-current border-t-transparent animate-spin", sizeClasses[size], toneClasses[tone], className)}
+        className={cn("inline-flex shrink-0 animate-spin rounded-sf-full border-current border-t-transparent", sizeClasses[size], toneClasses[tone], className)}
         {...props}
       />
     );

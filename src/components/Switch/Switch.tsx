@@ -71,7 +71,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
             aria-invalid={isInvalid ? true : ariaInvalid}
             data-invalid={isInvalid || undefined}
             className={cn(
-              "inline-flex shrink-0 cursor-pointer select-none items-center rounded-sf-full border border-border bg-surface-sunken outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=checked]:border-primary data-[state=checked]:bg-primary",
+              "sf-premium-control inline-flex shrink-0 cursor-pointer select-none items-center rounded-sf-full border border-border bg-surface-sunken outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=checked]:border-primary data-[state=checked]:bg-primary",
               rootSizeClasses[size],
               className
             )}
@@ -79,7 +79,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
           >
             <SwitchPrimitive.Thumb
               className={cn(
-                "block rounded-sf-full bg-surface-raised shadow-[0_1px_2px_rgb(var(--color-surface-inverse)_/_0.16)] transition duration-sf-normal ease-sf-standard data-[state=checked]:bg-primary-foreground",
+                "block rounded-sf-full bg-surface-raised shadow-[0_1px_4px_rgb(var(--color-surface-inverse)_/_0.18)] transition duration-sf-slow ease-sf-standard data-[state=checked]:bg-primary-foreground",
                 thumbSizeClasses[size]
               )}
             />

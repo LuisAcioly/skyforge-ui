@@ -87,6 +87,8 @@ Supported themes are `light` and `dark`.
 
 Skyforge UI is minimal, technical, sophisticated, and editorial. It balances restrained brutalism with system-driven interfaces.
 
+Default experience context is `premium-experience`. Components should feel more haptic, spacious, and cinematic while preserving token-first implementation, accessibility, and stable APIs.
+
 Use border-first hierarchy. Shadows are reserved for floating layers such as popovers, dropdowns, tooltips, and modals.
 
 Use Plus Jakarta Sans for display and hierarchy. Use Inter for dense product reading and forms.

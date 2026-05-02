@@ -81,7 +81,7 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Rad
           disabled={disabled}
           aria-describedby={describedBy}
           className={cn(
-            "inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border border-border bg-surface outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface active:translate-y-px active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:opacity-100 data-[state=checked]:border-primary data-[state=checked]:bg-surface",
+            "sf-premium-control inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border border-border bg-surface-raised outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface active:translate-y-0 active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:border-disabled-border disabled:bg-disabled-bg disabled:opacity-100 data-[state=checked]:border-primary data-[state=checked]:bg-surface-raised",
             itemSizeClasses[size],
             className
           )}

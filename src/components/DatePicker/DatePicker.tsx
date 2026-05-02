@@ -120,10 +120,10 @@ const localeLabels: Record<
 };
 
 const variantClasses: Record<DatePickerVariant, string> = {
-  outline: "border-border bg-surface hover:border-border-strong focus-visible:border-border-strong",
+  outline: "border-border bg-surface-raised hover:border-border-strong focus-visible:border-border-strong",
   filled:
-    "border-transparent bg-hover-surface hover:border-border hover:bg-active-surface focus-visible:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-hover-surface focus-visible:border-border-strong"
+    "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
 };
 
 const sizeClasses: Record<DatePickerSize, string> = {
@@ -257,7 +257,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
                   setOpen(true);
                 }}
-                className="absolute left-sf-8 top-1/2 inline-flex h-sf-24 w-sf-24 -translate-y-1/2 items-center justify-center rounded-sf-sm text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:text-disabled-text"
+                className="absolute left-sf-8 top-1/2 inline-flex h-sf-24 w-sf-24 -translate-y-1/2 items-center justify-center rounded-sf-full text-icon-secondary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:text-disabled-text"
               >
                 <CalendarDaysIcon className={iconSizeClasses[size]} strokeWidth={1.5} />
               </button>
@@ -282,7 +282,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                   setOpen(true);
                 }}
                 className={cn(
-                  "block min-w-0 w-full rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                  "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                   variantClasses[variant],
                   sizeClasses[size],
                   className
@@ -297,7 +297,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               sideOffset={8}
               onOpenAutoFocus={(event) => event.preventDefault()}
               className={cn(
-                "sf-popover-content z-sf-modal w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-sf-md border border-border bg-surface-raised p-sf-12 text-content-primary shadow-sf-2 outline-none"
+                "sf-popover-content sf-premium-surface z-sf-modal w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-sf-xl border border-border bg-surface-raised p-sf-16 text-content-primary outline-none"
               )}
             >
               <div className="flex items-center justify-between gap-sf-8 pb-sf-12">
@@ -305,19 +305,19 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                   type="button"
                   aria-label={labels.previousMonth}
                   onClick={() => moveMonth(-1)}
-                  className="inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-md border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="sf-premium-control inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-full border border-border bg-surface-raised text-icon-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <ChevronLeftIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
                 </button>
                 <div
-                  className="relative flex min-w-0 items-center gap-sf-4 rounded-sf-md border border-border bg-surface p-sf-4"
+                  className="relative flex min-w-0 items-center gap-sf-4 rounded-sf-lg border border-border bg-surface p-sf-4"
                   onBlur={(event) => {
                     if (!event.currentTarget.contains(event.relatedTarget)) {
                       setYearListOpen(false);
                     }
                   }}
                 >
-                  <span className="rounded-sf-sm bg-active-surface px-sf-8 py-sf-4 text-caption text-content-primary">
+                  <span className="rounded-sf-md bg-active-surface px-sf-8 py-sf-4 text-caption text-content-primary">
                     {labels.monthNames[viewDate.getMonth()].slice(0, 3)}
                   </span>
                   <button
@@ -326,35 +326,37 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                     aria-expanded={yearListOpen}
                     aria-haspopup="listbox"
                     onClick={() => setYearListOpen((current) => !current)}
-                    className="w-auto rounded-sf-sm border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption tabular-nums text-content-primary outline-none transition duration-sf-normal ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="w-auto rounded-sf-md border border-transparent bg-transparent px-sf-8 py-sf-4 font-body text-caption tabular-nums text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:border-border hover:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {viewDate.getFullYear()}
                   </button>
                   {yearListOpen ? (
-                    <div
-                      role="listbox"
-                      aria-label={labels.selectYear}
-                      className="sf-popover-content sf-year-list absolute left-1/2 top-[calc(100%+var(--space-4))] z-sf-modal grid max-h-[144px] w-[104px] -translate-x-1/2 gap-sf-4 overflow-y-auto rounded-sf-md border border-border bg-surface-raised p-sf-4 shadow-sf-2 outline-none"
-                    >
-                      {yearOptions.map((year) => {
-                        const isSelectedYear = year === viewDate.getFullYear();
+                    <div className="sf-popover-content sf-premium-surface absolute left-1/2 top-[calc(100%+var(--space-4))] z-sf-modal w-[104px] -translate-x-1/2 overflow-hidden rounded-sf-xl border border-border bg-surface-raised p-sf-4 outline-none">
+                      <div
+                        role="listbox"
+                        aria-label={labels.selectYear}
+                        className="sf-year-list grid max-h-[144px] gap-sf-4 overflow-y-auto rounded-sf-lg pr-sf-4"
+                      >
+                        {yearOptions.map((year) => {
+                          const isSelectedYear = year === viewDate.getFullYear();
 
-                        return (
-                          <button
-                            key={year}
-                            type="button"
-                            role="option"
-                            aria-selected={isSelectedYear}
-                            onClick={() => changeYear(year)}
-                            className={cn(
-                              "inline-flex min-h-sf-32 items-center justify-center rounded-sf-sm px-sf-8 text-center font-body text-caption tabular-nums outline-none transition duration-sf-normal ease-sf-standard hover:bg-active-surface focus-visible:bg-active-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                              isSelectedYear ? "bg-primary text-primary-foreground" : "text-content-primary"
-                            )}
-                          >
-                            {year}
-                          </button>
-                        );
-                      })}
+                          return (
+                            <button
+                              key={year}
+                              type="button"
+                              role="option"
+                              aria-selected={isSelectedYear}
+                              onClick={() => changeYear(year)}
+                              className={cn(
+                                "inline-flex min-h-sf-32 items-center justify-center rounded-sf-md px-sf-8 text-center font-body text-caption tabular-nums outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface focus-visible:bg-hover-surface focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                                isSelectedYear ? "bg-primary text-primary-foreground" : "text-content-primary"
+                              )}
+                            >
+                              {year}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   ) : null}
                 </div>
@@ -362,7 +364,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                   type="button"
                   aria-label={labels.nextMonth}
                   onClick={() => moveMonth(1)}
-                  className="inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-md border border-border bg-surface text-icon-secondary outline-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="sf-premium-control inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-full border border-border bg-surface-raised text-icon-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <ChevronRightIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
                 </button>
@@ -370,7 +372,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 
               <div className="grid grid-cols-7 gap-sf-4">
                 {labels.weekDays.map((day) => (
-                  <span key={day} className="flex h-sf-24 items-center justify-center rounded-sf-sm bg-surface-sunken text-caption text-content-tertiary">
+                  <span key={day} className="flex h-sf-24 items-center justify-center rounded-sf-full bg-surface-sunken text-caption text-content-tertiary">
                     {day}
                   </span>
                 ))}
@@ -389,13 +391,13 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
                     aria-pressed={isSelected}
                     onClick={() => selectDate(date)}
                     className={cn(
-                      "relative inline-flex h-sf-32 items-center justify-center rounded-sf-md border border-transparent font-body text-body-sm outline-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                      "relative inline-flex h-sf-32 items-center justify-center rounded-sf-full border border-transparent font-body text-body-sm outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                       isCurrentMonth
                         ? "text-content-primary hover:border-border-strong hover:bg-hover-surface"
                         : "text-content-tertiary hover:border-border hover:bg-hover-surface",
                       isOutsideEdge && "opacity-80",
                       isToday && !isSelected && "border-border-strong bg-surface text-content-primary",
-                      isSelected && "border-primary bg-primary text-primary-foreground shadow-[inset_0_0_0_1px_rgb(var(--color-primary-foreground)_/_0.18)] hover:border-primary hover:bg-primary"
+                      isSelected && "border-primary bg-primary text-primary-foreground hover:border-primary hover:bg-primary"
                     )}
                   >
                     {date.getDate()}

@@ -24,7 +24,7 @@ const TabsVariantContext = createContext<TabsVariant>("underline");
 const listClasses: Record<TabsVariant, string> = {
   underline: "flex h-sf-40 items-end gap-sf-4 border-b border-divider",
   segmented:
-    "inline-flex max-w-full min-h-sf-40 items-center gap-sf-4 overflow-x-auto rounded-sf-md border border-border bg-surface-sunken p-sf-4",
+    "sf-premium-control inline-flex max-w-full min-h-sf-40 items-center gap-sf-4 overflow-x-auto rounded-sf-lg border border-border bg-surface-sunken p-sf-4",
   rail: "flex flex-col gap-sf-4 border-l border-divider pl-sf-4"
 };
 
@@ -32,9 +32,9 @@ const triggerClasses: Record<TabsVariant, string> = {
   underline:
     "!rounded-none border-b-2 border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-primary data-[state=active]:text-content-primary data-[state=active]:hover:bg-transparent",
   segmented:
-    "h-sf-32 rounded-sf-sm bg-transparent px-sf-12 hover:bg-hover-surface hover:text-content-primary data-[state=active]:bg-surface-raised data-[state=active]:text-content-primary data-[state=active]:shadow-[inset_0_1px_0_rgb(var(--color-border)_/_0.45)]",
+    "h-sf-32 rounded-sf-md bg-transparent px-sf-12 hover:bg-hover-surface hover:text-content-primary data-[state=active]:bg-surface-raised data-[state=active]:text-content-primary data-[state=active]:shadow-[0_8px_18px_rgb(var(--color-surface-inverse)_/_0.06)]",
   rail:
-    "w-full justify-start border border-transparent bg-transparent text-left hover:border-border hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-border-strong data-[state=active]:bg-surface data-[state=active]:text-content-primary"
+    "w-full justify-start border border-transparent bg-transparent text-left hover:border-border hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-border-strong data-[state=active]:bg-surface-raised data-[state=active]:text-content-primary"
 };
 
 export const Tabs = forwardRef<ElementRef<typeof TabsPrimitive.Root>, TabsProps>(
@@ -73,7 +73,7 @@ export const TabsTrigger = forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-sf-md px-sf-12 font-body text-label text-content-secondary outline-none transition duration-sf-normal ease-sf-standard active:translate-y-px focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 data-[state=active]:translate-y-0",
+        "inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-sf-md px-sf-12 font-body text-label text-content-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 data-[state=active]:translate-y-0",
         triggerClasses[variant],
         className
       )}

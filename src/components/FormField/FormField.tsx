@@ -56,7 +56,7 @@ export const FormField = ({
         <label
           htmlFor={controlId}
           className={cn(
-            "inline-flex min-w-0 flex-wrap items-baseline gap-sf-4 text-label text-content-primary",
+            "inline-flex min-w-0 flex-wrap items-baseline gap-sf-4 text-label tracking-[0.01em] text-content-primary",
             disabled && "text-disabled-text"
           )}
         >
@@ -67,7 +67,7 @@ export const FormField = ({
             </span>
           ) : null}
           {resolvedOptionalText !== undefined ? (
-            <span className="shrink-0 text-caption text-content-tertiary">{resolvedOptionalText}</span>
+            <span className="shrink-0 rounded-sf-full bg-surface-sunken px-sf-8 py-sf-4 text-caption text-content-tertiary">{resolvedOptionalText}</span>
           ) : null}
         </label>
       ) : null}

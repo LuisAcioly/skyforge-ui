@@ -54,7 +54,7 @@ const alignClasses: Record<TableTextAlign, string> = {
 };
 
 const surfaceClasses: Record<TableSurface, string> = {
-  outline: "rounded-sf-md border border-border bg-surface shadow-none",
+  outline: "sf-premium-surface rounded-sf-xl border border-border bg-surface-raised",
   plain: "bg-transparent"
 };
 
@@ -79,7 +79,7 @@ Table.displayName = "Table";
 
 export const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(
   ({ className, ...props }, ref) => (
-    <thead ref={ref} className={cn("border-b border-divider bg-surface-sunken/80", className)} {...props} />
+    <thead ref={ref} className={cn("border-b border-divider bg-background-editorial/40", className)} {...props} />
   )
 );
 
@@ -92,7 +92,7 @@ export const TableBody = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTML
 TableBody.displayName = "TableBody";
 
 export const TableFooter = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(
-  ({ className, ...props }, ref) => <tfoot ref={ref} className={cn("border-t border-divider bg-surface-sunken", className)} {...props} />
+    ({ className, ...props }, ref) => <tfoot ref={ref} className={cn("border-t border-divider bg-background-editorial/40", className)} {...props} />
 );
 
 TableFooter.displayName = "TableFooter";
@@ -102,7 +102,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
     <tr
       ref={ref}
       className={cn(
-        "relative transition duration-sf-normal ease-sf-standard hover:bg-hover-surface data-[selected=true]:bg-active-surface [&[data-selected=true]>td:first-child]:shadow-[inset_3px_0_0_rgb(var(--color-primary))]",
+        "relative transition duration-sf-slow ease-sf-standard hover:bg-hover-surface data-[selected=true]:bg-active-surface [&[data-selected=true]>td:first-child]:border-l-4 [&[data-selected=true]>td:first-child]:border-primary",
         className
       )}
       {...props}
@@ -165,7 +165,7 @@ export const TableEmpty = forwardRef<HTMLTableCellElement, TableEmptyProps>(
       <tr>
         <td ref={ref} colSpan={colSpan} className={cn("px-sf-16 py-sf-32", className)} {...props}>
           <div className="mx-auto grid max-w-[360px] justify-items-center gap-sf-8 text-center">
-            <span aria-hidden="true" className="h-sf-4 w-sf-32 rounded-sf-full bg-primary" />
+            <span aria-hidden="true" className="h-sf-8 w-sf-48 rounded-sf-full bg-primary" />
             {resolvedTitle ? <p className="m-0 text-label text-content-primary">{resolvedTitle}</p> : null}
             {resolvedDescription ? <p className="m-0 text-body-sm text-content-tertiary">{resolvedDescription}</p> : null}
             {action ? <div className="mt-sf-4">{action}</div> : null}

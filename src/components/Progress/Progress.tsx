@@ -118,7 +118,7 @@ export const Progress = forwardRef<ElementRef<typeof ProgressPrimitive.Root>, Pr
           aria-describedby={describedBy}
           aria-labelledby={labelledBy}
           className={cn(
-            "relative w-full overflow-hidden rounded-sf-full bg-surface-sunken shadow-none ring-1 ring-inset ring-border",
+            "sf-premium-control relative w-full overflow-hidden rounded-sf-full bg-surface-sunken ring-1 ring-inset ring-border",
             sizeClasses[size],
             className
           )}

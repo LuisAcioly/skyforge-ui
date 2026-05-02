@@ -109,7 +109,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           aria-label={isCurrent ? `Page ${item}, current page` : `Go to page ${item}`}
           onClick={() => onPageChange?.(item)}
           className={cn(
-            "inline-flex shrink-0 select-none items-center justify-center rounded-sf-md border font-body outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:opacity-100",
+            "sf-premium-control inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border font-body outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:opacity-100",
             sizeClasses[size],
             isCurrent
               ? "border-primary bg-primary text-primary-foreground disabled:border-primary disabled:bg-primary disabled:text-primary-foreground"
@@ -134,7 +134,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           aria-label={previousLabel}
           onClick={() => onPageChange?.(currentPage - 1)}
           className={cn(
-            "inline-flex shrink-0 select-none items-center justify-center rounded-sf-md border border-border bg-surface font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+            "sf-premium-control inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border border-border bg-surface-raised font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
             sizeClasses[size]
           )}
         >
@@ -149,7 +149,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           aria-label={nextLabel}
           onClick={() => onPageChange?.(currentPage + 1)}
           className={cn(
-            "inline-flex shrink-0 select-none items-center justify-center rounded-sf-md border border-border bg-surface font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard hover:border-border-strong hover:bg-hover-surface active:translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+            "sf-premium-control inline-flex shrink-0 select-none items-center justify-center rounded-sf-full border border-border bg-surface-raised font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
             sizeClasses[size]
           )}
         >

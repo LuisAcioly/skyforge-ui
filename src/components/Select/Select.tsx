@@ -28,9 +28,9 @@ export interface SelectItemProps extends ComponentPropsWithoutRef<typeof SelectP
 }
 
 const variantClasses: Record<SelectVariant, string> = {
-  outline: "border-border bg-surface hover:border-border-strong data-[state=open]:border-border-strong",
-  filled: "border-transparent bg-hover-surface hover:border-border hover:bg-active-surface data-[state=open]:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong"
+  outline: "border-border bg-surface-raised hover:border-border-strong data-[state=open]:border-border-strong",
+  filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<SelectSize, string> = {
@@ -44,7 +44,7 @@ const iconSizeClasses: Record<SelectSize, string> = {
 };
 
 const itemClasses =
-  "relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-sm px-sf-12 py-sf-8 pl-sf-32 font-body text-body-sm text-content-primary outline-none transition duration-sf-normal ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-active-surface data-[highlighted]:text-content-primary data-[highlighted]:shadow-[inset_0_0_0_1px_rgb(var(--color-border-strong)_/_0.42)]";
+  "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 pl-sf-32 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";
 
 export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
@@ -100,7 +100,7 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
           aria-invalid={isInvalid ? true : ariaInvalid}
           data-invalid={isInvalid || undefined}
           className={cn(
-            "inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-md border font-body text-content-primary outline-none shadow-none transition duration-sf-normal ease-sf-standard active:translate-y-px active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
+            "sf-premium-control inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
             variantClasses[variant],
             sizeClasses[size],
             className
@@ -141,7 +141,7 @@ export const SelectContent = forwardRef<
       position={position}
       sideOffset={sideOffset}
       className={cn(
-        "sf-popover-content z-sf-modal max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-md border border-border bg-surface-raised text-content-primary shadow-sf-2 outline-none",
+        "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-xl border border-border bg-surface-raised text-content-primary outline-none",
         className
       )}
       {...props}
@@ -149,7 +149,7 @@ export const SelectContent = forwardRef<
       <SelectPrimitive.ScrollUpButton className="flex h-sf-32 cursor-default items-center justify-center text-icon-secondary">
         <ChevronUpIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
       </SelectPrimitive.ScrollUpButton>
-      <SelectPrimitive.Viewport className="max-h-[320px] p-sf-4">
+      <SelectPrimitive.Viewport className="max-h-[320px] p-sf-8">
         {children}
       </SelectPrimitive.Viewport>
       <SelectPrimitive.ScrollDownButton className="flex h-sf-32 cursor-default items-center justify-center text-icon-secondary">
@@ -165,7 +165,7 @@ export const SelectViewport = forwardRef<
   ElementRef<typeof SelectPrimitive.Viewport>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Viewport ref={ref} className={cn("max-h-[320px] p-sf-4", className)} {...props} />
+  <SelectPrimitive.Viewport ref={ref} className={cn("max-h-[320px] p-sf-8", className)} {...props} />
 ));
 
 SelectViewport.displayName = "SelectViewport";

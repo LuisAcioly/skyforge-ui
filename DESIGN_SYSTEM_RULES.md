@@ -33,6 +33,25 @@ Core principles:
 
 Avoid indistinguishable cards, heavy shadows, decorative gradients, excessive icon use, teal as a universal CTA color, and automatic centering of every section.
 
+## Experience Context Profiles
+
+Every interface must declare its context before visual decisions are made. Context controls density, typography freedom, iconography, motion, container treatment, and spacing.
+
+Agent protocol:
+
+1. After reading this document for a UI task, ask which context applies unless the user or project already states it clearly.
+2. If the task is an existing screen and context can be inferred from functionality, state the inferred context before applying rules.
+3. If multiple contexts could apply, ask the user to choose between `product-operational`, `premium-experience`, or `hybrid-product` before changing UI.
+4. Do not silently apply premium rules to operational workflows.
+
+| Context | Use for | Visual posture |
+| --- | --- | --- |
+| `product-operational` | SaaS apps, dashboards, CRUD tools, admin panels, task managers, CRM, internal systems | Quiet, dense, scannable, predictable, low-distraction. Prioritize repeated workflows, comparison, status clarity, and stable dimensions. |
+| `premium-experience` | Landing pages, brand pages, portfolios, launch pages, campaigns, object-focused showcases, high-touch editorial product surfaces | Cinematic, spacious, haptic, motion-rich, high contrast in hierarchy. Prioritize first impression, visual craft, and memorable spatial rhythm. |
+| `hybrid-product` | Product surfaces with an editorial first impression plus operational areas | First viewport may use premium treatment. Core workflow areas must return to operational density. |
+
+When context conflicts occur, product usability wins inside workflow-heavy screens. Premium rules apply only where they do not reduce task speed, readability, accessibility, or predictable layout.
+
 ## Foundations
 
 ### Color
@@ -72,9 +91,16 @@ Pure black rule:
 
 Use Plus Jakarta Sans for hierarchy and personality. Use Inter for product reading, dense information, and forms.
 
+Typography exceptions:
+
+1. `product-operational` uses the standard font pairing unless a documented product brand token overrides it.
+2. `premium-experience` may use premium display/body families such as `Geist`, `Satoshi`, `Clash Display`, or editorial serif families when they are added to `design-tokens.json` first.
+3. Do not hardcode font families in components. Add premium font choices as tokens before use.
+4. Premium typography must still preserve readable body sizes, stable line-height, and responsive text fit. Do not scale font size with viewport width.
+
 ### Iconography
 
-Heroicons is the official iconography library.
+Heroicons is the official iconography library for `product-operational` interfaces.
 
 Rules:
 
@@ -84,6 +110,12 @@ Rules:
 4. Keep outline stroke width at `1.5`.
 5. Do not mix icon families in the same product surface.
 6. Do not use icons as decoration when typography or spacing can communicate the same meaning.
+
+Contextual icon exceptions:
+
+1. `premium-experience` may use a different precise line icon family such as Phosphor Light or Remix Line only when the choice is documented at the surface level.
+2. Never mix Heroicons with another icon family in the same screen, toolbar, modal, or repeated collection.
+3. If Skyforge UI supplies Heroicons internally, local premium icons must not visually conflict with those controls.
 
 Semantic icon tokens:
 
@@ -111,6 +143,13 @@ Accessibility:
 
 Use `4`, `8`, `12`, `16`, `24`, `32`, `48`, `64`, `96`, and `128` for spacing. Use `4`, `8`, `12`, `16`, `24`, and `9999` for radius.
 
+Spacing by context:
+
+1. `product-operational` uses compact spacing that supports scanning and repeated action. Prefer `12`, `16`, `24`, and `32` for tool surfaces.
+2. `premium-experience` may use macro whitespace with `64`, `96`, and `128` section gaps when the screen is not a dense workflow.
+3. `hybrid-product` may use premium spacing in the first viewport, then operational density in the working surface.
+4. Do not add macro whitespace to task lists, tables, forms, sidebars, or dashboards if it reduces throughput.
+
 Elevation is border-first:
 
 | Elevation | Use | Rule |
@@ -121,6 +160,27 @@ Elevation is border-first:
 | `shadow.3` | Modals and overlays | Highest surface only. |
 
 If everything is elevated, nothing is elevated. Standard cards must be flat unless elevation communicates functional hierarchy.
+
+Inner shadow rule:
+
+1. Do not use inner shadows for highlights, borders, bevels, glass edges, selected states, loading rings, or decorative depth.
+2. Do not use Tailwind arbitrary `shadow-[inset_*]` utilities or CSS `box-shadow: inset ...` in components.
+3. Use borders, outlines, rings, tonal contrast, outer shadows, or explicit structural layers instead.
+4. Exceptions require explicit design review and a documented functional reason.
+
+Premium containers:
+
+1. Standard `product-operational` screens must avoid cards inside cards and avoid floating page sections unless the framed surface is a modal, popover, repeated item, or genuinely framed tool.
+2. `premium-experience` may use double-bezel containers: an outer shell with subtle tonal background, hairline boundary, tokenized padding, and a larger radius; an inner core with its own surface and smaller concentric radius.
+3. Double-bezel containers are not allowed for dense repeated rows, tables, task lists, or ordinary CRUD forms.
+4. Double-bezel values must use semantic tokens, `rgb(var(--color-token) / alpha)`, and token spacing/radius. Do not hardcode new hex values.
+
+Visual effects:
+
+1. `product-operational` may use subtle texture, grid, or tonal contrast only when it does not distract from content.
+2. `premium-experience` may use glass, mesh gradients, ambient light, or cinematic texture when performance and contrast remain acceptable.
+3. Decorative orbs and bokeh remain forbidden in operational tools. They are allowed only in `premium-experience` when they support brand mood and do not obscure product inspection.
+4. Backdrop blur is reserved for fixed or sticky layers, overlays, and menus. Do not apply heavy blur to large scrolling content surfaces.
 
 ### Responsive Tokens
 
@@ -172,6 +232,14 @@ Every interactive component must define and document applicable states:
 
 The visual showcase must include a state matrix for Button, Input, Alert, Tabs, Modal, and Card before a component library is considered complete.
 
+Motion by context:
+
+1. `product-operational` uses micro-motion only: hover, active, focus, alert entry, modal/popup entry, and small transform/opacity transitions.
+2. `premium-experience` may use scroll reveal, staggered entry, mask reveals, and cinematic transition choreography when implemented with IntersectionObserver or an equivalent viewport API.
+3. Never use `window.addEventListener("scroll")` for continuous scroll animation.
+4. Animate only `transform` and `opacity` by default. Avoid animating layout properties in repeated lists.
+5. Use custom cubic-bezier easing from tokens or documented component values. Avoid default-looking motion.
+
 ### Button
 
 Variants: `primary`, `secondary`, `ghost`, `danger`, `editorial`.
@@ -185,6 +253,12 @@ Sizes:
 | `lg` | `48px` | `24px` |
 
 Labels must be short verbs. Loading must preserve width. Danger uses error semantic tokens.
+
+Premium CTA rule:
+
+1. Primary CTAs in `premium-experience` should use pill geometry and may use a nested trailing icon island when the CTA is a high-emphasis navigation or conversion action.
+2. Product tool buttons in `product-operational` keep Skyforge UI button sizes, variants, and stable icon-button dimensions.
+3. Do not convert dense toolbar actions, table row actions, task actions, or destructive controls into marketing-style pill CTAs.
 
 ### Input
 
