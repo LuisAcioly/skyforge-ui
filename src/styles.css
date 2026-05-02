@@ -327,6 +327,34 @@
     }
   }
 
+  @keyframes sf-accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+      transform: translate3d(0, -4px, 0);
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes sf-accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      height: 0;
+      opacity: 0;
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
   .sf-popover-content,
   .sf-autocomplete-content {
     --sf-autocomplete-y: 4px;
@@ -365,6 +393,18 @@
 
   .sf-autocomplete-option:nth-child(n + 5) {
     animation-delay: 72ms;
+  }
+
+  .sf-accordion-content {
+    will-change: height, opacity, transform;
+  }
+
+  .sf-accordion-content[data-state="open"] {
+    animation: sf-accordion-down var(--duration-slow) var(--ease-standard) both;
+  }
+
+  .sf-accordion-content[data-state="closed"] {
+    animation: sf-accordion-up var(--duration-normal) var(--ease-standard) both;
   }
 
   .sf-year-list {
@@ -416,9 +456,15 @@
 
     .sf-popover-content,
     .sf-autocomplete-content,
-    .sf-autocomplete-option {
+    .sf-autocomplete-option,
+    .sf-accordion-content {
       animation: none !important;
       transform: none !important;
+    }
+
+    .sf-accordion-content {
+      height: auto !important;
+      opacity: 1 !important;
     }
   }
 }

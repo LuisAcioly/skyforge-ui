@@ -43,6 +43,8 @@ Do not use removed or unsupported components: `Label`, `Loading`, `TableCaption`
 
 ## Package Installation
 
+Current documented package version: `0.2.1`.
+
 Install Skyforge UI from npm:
 
 ```bash
@@ -64,6 +66,11 @@ Import components from the package entry:
 
 ```tsx
 import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionItem,
+  AccordionTrigger,
   Button,
   Input,
   Progress,
@@ -97,10 +104,13 @@ Use spacing tokens: `sf-4`, `sf-8`, `sf-12`, `sf-16`, `sf-24`, `sf-32`, `sf-48`,
 
 Use radius tokens: `sf-sm`, `sf-md`, `sf-lg`, `sf-xl`, `sf-2xl`, `sf-full`.
 
+Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer shadows, or structural layers instead.
+
 ## Component Registry
 
 | Component | Use for | Key variants or props |
 | --- | --- | --- |
+| `Accordion` | Progressive disclosure inside a surface | `Accordion`, `AccordionItem`, `AccordionHeader`, `AccordionTrigger`, `AccordionContent`, `type`, `collapsible`, `variant` |
 | `Alert` | Status, success, warning, error messaging | `variant="info" | "success" | "warning" | "error"`, `title` string |
 | `AutoComplete` | Searchable single selection | `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size` |
 | `Avatar` | Identity display | `size="sm" | "md" | "lg"`, `status` |
@@ -341,6 +351,27 @@ Use `Modal` for focus-trapped blocking decisions or short workflows.
 ```
 
 ## Navigation
+
+Use `Accordion` for progressive disclosure inside a page or panel. Do not use it as primary navigation.
+
+Variants: `outline`, `ghost`.
+
+Accordion content animates open and closed through Radix height variables. Respect `prefers-reduced-motion`; do not add JavaScript height measurement or scroll listeners.
+
+```tsx
+<Accordion type="single" collapsible defaultValue="tokens" variant="outline">
+  <AccordionItem value="tokens">
+    <AccordionHeader>
+      <AccordionTrigger>Token validation</AccordionTrigger>
+    </AccordionHeader>
+    <AccordionContent>
+      Token aliases were checked against light and dark themes.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+Use `type="multiple"` only when users need several sections open at once.
 
 Use `Tabs` for related panels, not multi-select filters.
 

@@ -1,5 +1,6 @@
 import "./styles.css";
 
+export * from "./components/Accordion/Accordion";
 export * from "./components/Alert/Alert";
 export * from "./components/AutoComplete/AutoComplete";
 export * from "./components/Avatar/Avatar";
