@@ -80,6 +80,7 @@ Core:
 
 - `Alert`
 - `Avatar`
+- `Badge`
 - `Button`
 - `Modal`
 - `Tabs`
@@ -89,6 +90,7 @@ Forms:
 
 - `AutoComplete`
 - `Checkbox`
+- `Chip`
 - `DatePicker`
 - `FormField`
 - `Input`
@@ -104,6 +106,7 @@ Data and feedback:
 - `Pagination`
 - `Skeleton`
 - `Spinner`
+- `Tag`
 - `Table`
 
 Theme:
@@ -117,8 +120,11 @@ Unsupported components: `Label`, `Loading`, `TableCaption`.
 - Use `Input` only for `type="text"` and `type="number"`.
 - Use `Textarea` for long text.
 - Use `DatePicker` for dates in `DD-MM-YYYY` format.
+- Use `Badge` for compact non-interactive metadata and status counts.
+- Use `Chip` for selectable or removable compact filters.
 - Use `Skeleton` for layout-shaped loading states.
 - Use `Spinner` for compact inline activity.
+- Use `Tag` for compact metadata, status labels, and removable filters.
 - Use `TableEmpty` and `TableLoading` for table states.
 - Use Heroicons for product icons and keep `strokeWidth={1.5}`.
 - Use semantic tokens instead of hardcoded colors.

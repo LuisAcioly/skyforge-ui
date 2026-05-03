@@ -114,8 +114,10 @@ Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer sh
 | `Alert` | Status, success, warning, error messaging | `variant="info" | "success" | "warning" | "error"`, `title` string |
 | `AutoComplete` | Searchable single selection | `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size` |
 | `Avatar` | Identity display | `size="sm" | "md" | "lg"`, `status` |
+| `Badge` | Compact non-interactive metadata and status counts | `variant="neutral" | "accent" | "info" | "success" | "warning" | "error"`, `size`, `dot`, `icon` |
 | `Button` | Actions | `variant`, `size`, `loading`, `leftIcon`, `rightIcon` |
 | `Checkbox` | Boolean or multi-select form item | `label`, `helperText`, `errorText`, `size` |
+| `Chip` | Selectable or removable compact filters | `variant`, `size`, `selected`, `onClick`, `onRemove` |
 | `DatePicker` | Date entry with calendar | `DD-MM-YYYY`, `locale="en" | "pt-BR"`, `onDateChange` |
 | `DropdownMenu` | Action menus and contextual commands | Radix-style compound API |
 | `FormField` | Composed custom fields | render prop gives `id`, `aria-describedby`, `aria-invalid` |
@@ -131,6 +133,7 @@ Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer sh
 | `Switch` | Binary setting toggle | `label`, `helperText`, `errorText`, `size` |
 | `Tabs` | Related panels | `variant="underline" | "segmented" | "rail"` |
 | `Table` | Structured data | `density`, `surface`, `TableEmpty`, `TableLoading` |
+| `Tag` | Compact metadata, status labels, removable filters | `variant="neutral" | "accent" | "info" | "success" | "warning" | "error"`, `size`, `onRemove` |
 | `Textarea` | Multi-line text entry | `variant`, `size`, `status`, `loading` |
 | `Tooltip` | Brief contextual hint | `TooltipProvider`, `Tooltip`, `TooltipTrigger`, `TooltipContent` |
 
@@ -467,6 +470,35 @@ Use `Spinner` only for compact inline indeterminate activity.
 
 ```tsx
 <Spinner size="sm" label="Loading" />
+```
+
+Use `Badge` for compact non-interactive metadata, status labels, and counts. Do not use it as a CTA.
+
+```tsx
+<Badge dot variant="success">Online</Badge>
+<Badge variant="warning">3 pending</Badge>
+```
+
+Use `Chip` for selectable or removable compact filters.
+
+```tsx
+<Chip onClick={() => setFilter("active")} selected>
+  Active
+</Chip>
+
+<Chip onRemove={() => removeFilter("blocked")} removeLabel="Remove blocked filter" variant="error">
+  Blocked
+</Chip>
+```
+
+Use `Tag` for compact metadata, status labels, and removable filters. Do not use it as a CTA.
+
+```tsx
+<Tag variant="success">Validated</Tag>
+
+<Tag onRemove={() => removeFilter("blocked")} removeLabel="Remove blocked filter" variant="error">
+  Blocked
+</Tag>
 ```
 
 ## Identity
