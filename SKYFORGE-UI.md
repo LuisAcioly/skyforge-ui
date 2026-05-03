@@ -119,7 +119,7 @@ Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer sh
 | `Checkbox` | Boolean or multi-select form item | `label`, `helperText`, `errorText`, `size` |
 | `Chip` | Selectable or removable compact filters | `variant`, `size`, `selected`, `onClick`, `onRemove` |
 | `DatePicker` | Date entry with calendar | `DD-MM-YYYY`, `locale="en" | "pt-BR"`, `onDateChange` |
-| `DropdownMenu` | Action menus and contextual commands | Radix-style compound API |
+| `DropdownMenu` | Action menus and contextual commands | Radix-style compound API, `DropdownMenuTrigger variant="secondary" | "ghost"` |
 | `FormField` | Composed custom fields | render prop gives `id`, `aria-describedby`, `aria-invalid` |
 | `Input` | Single-line text or number entry | `type="text" | "number"`, `variant`, `size`, `status`, `loading` |
 | `Modal` | Focus-trapped dialogs | `Modal`, `ModalTrigger`, `ModalContent`, title and description |
@@ -314,7 +314,7 @@ Use `DropdownMenu` for contextual actions.
 
 ```tsx
 <DropdownMenu>
-  <DropdownMenuTrigger>Open menu</DropdownMenuTrigger>
+  <DropdownMenuTrigger variant="ghost">Open menu</DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>Release actions</DropdownMenuLabel>
     <DropdownMenuItem>Duplicate draft</DropdownMenuItem>

@@ -4,6 +4,12 @@ import { forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAt
 
 import { cn } from "../../utils/cn";
 
+export type DropdownMenuTriggerVariant = "secondary" | "ghost";
+
+export interface DropdownMenuTriggerProps extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger> {
+  variant?: DropdownMenuTriggerVariant;
+}
+
 export interface DropdownMenuItemProps extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
   danger?: boolean;
   inset?: boolean;
@@ -29,6 +35,13 @@ const contentClasses =
 const itemClasses =
   "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";
 
+const triggerVariantClasses: Record<DropdownMenuTriggerVariant, string> = {
+  secondary:
+    "border-border bg-surface-raised text-secondary-foreground hover:border-border-strong hover:bg-secondary-hover data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+  ghost:
+    "border-transparent bg-transparent text-content-primary hover:border-border hover:bg-hover-surface active:border-border-strong active:bg-active-surface data-[state=open]:border-border data-[state=open]:bg-hover-surface"
+};
+
 export const DropdownMenu = DropdownMenuPrimitive.Root;
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
@@ -37,12 +50,13 @@ export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 
 export const DropdownMenuTrigger = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Trigger>
->(({ className, ...props }, ref) => (
+  DropdownMenuTriggerProps
+>(({ className, variant = "secondary", ...props }, ref) => (
   <DropdownMenuPrimitive.Trigger
     ref={ref}
     className={cn(
-      "sf-premium-control inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-full border border-border bg-surface-raised px-sf-16 font-body text-label text-secondary-foreground outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-secondary-hover active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+      "sf-premium-control inline-flex h-sf-40 max-w-full shrink-0 select-none items-center justify-center gap-sf-8 rounded-sf-full border px-sf-16 font-body text-label outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+      triggerVariantClasses[variant],
       className
     )}
     {...props}

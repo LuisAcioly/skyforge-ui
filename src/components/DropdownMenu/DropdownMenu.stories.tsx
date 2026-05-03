@@ -80,6 +80,22 @@ const statesSource = `<DropdownMenu defaultOpen>
     <DropdownMenuItem danger>Danger item</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`;
+
+const triggerVariantsSource = `<div className="flex flex-wrap items-center gap-sf-8">
+  <DropdownMenu>
+    <DropdownMenuTrigger>Secondary trigger</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Duplicate draft</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+
+  <DropdownMenu>
+    <DropdownMenuTrigger variant="ghost">Ghost trigger</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Export notes</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</div>`;
 type Story = StoryFn<typeof DropdownMenu>;
 
 export const Playground: Story = () => (
@@ -164,6 +180,32 @@ States.parameters = {
   docs: {
     source: {
       code: statesSource
+    }
+  }
+};
+
+export const TriggerVariants: Story = () => (
+    <div className="flex flex-wrap items-center gap-sf-8">
+      <DropdownMenu>
+        <DropdownMenuTrigger>Secondary trigger</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Duplicate draft</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger variant="ghost">Ghost trigger</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Export notes</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+
+TriggerVariants.parameters = {
+  docs: {
+    source: {
+      code: triggerVariantsSource
     }
   }
 };
