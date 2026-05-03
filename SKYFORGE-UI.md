@@ -113,8 +113,8 @@ Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer sh
 | `Accordion` | Progressive disclosure inside a surface | `Accordion`, `AccordionItem`, `AccordionHeader`, `AccordionTrigger`, `AccordionContent`, `type`, `collapsible`, `variant` |
 | `Alert` | Status, success, warning, error messaging | `variant="info" | "success" | "warning" | "error"`, `title` string |
 | `AutoComplete` | Searchable single selection | `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size` |
-| `Avatar` | Identity display | `size="sm" | "md" | "lg"`, `status` |
-| `Badge` | Compact non-interactive metadata and status counts | `variant="neutral" | "accent" | "info" | "success" | "warning" | "error"`, `size`, `dot`, `icon` |
+| `Avatar` | Identity display | `size="sm" | "md" | "lg"`, `status`, `variant="neutral" | "custom"`, `customColor` |
+| `Badge` | Compact non-interactive metadata and status counts | `variant="neutral" | "accent" | "info" | "success" | "warning" | "error" | "custom"`, `size`, `dot`, `icon`, `customColor` |
 | `Button` | Actions | `variant`, `size`, `loading`, `leftIcon`, `rightIcon` |
 | `Checkbox` | Boolean or multi-select form item | `label`, `helperText`, `errorText`, `size` |
 | `Chip` | Selectable or removable compact filters | `variant`, `size`, `selected`, `onClick`, `onRemove` |
@@ -477,7 +477,10 @@ Use `Badge` for compact non-interactive metadata, status labels, and counts. Do 
 ```tsx
 <Badge dot variant="success">Online</Badge>
 <Badge variant="warning">3 pending</Badge>
+<Badge customColor="#367656" variant="custom">Review lane</Badge>
 ```
+
+`customColor` accepts hex values like `#367656`, RGB functions like `rgb(54 118 86)`, and raw RGB channels like `54 118 86`. Validate contrast in light and dark themes.
 
 Use `Chip` for selectable or removable compact filters.
 
@@ -509,6 +512,10 @@ Use `Avatar` for people or service identities. Prefer initials fallback. Use rea
 <Avatar status="online">
   <AvatarImage src="https://picsum.photos/seed/maia-rocha/96/96" alt="Maia Rocha" />
   <AvatarFallback>MR</AvatarFallback>
+</Avatar>
+
+<Avatar customColor="rgb(54 118 86)" variant="custom">
+  <AvatarFallback>SF</AvatarFallback>
 </Avatar>
 ```
 

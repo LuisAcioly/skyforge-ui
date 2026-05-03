@@ -14,11 +14,20 @@ const meta = {
     status: {
       control: "select",
       options: ["online", "away", "busy", "offline"]
+    },
+    customColor: {
+      control: "text"
+    },
+    variant: {
+      control: "select",
+      options: ["neutral", "custom"]
     }
   },
   args: {
+    customColor: "#367656",
     size: "md",
-    status: "online"
+    status: "online",
+    variant: "neutral"
   }
 } satisfies Meta<typeof Avatar>;
 
@@ -65,6 +74,19 @@ export const Status: Story = {
       </Avatar>
       <Avatar status="offline">
         <AvatarFallback>OF</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+};
+
+export const CustomColor: Story = {
+  render: () => (
+    <div className="flex items-center gap-sf-12">
+      <Avatar customColor="#367656" variant="custom">
+        <AvatarFallback>SF</AvatarFallback>
+      </Avatar>
+      <Avatar customColor="rgb(54 118 86)" status="online" variant="custom">
+        <AvatarFallback>UI</AvatarFallback>
       </Avatar>
     </div>
   )

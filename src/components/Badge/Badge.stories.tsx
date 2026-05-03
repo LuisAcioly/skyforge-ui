@@ -11,17 +11,21 @@ const meta = {
     dot: {
       control: "boolean"
     },
+    customColor: {
+      control: "text"
+    },
     size: {
       control: "select",
       options: ["sm", "md"]
     },
     variant: {
       control: "select",
-      options: ["neutral", "accent", "info", "success", "warning", "error"]
+      options: ["neutral", "accent", "info", "success", "warning", "error", "custom"]
     }
   },
   args: {
     children: "Stable",
+    customColor: "#367656",
     dot: false,
     size: "md",
     variant: "neutral"
@@ -43,6 +47,7 @@ export const Variants: Story = {
       <Badge variant="success">Validated</Badge>
       <Badge variant="warning">Review</Badge>
       <Badge variant="error">Blocked</Badge>
+      <Badge customColor="#367656" variant="custom">Custom</Badge>
     </div>
   )
 };
@@ -77,5 +82,18 @@ export const WithIcon: Story = {
     <Badge icon={<ShieldCheckIcon />} variant="success">
       Verified
     </Badge>
+  )
+};
+
+export const CustomColor: Story = {
+  render: () => (
+    <div className="flex max-w-modal-md flex-wrap items-center gap-sf-8">
+      <Badge customColor="#367656" dot variant="custom">
+        Hex
+      </Badge>
+      <Badge customColor="rgb(54 118 86)" icon={<ShieldCheckIcon />} variant="custom">
+        RGB
+      </Badge>
+    </div>
   )
 };

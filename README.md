@@ -121,6 +121,7 @@ Unsupported components: `Label`, `Loading`, `TableCaption`.
 - Use `Textarea` for long text.
 - Use `DatePicker` for dates in `DD-MM-YYYY` format.
 - Use `Badge` for compact non-interactive metadata and status counts.
+- Use `customColor` with hex values like `#367656` or RGB values like `rgb(54 118 86)` when `Badge` or `Avatar` needs a local semantic color.
 - Use `Chip` for selectable or removable compact filters.
 - Use `Skeleton` for layout-shaped loading states.
 - Use `Spinner` for compact inline activity.

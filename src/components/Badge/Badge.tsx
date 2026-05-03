@@ -2,17 +2,27 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  type CSSProperties,
   type HTMLAttributes,
   type ReactElement,
   type ReactNode
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { resolveCustomColor } from "../../utils/customColor";
 
-export type BadgeVariant = "neutral" | "accent" | "info" | "success" | "warning" | "error";
+export type BadgeVariant = "neutral" | "accent" | "info" | "success" | "warning" | "error" | "custom";
 export type BadgeSize = "sm" | "md";
 
+type BadgeCustomColorStyle = CSSProperties & {
+  "--sf-badge-custom-bg"?: string;
+  "--sf-badge-custom-border"?: string;
+  "--sf-badge-custom-color"?: string;
+  "--sf-badge-custom-text"?: string;
+};
+
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+  customColor?: string;
   dot?: boolean;
   icon?: ReactNode;
   size?: BadgeSize;
@@ -25,7 +35,8 @@ const variantClasses: Record<BadgeVariant, string> = {
   info: "border-info-border bg-info-bg text-info-text",
   success: "border-success-border bg-success-bg text-success-text",
   warning: "border-warning-border bg-warning-bg text-warning-text",
-  error: "border-error-border bg-error-bg text-error-text"
+  error: "border-error-border bg-error-bg text-error-text",
+  custom: "border-[color:var(--sf-badge-custom-border)] bg-[color:var(--sf-badge-custom-bg)] text-[color:var(--sf-badge-custom-text)]"
 };
 
 const iconClasses: Record<BadgeVariant, string> = {
@@ -34,7 +45,8 @@ const iconClasses: Record<BadgeVariant, string> = {
   info: "text-info-icon",
   success: "text-success-icon",
   warning: "text-warning-icon",
-  error: "text-error-icon"
+  error: "text-error-icon",
+  custom: "text-[color:var(--sf-badge-custom-color)]"
 };
 
 const dotClasses: Record<BadgeVariant, string> = {
@@ -43,7 +55,8 @@ const dotClasses: Record<BadgeVariant, string> = {
   info: "bg-info-icon",
   success: "bg-success-icon",
   warning: "bg-warning-icon",
-  error: "bg-error-icon"
+  error: "bg-error-icon",
+  custom: "bg-[color:var(--sf-badge-custom-color)]"
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
@@ -80,13 +93,25 @@ function renderBadgeIcon(icon: ReactNode, size: BadgeSize, variant: BadgeVariant
   );
 }
 
+function getBadgeCustomColorStyle(customColor: string | undefined, style: CSSProperties | undefined): BadgeCustomColorStyle {
+  return {
+    ...style,
+    "--sf-badge-custom-bg": "color-mix(in srgb, var(--sf-badge-custom-color) 14%, rgb(var(--color-surface-raised)))",
+    "--sf-badge-custom-border": "color-mix(in srgb, var(--sf-badge-custom-color) 42%, rgb(var(--color-border)))",
+    "--sf-badge-custom-color": resolveCustomColor(customColor),
+    "--sf-badge-custom-text": "var(--sf-badge-custom-color)"
+  };
+}
+
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ children, className, dot = false, icon, size = "md", variant = "neutral", ...props }, ref) => {
+  ({ children, className, customColor, dot = false, icon, size = "md", style, variant = "neutral", ...props }, ref) => {
     const hasChildren = children !== null && children !== undefined;
+    const resolvedStyle = variant === "custom" ? getBadgeCustomColorStyle(customColor, style) : style;
 
     return (
       <span
         ref={ref}
+        style={resolvedStyle}
         className={cn(
           "inline-flex max-w-full shrink-0 select-none items-center rounded-sf-full border font-body font-semibold leading-none tracking-[0.01em]",
           variantClasses[variant],
