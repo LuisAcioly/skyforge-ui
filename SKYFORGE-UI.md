@@ -98,7 +98,7 @@ Default experience context is `premium-experience`. Components should feel more 
 
 Use border-first hierarchy. Shadows are reserved for floating layers such as popovers, dropdowns, tooltips, and modals.
 
-Use Plus Jakarta Sans for display and hierarchy. Use Inter for dense product reading and forms.
+Use Bebas Neue for display and hierarchy. Use Figtree for dense product reading and forms.
 
 Use spacing tokens: `sf-4`, `sf-8`, `sf-12`, `sf-16`, `sf-24`, `sf-32`, `sf-48`, `sf-64`, `sf-96`, `sf-128`.
 

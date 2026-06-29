@@ -78,18 +78,18 @@ Pure black rule:
 
 | Role | Font | Size | Line-height | Weight | Use |
 | --- | --- | --- | --- | --- | --- |
-| `display.2xl` | Plus Jakarta Sans | `64px` | `110%` | `700` | Hero and institutional pages. |
-| `display.xl` | Plus Jakarta Sans | `48px` | `110%` | `700` | Page titles and high-impact modals. |
-| `heading.lg` | Plus Jakarta Sans | `32px` | `120%` | `650/700` | Main sections. |
-| `heading.md` | Plus Jakarta Sans | `24px` | `120%` | `650` | Cards, modals, groups. |
-| `heading.sm` | Plus Jakarta Sans | `20px` | `120%` | `600` | Subtitles and entities. |
-| `body.md` | Inter | `16px` | `150%` | `400` | Main body copy. |
-| `body.sm` | Inter | `14px` | `150%` | `400` | Secondary text, forms, lists. |
-| `caption` | Inter | `12px` | `150%` | `500` | Metadata and captions. |
-| `label` | Inter | `12/14px` | `120%` | `600` | Labels, buttons, tabs. |
-| `eyebrow` | Inter | `12px` | `120%` | `700` | Uppercase editorial markers. |
+| `display.2xl` | Bebas Neue | `64px` | `110%` | `700` | Hero and institutional pages. |
+| `display.xl` | Bebas Neue | `48px` | `110%` | `700` | Page titles and high-impact modals. |
+| `heading.lg` | Bebas Neue | `32px` | `120%` | `650/700` | Main sections. |
+| `heading.md` | Bebas Neue | `24px` | `120%` | `650` | Cards, modals, groups. |
+| `heading.sm` | Bebas Neue | `20px` | `120%` | `600` | Subtitles and entities. |
+| `body.md` | Figtree | `16px` | `150%` | `400` | Main body copy. |
+| `body.sm` | Figtree | `14px` | `150%` | `400` | Secondary text, forms, lists. |
+| `caption` | Figtree | `12px` | `150%` | `500` | Metadata and captions. |
+| `label` | Figtree | `12/14px` | `120%` | `600` | Labels, buttons, tabs. |
+| `eyebrow` | Figtree | `12px` | `120%` | `700` | Uppercase editorial markers. |
 
-Use Plus Jakarta Sans for hierarchy and personality. Use Inter for product reading, dense information, and forms.
+Use Bebas Neue for hierarchy and personality. Use Figtree for product reading, dense information, and forms.
 
 Typography exceptions:
 
