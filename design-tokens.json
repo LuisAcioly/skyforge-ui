@@ -1,5 +1,6 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Skyforge Design System v2 — color tokens. Carbon Black neutralized to #18181A and the neutral ramp rebuilt off it (R=G, B +2..+6). Feedback hues and linen promoted to full 10-step scales. Additive: no token was renamed or removed.",
   "primitive": {
     "color": {
       "base": {
@@ -11,29 +12,29 @@
         "black": {
           "$type": "color",
           "$value": "#000000",
-          "$description": "Technical black reserved for alpha overlays and non-UI compositing only. Do not use for visible component states."
+          "$description": "Technical black reserved for alpha overlays and non-UI compositing only. Never for visible component states."
         }
       },
       "brand": {
         "carbon-black": {
           "$type": "color",
-          "$value": "#161B1E",
-          "$description": "Primary brand authority color used for light theme CTAs and dark theme canvas."
+          "$value": "#18181A",
+          "$description": "v2: neutralized from #161B1E. Primary brand authority color — light theme CTAs, dark theme canvas. Anchors the neutral ramp."
         },
         "shadow-ink": {
           "$type": "color",
-          "$value": "#323738",
-          "$description": "Dark ink surface color separated from neutral 900 for visible dark-mode surfaces."
+          "$value": "#323238",
+          "$description": "v2: neutralized from #323738. Dark ink surface, separated from neutral 900 for visible dark-mode surfaces."
         },
         "charcoal": {
           "$type": "color",
-          "$value": "#515656",
-          "$description": "Structural brand neutral aligned with neutral 700."
+          "$value": "#4F4F55",
+          "$description": "v2: neutralized from #515656. Structural brand neutral aligned with neutral 700."
         },
         "soft-linen": {
           "$type": "color",
           "$value": "#E4E0D5",
-          "$description": "Warm editorial surface color used sparingly for narrative emphasis."
+          "$description": "Warm editorial surface color used sparingly for narrative emphasis. The only warm family in the system."
         },
         "muted-teal": {
           "$type": "color",
@@ -44,490 +45,909 @@
       "neutral": {
         "50": {
           "$type": "color",
-          "$value": "#F5F6F6",
+          "$value": "#F6F6F7",
           "$description": "Primary light canvas."
         },
         "100": {
           "$type": "color",
-          "$value": "#E6E7E7",
+          "$value": "#ECECEE",
           "$description": "Subtle light surface and hover tone."
         },
         "200": {
           "$type": "color",
-          "$value": "#CFD2D1",
+          "$value": "#D8D8DB",
           "$description": "Default light border and divider tone."
         },
         "300": {
           "$type": "color",
-          "$value": "#ADB3B3",
-          "$description": "Strong light border and muted dark text."
+          "$value": "#B7B7BB",
+          "$description": "Strong light border for selected or emphasized boundaries."
         },
         "400": {
           "$type": "color",
-          "$value": "#848C8B",
-          "$description": "Muted neutral for non-text affordances and low-emphasis decoration."
+          "$value": "#8E8E93",
+          "$description": "Dark-theme border tone."
         },
         "500": {
           "$type": "color",
-          "$value": "#697170",
-          "$description": "Secondary content on light backgrounds."
+          "$value": "#707076",
+          "$description": "Tertiary icon tone."
         },
         "600": {
           "$type": "color",
-          "$value": "#5A6060",
-          "$description": "Secondary icon and strong content tone."
+          "$value": "#5D5D63",
+          "$description": "Tertiary text on light surfaces."
         },
         "700": {
           "$type": "color",
-          "$value": "#515656",
-          "$description": "Strong neutral and brand charcoal alias."
+          "$value": "#4F4F55",
+          "$description": "Secondary text on light surfaces. Matches brand charcoal."
         },
         "800": {
           "$type": "color",
-          "$value": "#404444",
-          "$description": "Raised dark surface and active tone with improved contrast against neutral 300 text."
+          "$value": "#3B3B41",
+          "$description": "Raised dark surface."
         },
         "900": {
           "$type": "color",
-          "$value": "#252627",
-          "$description": "Deep neutral for low-emphasis dark surfaces, kept distinct from brand shadow ink."
+          "$value": "#26262A",
+          "$description": "Editorial dark canvas."
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#18181A",
+          "$description": "v2: ramp anchor. Equals brand carbon-black."
         }
       },
       "teal": {
         "50": {
           "$type": "color",
           "$value": "#F0F7F3",
-          "$description": "Subtle teal background for accents."
+          "$description": "Accent surface — selected rows, checked controls."
         },
         "100": {
           "$type": "color",
           "$value": "#D9EEE3",
-          "$description": "Soft teal hover and badge background."
+          "$description": ""
         },
         "200": {
           "$type": "color",
           "$value": "#BFE0CE",
-          "$description": "Teal border and tonal surface."
+          "$description": "Accent container edge."
         },
         "300": {
           "$type": "color",
           "$value": "#85B79D",
-          "$description": "Light teal accent for dark theme links and non-text accent surfaces."
+          "$description": "Dark-theme accent and focus tone."
         },
         "400": {
           "$type": "color",
           "$value": "#66A384",
-          "$description": "Medium teal accent for icons and charts."
+          "$description": ""
         },
         "500": {
           "$type": "color",
           "$value": "#4B8F6E",
-          "$description": "Mid teal interaction tone."
+          "$description": ""
         },
         "600": {
           "$type": "color",
           "$value": "#367656",
-          "$description": "Accessible brand teal for normal text, links, and focus in light theme."
+          "$description": "Functional accent. Matches brand muted-teal."
         },
         "700": {
           "$type": "color",
           "$value": "#2B5E47",
-          "$description": "Accessible default link and focus tone in light theme."
+          "$description": "Text on accent surfaces. Link hover."
         },
         "800": {
           "$type": "color",
           "$value": "#214837",
-          "$description": "Active teal state in light theme."
+          "$description": ""
         },
         "900": {
           "$type": "color",
           "$value": "#173226",
-          "$description": "Strong teal foreground on light teal surfaces."
+          "$description": ""
         }
       },
-      "feedback": {
-        "success": {
-          "50": {
-            "$type": "color",
-            "$value": "#EAF6EE",
-            "$description": "Success background."
-          },
-          "200": {
-            "$type": "color",
-            "$value": "#B7DFC4",
-            "$description": "Success border."
-          },
-          "600": {
-            "$type": "color",
-            "$value": "#2F7D4F",
-            "$description": "Success icon."
-          },
-          "700": {
-            "$type": "color",
-            "$value": "#1F5A38",
-            "$description": "Success text."
-          }
+      "green": {
+        "50": {
+          "$type": "color",
+          "$value": "#EAF6EE",
+          "$description": "Success background."
         },
-        "warning": {
-          "50": {
-            "$type": "color",
-            "$value": "#FFF7D6",
-            "$description": "Warning background."
-          },
-          "200": {
-            "$type": "color",
-            "$value": "#F6D77A",
-            "$description": "Warning border."
-          },
-          "600": {
-            "$type": "color",
-            "$value": "#A16207",
-            "$description": "Warning icon."
-          },
-          "700": {
-            "$type": "color",
-            "$value": "#713F12",
-            "$description": "Warning text."
-          }
+        "100": {
+          "$type": "color",
+          "$value": "#D5ECDD",
+          "$description": ""
         },
-        "error": {
-          "50": {
-            "$type": "color",
-            "$value": "#FFF1F0",
-            "$description": "Error background."
-          },
-          "200": {
-            "$type": "color",
-            "$value": "#F4B7B4",
-            "$description": "Error border."
-          },
-          "600": {
-            "$type": "color",
-            "$value": "#C2413D",
-            "$description": "Error icon and destructive action."
-          },
-          "700": {
-            "$type": "color",
-            "$value": "#8E2421",
-            "$description": "Error text."
-          }
+        "200": {
+          "$type": "color",
+          "$value": "#B7DFC4",
+          "$description": "Success border."
         },
-        "info": {
-          "50": {
-            "$type": "color",
-            "$value": "#EFF6FF",
-            "$description": "Info background."
-          },
-          "200": {
-            "$type": "color",
-            "$value": "#BFDBFE",
-            "$description": "Info border."
-          },
-          "600": {
-            "$type": "color",
-            "$value": "#2563A8",
-            "$description": "Info icon."
-          },
-          "700": {
-            "$type": "color",
-            "$value": "#1E3A70",
-            "$description": "Info text."
-          }
-        }
-      }
-    },
-    "font": {
-      "family": {
-        "display": {
-          "$type": "fontFamily",
-          "$value": "Bebas Neue",
-          "$description": "Display font for headings and editorial moments."
+        "300": {
+          "$type": "color",
+          "$value": "#86C39D",
+          "$description": ""
         },
-        "body": {
-          "$type": "fontFamily",
-          "$value": "Figtree",
-          "$description": "Body font for product UI and long-form readability."
+        "400": {
+          "$type": "color",
+          "$value": "#57A878",
+          "$description": ""
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#2F7D4F",
+          "$description": "Success icon."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#256641",
+          "$description": ""
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#1F5A38",
+          "$description": "Success text."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#17442B",
+          "$description": ""
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#10301E",
+          "$description": ""
         }
       },
-      "size": {
-        "xs": {
-          "$type": "dimension",
-          "$value": "12px",
-          "$description": "Caption and metadata size."
+      "amber": {
+        "50": {
+          "$type": "color",
+          "$value": "#FFF7D6",
+          "$description": "Warning background."
         },
-        "sm": {
-          "$type": "dimension",
-          "$value": "14px",
-          "$description": "Small body and compact controls."
+        "100": {
+          "$type": "color",
+          "$value": "#FDEFB4",
+          "$description": ""
         },
-        "base": {
-          "$type": "dimension",
-          "$value": "16px",
-          "$description": "Default body size."
+        "200": {
+          "$type": "color",
+          "$value": "#F6D77A",
+          "$description": "Warning border."
         },
-        "lg": {
-          "$type": "dimension",
-          "$value": "20px",
-          "$description": "Small heading size."
+        "300": {
+          "$type": "color",
+          "$value": "#E9B949",
+          "$description": ""
         },
-        "xl": {
-          "$type": "dimension",
-          "$value": "24px",
-          "$description": "Medium heading size."
+        "400": {
+          "$type": "color",
+          "$value": "#CF941F",
+          "$description": ""
         },
-        "2xl": {
-          "$type": "dimension",
-          "$value": "32px",
-          "$description": "Large heading size."
+        "500": {
+          "$type": "color",
+          "$value": "#A16207",
+          "$description": "Warning icon."
         },
-        "3xl": {
-          "$type": "dimension",
-          "$value": "48px",
-          "$description": "Display heading size."
+        "600": {
+          "$type": "color",
+          "$value": "#86520A",
+          "$description": ""
         },
-        "4xl": {
-          "$type": "dimension",
-          "$value": "64px",
-          "$description": "Hero display size."
+        "700": {
+          "$type": "color",
+          "$value": "#713F12",
+          "$description": "Warning text."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#57300D",
+          "$description": ""
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#3D2109",
+          "$description": ""
         }
       },
-      "weight": {
-        "regular": {
-          "$type": "fontWeight",
-          "$value": 400,
-          "$description": "Default body text weight."
+      "red": {
+        "50": {
+          "$type": "color",
+          "$value": "#FFF1F0",
+          "$description": "Error background."
         },
-        "medium": {
-          "$type": "fontWeight",
-          "$value": 500,
-          "$description": "Metadata and subtle emphasis."
+        "100": {
+          "$type": "color",
+          "$value": "#FFDEDC",
+          "$description": ""
         },
-        "semibold": {
-          "$type": "fontWeight",
-          "$value": 600,
-          "$description": "Labels and control text."
+        "200": {
+          "$type": "color",
+          "$value": "#F4B7B4",
+          "$description": "Error border."
         },
-        "bold": {
-          "$type": "fontWeight",
-          "$value": 700,
-          "$description": "Headings and strong emphasis."
+        "300": {
+          "$type": "color",
+          "$value": "#E88B86",
+          "$description": ""
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#D66862",
+          "$description": ""
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#C2413D",
+          "$description": "Error and destructive icon."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#A63330",
+          "$description": ""
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#8E2421",
+          "$description": "Error text."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#6D1B19",
+          "$description": ""
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#4A1211",
+          "$description": ""
         }
       },
-      "line-height": {
-        "tight": {
-          "$type": "number",
-          "$value": 1.1,
-          "$description": "Display and hero line-height."
+      "blue": {
+        "50": {
+          "$type": "color",
+          "$value": "#EFF6FF",
+          "$description": "Info background."
         },
-        "snug": {
-          "$type": "number",
-          "$value": 1.2,
-          "$description": "Heading and label line-height."
+        "100": {
+          "$type": "color",
+          "$value": "#DBEAFE",
+          "$description": ""
         },
-        "normal": {
-          "$type": "number",
-          "$value": 1.5,
-          "$description": "Body copy line-height."
+        "200": {
+          "$type": "color",
+          "$value": "#BFDBFE",
+          "$description": "Info border."
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#93BDF7",
+          "$description": ""
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#5F98E6",
+          "$description": ""
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#2563A8",
+          "$description": "Info icon."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#1F5490",
+          "$description": ""
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#1E3A70",
+          "$description": "Info text."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#172C54",
+          "$description": ""
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#101D38",
+          "$description": ""
         }
       },
-      "letter-spacing": {
-        "normal": {
-          "$type": "dimension",
-          "$value": "0em",
-          "$description": "Default tracking."
+      "linen": {
+        "50": {
+          "$type": "color",
+          "$value": "#FAF9F5",
+          "$description": ""
         },
-        "eyebrow": {
-          "$type": "dimension",
-          "$value": "0.08em",
-          "$description": "Uppercase editorial eyebrow tracking."
-        }
-      }
-    },
-    "spacing": {
-      "4": {
-        "$type": "dimension",
-        "$value": "4px",
-        "$description": "Micro spacing unit."
-      },
-      "8": {
-        "$type": "dimension",
-        "$value": "8px",
-        "$description": "Default inline gap."
-      },
-      "12": {
-        "$type": "dimension",
-        "$value": "12px",
-        "$description": "Compact component padding."
-      },
-      "16": {
-        "$type": "dimension",
-        "$value": "16px",
-        "$description": "Default component padding."
-      },
-      "24": {
-        "$type": "dimension",
-        "$value": "24px",
-        "$description": "Default card and form spacing."
-      },
-      "32": {
-        "$type": "dimension",
-        "$value": "32px",
-        "$description": "Section and large component spacing."
-      },
-      "48": {
-        "$type": "dimension",
-        "$value": "48px",
-        "$description": "Page section spacing."
-      },
-      "64": {
-        "$type": "dimension",
-        "$value": "64px",
-        "$description": "Large section spacing."
-      },
-      "96": {
-        "$type": "dimension",
-        "$value": "96px",
-        "$description": "Editorial layout spacing."
-      },
-      "128": {
-        "$type": "dimension",
-        "$value": "128px",
-        "$description": "Hero and immersive layout spacing."
-      }
-    },
-    "radius": {
-      "sm": {
-        "$type": "dimension",
-        "$value": "4px",
-        "$description": "Small radius for badges and compact surfaces."
-      },
-      "md": {
-        "$type": "dimension",
-        "$value": "8px",
-        "$description": "Default control radius."
-      },
-      "lg": {
-        "$type": "dimension",
-        "$value": "12px",
-        "$description": "Card and alert radius."
-      },
-      "xl": {
-        "$type": "dimension",
-        "$value": "16px",
-        "$description": "Editorial card and popover radius."
-      },
-      "2xl": {
-        "$type": "dimension",
-        "$value": "24px",
-        "$description": "Modal and high-emphasis surface radius."
-      },
-      "full": {
-        "$type": "dimension",
-        "$value": "9999px",
-        "$description": "Fully rounded pills and avatars."
-      }
-    },
-    "border-width": {
-      "default": {
-        "$type": "dimension",
-        "$value": "1px",
-        "$description": "Default structural border width."
-      },
-      "strong": {
-        "$type": "dimension",
-        "$value": "2px",
-        "$description": "Focus and selected state border width."
-      }
-    },
-    "shadow": {
-      "none": {
-        "$type": "shadow",
-        "$value": "none",
-        "$description": "No elevation."
-      },
-      "1": {
-        "$type": "shadow",
-        "$value": "0 1px 2px rgb(22 27 30 / 0.04), 0 8px 24px rgb(22 27 30 / 0.035)",
-        "$description": "Subtle elevation for interactive cards and small menus only."
-      },
-      "2": {
-        "$type": "shadow",
-        "$value": "0 8px 24px rgb(22 27 30 / 0.08), 0 24px 48px rgb(22 27 30 / 0.06)",
-        "$description": "Medium elevation for popovers and floating panels."
-      },
-      "3": {
-        "$type": "shadow",
-        "$value": "0 24px 64px rgb(22 27 30 / 0.18), 0 48px 96px rgb(22 27 30 / 0.14)",
-        "$description": "High elevation for modals."
-      }
-    },
-    "icon": {
-      "library": {
-        "$type": "string",
-        "$value": "Heroicons",
-        "$description": "Official iconography library for the design system."
-      },
-      "style": {
-        "default": {
-          "$type": "string",
-          "$value": "outline",
-          "$description": "Default icon style for navigation, actions, forms, and utility UI."
+        "100": {
+          "$type": "color",
+          "$value": "#F2EFE7",
+          "$description": ""
         },
-        "emphasis": {
-          "$type": "string",
-          "$value": "solid",
-          "$description": "Use solid icons only for emphasis, filled badges, and feedback states."
-        }
-      },
-      "size": {
-        "xs": {
-          "$type": "dimension",
-          "$value": "16px",
-          "$description": "Dense metadata, small badges, and compact inline affordances."
+        "200": {
+          "$type": "color",
+          "$value": "#E4E0D5",
+          "$description": "Editorial canvas. Matches brand soft-linen."
         },
-        "sm": {
-          "$type": "dimension",
-          "$value": "20px",
-          "$description": "Default inline icon size for controls and inputs."
+        "300": {
+          "$type": "color",
+          "$value": "#D2CDBD",
+          "$description": ""
         },
-        "md": {
-          "$type": "dimension",
-          "$value": "24px",
-          "$description": "Standard navigation, empty-state, and card icon size."
+        "400": {
+          "$type": "color",
+          "$value": "#B8B19C",
+          "$description": ""
         },
-        "lg": {
-          "$type": "dimension",
-          "$value": "32px",
-          "$description": "Large illustrative or feature icon size."
-        }
-      },
-      "stroke-width": {
-        "outline": {
-          "$type": "number",
-          "$value": 1.5,
-          "$description": "Consistent Heroicons outline stroke width."
+        "500": {
+          "$type": "color",
+          "$value": "#99917B",
+          "$description": ""
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#7C7562",
+          "$description": ""
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#5F594B",
+          "$description": ""
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#423E34",
+          "$description": ""
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#2A271F",
+          "$description": "Editorial canvas in dark theme."
         }
       }
-    },
-    "layout": {
-      "breakpoint": {
-        "mobile": {
-          "$type": "dimension",
-          "$value": "720px",
-          "$description": "Single-column mobile layout breakpoint used by the showcase."
+    }
+  },
+  "semantic": {
+    "color": {
+      "light": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
         },
-        "tablet": {
-          "$type": "dimension",
-          "$value": "1040px",
-          "$description": "Intermediate collapse point for navigation and major grids."
-        }
+        "background-editorial": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.200}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.color.base.white}"
+        },
+        "surface-raised": {
+          "$type": "color",
+          "$value": "{primitive.color.base.white}"
+        },
+        "surface-sunken": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.100}"
+        },
+        "surface-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "border-strong": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "divider": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "text-primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "text-secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.700}"
+        },
+        "text-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.600}"
+        },
+        "text-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "icon-primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "icon-secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.600}"
+        },
+        "icon-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.500}"
+        },
+        "icon-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "icon-accent": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.600}"
+        },
+        "icon-disabled": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.500}"
+        },
+        "icon-success": {
+          "$type": "color",
+          "$value": "{primitive.color.green.500}"
+        },
+        "icon-warning": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.500}"
+        },
+        "icon-error": {
+          "$type": "color",
+          "$value": "{primitive.color.red.500}"
+        },
+        "icon-info": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.500}"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "primary-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}"
+        },
+        "primary-active": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}"
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.base.white}"
+        },
+        "secondary-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.100}"
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.600}"
+        },
+        "link": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.600}"
+        },
+        "link-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.800}"
+        },
+        "hover-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.100}"
+        },
+        "active-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "success-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.green.50}"
+        },
+        "success-border": {
+          "$type": "color",
+          "$value": "{primitive.color.green.200}"
+        },
+        "success-text": {
+          "$type": "color",
+          "$value": "{primitive.color.green.700}"
+        },
+        "success-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.green.500}"
+        },
+        "warning-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.50}"
+        },
+        "warning-border": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.200}"
+        },
+        "warning-text": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.700}"
+        },
+        "warning-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.500}"
+        },
+        "error-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.red.50}"
+        },
+        "error-border": {
+          "$type": "color",
+          "$value": "{primitive.color.red.200}"
+        },
+        "error-text": {
+          "$type": "color",
+          "$value": "{primitive.color.red.700}"
+        },
+        "error-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.red.500}"
+        },
+        "info-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.50}"
+        },
+        "info-border": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.200}"
+        },
+        "info-text": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.700}"
+        },
+        "info-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.500}"
+        },
+        "disabled-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.100}"
+        },
+        "disabled-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "disabled-text": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.600}"
+        },
+        "field-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.base.white}"
+        },
+        "field-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "field-border-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.500}"
+        },
+        "field-placeholder": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.500}"
+        },
+        "field-bg-readonly": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.600}"
+        },
+        "accent-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.700}"
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "accent-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.50}"
+        },
+        "accent-border": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.200}"
+        },
+        "accent-text": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.700}"
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "$description": "Light theme roles. Components consume these, never primitives."
       },
-      "container": {
-        "shell": {
-          "$type": "dimension",
-          "$value": "1180px",
-          "$description": "Maximum width for the documentation shell container."
-        }
+      "dark": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "background-editorial": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.900}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}"
+        },
+        "surface-raised": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "surface-sunken": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "surface-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.200}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}"
+        },
+        "border-strong": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "divider": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "text-primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "text-secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "text-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "text-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "icon-primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "icon-secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "icon-tertiary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}"
+        },
+        "icon-inverse": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "icon-accent": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.300}"
+        },
+        "icon-disabled": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}"
+        },
+        "icon-success": {
+          "$type": "color",
+          "$value": "{primitive.color.green.300}"
+        },
+        "icon-warning": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.300}"
+        },
+        "icon-error": {
+          "$type": "color",
+          "$value": "{primitive.color.red.300}"
+        },
+        "icon-info": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.300}"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "primary-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.100}"
+        },
+        "primary-active": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}"
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}"
+        },
+        "secondary-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}"
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.300}"
+        },
+        "link": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.300}"
+        },
+        "link-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.200}"
+        },
+        "hover-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "active-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.700}"
+        },
+        "success-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.green.900}"
+        },
+        "success-border": {
+          "$type": "color",
+          "$value": "{primitive.color.green.700}"
+        },
+        "success-text": {
+          "$type": "color",
+          "$value": "{primitive.color.green.200}"
+        },
+        "success-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.green.300}"
+        },
+        "warning-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.900}"
+        },
+        "warning-border": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.700}"
+        },
+        "warning-text": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.200}"
+        },
+        "warning-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.300}"
+        },
+        "error-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.red.900}"
+        },
+        "error-border": {
+          "$type": "color",
+          "$value": "{primitive.color.red.700}"
+        },
+        "error-text": {
+          "$type": "color",
+          "$value": "{primitive.color.red.200}"
+        },
+        "error-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.red.300}"
+        },
+        "info-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.900}"
+        },
+        "info-border": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.700}"
+        },
+        "info-text": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.200}"
+        },
+        "info-icon": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.300}"
+        },
+        "disabled-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "disabled-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.700}"
+        },
+        "disabled-text": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}"
+        },
+        "field-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.900}"
+        },
+        "field-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.500}"
+        },
+        "field-border-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}"
+        },
+        "field-placeholder": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}"
+        },
+        "field-bg-readonly": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.300}"
+        },
+        "accent-hover": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.200}"
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
+        },
+        "accent-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.900}"
+        },
+        "accent-border": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.700}"
+        },
+        "accent-text": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.200}"
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "{primitive.color.base.black}"
+        },
+        "$description": "Dark theme roles. Same key set as light — every role resolves in both themes."
       }
     }
   }

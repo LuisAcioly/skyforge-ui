@@ -55,9 +55,9 @@
     --border-width-strong: 2px;
 
     --shadow-none: none;
-    --shadow-1: 0 1px 2px rgb(22 27 30 / 0.06), 0 8px 24px rgb(22 27 30 / 0.05);
-    --shadow-2: 0 8px 24px rgb(22 27 30 / 0.1), 0 24px 48px rgb(22 27 30 / 0.08);
-    --shadow-3: 0 24px 64px rgb(22 27 30 / 0.18), 0 48px 96px rgb(22 27 30 / 0.14);
+    --shadow-1: 0 1px 2px rgb(24 24 26 / 0.06), 0 8px 24px rgb(24 24 26 / 0.05);
+    --shadow-2: 0 8px 24px rgb(24 24 26 / 0.1), 0 24px 48px rgb(24 24 26 / 0.08);
+    --shadow-3: 0 24px 64px rgb(24 24 26 / 0.18), 0 48px 96px rgb(24 24 26 / 0.14);
 
     --z-overlay: 40;
     --z-modal: 50;
@@ -81,7 +81,7 @@
     --component-modal-width-md: 560px;
     --component-modal-width-lg: 720px;
     --component-modal-width-xl: 960px;
-    --component-modal-overlay: 22 27 30;
+    --component-modal-overlay: 24 24 26;
     --component-tabs-height: 40px;
     --component-tabs-indicator-height: 2px;
     --component-badge-height-sm: 20px;
@@ -91,37 +91,37 @@
   :root,
   [data-theme="light"] {
     color-scheme: light;
-    --color-background: 245 246 246;
+    --color-background: 246 246 247;
     --color-background-editorial: 228 224 213;
     --color-surface: 255 255 255;
     --color-surface-raised: 255 255 255;
-    --color-surface-sunken: 230 231 231;
-    --color-surface-inverse: 22 27 30;
-    --color-border: 207 210 209;
-    --color-border-strong: 173 179 179;
-    --color-divider: 207 210 209;
-    --color-text-primary: 22 27 30;
-    --color-text-secondary: 81 86 86;
-    --color-text-tertiary: 90 96 96;
-    --color-text-inverse: 245 246 246;
-    --color-icon-primary: 22 27 30;
-    --color-icon-secondary: 90 96 96;
-    --color-icon-tertiary: 105 113 112;
-    --color-icon-inverse: 245 246 246;
+    --color-surface-sunken: 236 236 238;
+    --color-surface-inverse: 24 24 26;
+    --color-border: 216 216 219;
+    --color-border-strong: 183 183 187;
+    --color-divider: 216 216 219;
+    --color-text-primary: 24 24 26;
+    --color-text-secondary: 79 79 85;
+    --color-text-tertiary: 93 93 99;
+    --color-text-inverse: 246 246 247;
+    --color-icon-primary: 24 24 26;
+    --color-icon-secondary: 93 93 99;
+    --color-icon-tertiary: 112 112 118;
+    --color-icon-inverse: 246 246 247;
     --color-icon-accent: 54 118 86;
-    --color-icon-disabled: 105 113 112;
-    --color-primary: 22 27 30;
-    --color-primary-hover: 50 55 56;
-    --color-primary-active: 22 27 30;
-    --color-primary-foreground: 245 246 246;
+    --color-icon-disabled: 112 112 118;
+    --color-primary: 24 24 26;
+    --color-primary-hover: 50 50 56;
+    --color-primary-active: 50 50 56;
+    --color-primary-foreground: 246 246 247;
     --color-secondary: 255 255 255;
-    --color-secondary-hover: 230 231 231;
-    --color-secondary-foreground: 22 27 30;
+    --color-secondary-hover: 236 236 238;
+    --color-secondary-foreground: 24 24 26;
     --color-focus: 54 118 86;
     --color-link: 54 118 86;
     --color-link-hover: 33 72 55;
-    --color-hover-surface: 230 231 231;
-    --color-active-surface: 207 210 209;
+    --color-hover-surface: 236 236 238;
+    --color-active-surface: 216 216 219;
     --color-success-background: 234 246 238;
     --color-success-border: 183 223 196;
     --color-success-text: 31 90 56;
@@ -138,49 +138,49 @@
     --color-info-border: 191 219 254;
     --color-info-text: 30 58 112;
     --color-info-icon: 37 99 168;
-    --color-disabled-background: 230 231 231;
-    --color-disabled-border: 207 210 209;
-    --color-disabled-text: 90 96 96;
+    --color-disabled-background: 236 236 238;
+    --color-disabled-border: 216 216 219;
+    --color-disabled-text: 93 93 99;
     --color-success-bg: 234 246 238;
     --color-warning-bg: 255 247 214;
     --color-error-bg: 255 241 240;
     --color-info-bg: 239 246 255;
-    --color-disabled-bg: 230 231 231;
+    --color-disabled-bg: 236 236 238;
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
-    --color-background: 22 27 30;
-    --color-background-editorial: 37 38 39;
-    --color-surface: 50 55 56;
-    --color-surface-raised: 64 68 68;
-    --color-surface-sunken: 22 27 30;
+    --color-background: 24 24 26;
+    --color-background-editorial: 38 38 42;
+    --color-surface: 50 50 56;
+    --color-surface-raised: 59 59 65;
+    --color-surface-sunken: 24 24 26;
     --color-surface-inverse: 228 224 213;
-    --color-border: 132 140 139;
-    --color-border-strong: 173 179 179;
-    --color-divider: 132 140 139;
-    --color-text-primary: 245 246 246;
-    --color-text-secondary: 207 210 209;
-    --color-text-tertiary: 173 179 179;
-    --color-text-inverse: 22 27 30;
-    --color-icon-primary: 245 246 246;
-    --color-icon-secondary: 173 179 179;
-    --color-icon-tertiary: 132 140 139;
-    --color-icon-inverse: 22 27 30;
+    --color-border: 142 142 147;
+    --color-border-strong: 183 183 187;
+    --color-divider: 59 59 65;
+    --color-text-primary: 246 246 247;
+    --color-text-secondary: 216 216 219;
+    --color-text-tertiary: 183 183 187;
+    --color-text-inverse: 24 24 26;
+    --color-icon-primary: 246 246 247;
+    --color-icon-secondary: 183 183 187;
+    --color-icon-tertiary: 142 142 147;
+    --color-icon-inverse: 24 24 26;
     --color-icon-accent: 133 183 157;
-    --color-icon-disabled: 173 179 179;
-    --color-primary: 228 224 213;
-    --color-primary-hover: 230 231 231;
-    --color-primary-active: 207 210 209;
-    --color-primary-foreground: 22 27 30;
-    --color-secondary: 50 55 56;
-    --color-secondary-hover: 64 68 68;
-    --color-secondary-foreground: 245 246 246;
+    --color-icon-disabled: 183 183 187;
+    --color-primary: 246 246 247;
+    --color-primary-hover: 236 236 238;
+    --color-primary-active: 216 216 219;
+    --color-primary-foreground: 24 24 26;
+    --color-secondary: 50 50 56;
+    --color-secondary-hover: 59 59 65;
+    --color-secondary-foreground: 246 246 247;
     --color-focus: 133 183 157;
     --color-link: 133 183 157;
     --color-link-hover: 191 224 206;
-    --color-hover-surface: 64 68 68;
-    --color-active-surface: 81 86 86;
+    --color-hover-surface: 59 59 65;
+    --color-active-surface: 79 79 85;
     --color-success-background: 16 37 26;
     --color-success-border: 125 199 154;
     --color-success-text: 183 223 196;
@@ -197,14 +197,14 @@
     --color-info-border: 126 182 244;
     --color-info-text: 191 219 254;
     --color-info-icon: 126 182 244;
-    --color-disabled-background: 37 38 39;
-    --color-disabled-border: 105 113 112;
-    --color-disabled-text: 173 179 179;
+    --color-disabled-background: 59 59 65;
+    --color-disabled-border: 79 79 85;
+    --color-disabled-text: 142 142 147;
     --color-success-bg: 16 37 26;
     --color-warning-bg: 46 34 5;
     --color-error-bg: 50 18 17;
     --color-info-bg: 15 30 51;
-    --color-disabled-bg: 37 38 39;
+    --color-disabled-bg: 59 59 65;
   }
 
   * {
@@ -408,9 +408,9 @@
   }
 
   .sf-year-list {
-    --sf-year-scrollbar-track: 230 231 231;
-    --sf-year-scrollbar-thumb: 173 179 179;
-    --sf-year-scrollbar-thumb-hover: 132 140 139;
+    --sf-year-scrollbar-track: 236 236 238;
+    --sf-year-scrollbar-thumb: 183 183 187;
+    --sf-year-scrollbar-thumb-hover: 142 142 147;
 
     scrollbar-color: rgb(var(--sf-year-scrollbar-thumb)) rgb(var(--sf-year-scrollbar-track));
     scrollbar-gutter: stable;
