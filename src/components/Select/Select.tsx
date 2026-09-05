@@ -8,6 +8,12 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import {
+  fieldStatusBorderClasses,
+  fieldStatusMessageClasses,
+  resolveFieldStatus,
+  type FieldStatus
+} from "../../utils/fieldStatus";
 
 export type SelectSize = "md" | "lg";
 export type SelectVariant = "outline" | "filled" | "ghost";
@@ -20,6 +26,9 @@ export interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof Sele
   labelClassName?: string;
   placeholder?: string;
   size?: SelectSize;
+  /** Validation state. Parity with Input: success and warning, not only error. */
+  status?: FieldStatus;
+  statusText?: string | null;
   variant?: SelectVariant;
 }
 
@@ -28,14 +37,14 @@ export interface SelectItemProps extends ComponentPropsWithoutRef<typeof SelectP
 }
 
 const variantClasses: Record<SelectVariant, string> = {
-  outline: "border-border bg-surface-raised hover:border-border-strong data-[state=open]:border-border-strong",
+  outline: "border-field-border bg-field-bg hover:border-field-border-hover data-[state=open]:border-field-border-hover",
   filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
   ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<SelectSize, string> = {
-  md: "h-sf-40 px-sf-12 text-body-sm",
-  lg: "h-sf-48 px-sf-16 text-body-md"
+  md: "h-control-md px-sf-12 text-body-sm",
+  lg: "h-control-lg px-sf-16 text-body-md"
 };
 
 const iconSizeClasses: Record<SelectSize, string> = {
@@ -66,6 +75,8 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
       labelClassName,
       placeholder,
       size = "md",
+      status,
+      statusText,
       variant = "outline",
       ...props
     },
@@ -81,8 +92,12 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
     const hasErrorText = resolvedErrorText !== undefined;
     const helperId = hasHelperText ? `${triggerId}-helper` : undefined;
     const errorId = hasErrorText ? `${triggerId}-error` : undefined;
-    const isInvalid = hasErrorText || ariaInvalid === true || ariaInvalid === "true";
-    const describedBy = [ariaDescribedBy, helperId, errorId].filter(Boolean).join(" ") || undefined;
+    const resolvedStatusText = typeof statusText === "string" ? statusText : undefined;
+    const { status: resolvedStatus, isInvalid } = resolveFieldStatus(status, resolvedErrorText, ariaInvalid);
+    const feedbackText = resolvedErrorText ?? resolvedStatusText;
+    const hasFeedbackText = feedbackText !== undefined;
+    const feedbackId = hasFeedbackText ? `${triggerId}-feedback` : undefined;
+    const describedBy = [ariaDescribedBy, helperId, feedbackId].filter(Boolean).join(" ") || undefined;
 
     return (
       <div className={cn("grid w-full gap-sf-8", containerClassName)}>
@@ -99,10 +114,12 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
           aria-describedby={describedBy}
           aria-invalid={isInvalid ? true : ariaInvalid}
           data-invalid={isInvalid || undefined}
+          data-status={resolvedStatus}
           className={cn(
             "sf-premium-control inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
             variantClasses[variant],
             sizeClasses[size],
+            fieldStatusBorderClasses[resolvedStatus],
             className
           )}
           {...props}
@@ -119,9 +136,9 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
           </p>
         ) : null}
 
-        {hasErrorText ? (
-          <p id={errorId} className="m-0 text-caption text-error-text">
-            {resolvedErrorText}
+        {hasFeedbackText ? (
+          <p id={feedbackId} className={cn("m-0 text-caption", fieldStatusMessageClasses[resolvedStatus])}>
+            {feedbackText}
           </p>
         ) : null}
       </div>
@@ -141,7 +158,7 @@ export const SelectContent = forwardRef<
       position={position}
       sideOffset={sideOffset}
       className={cn(
-        "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-xl border border-border bg-surface-raised text-content-primary outline-none",
+        "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-xl border border-border bg-surface-raised text-content-primary outline-none",
         className
       )}
       {...props}

@@ -10,8 +10,11 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToError } from "../../utils/aliases";
 
 export type TagVariant = "neutral" | "accent" | "info" | "success" | "warning" | "error";
+/** `danger` is accepted as a synonym of `error`. */
+export type TagVariantInput = TagVariant | "danger";
 export type TagSize = "sm" | "md";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
@@ -21,8 +24,9 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   removeLabel?: string;
   rightIcon?: ReactNode;
   size?: TagSize;
-  variant?: TagVariant;
+  variant?: TagVariantInput;
 }
+
 
 const variantClasses: Record<TagVariant, string> = {
   neutral: "border-border bg-surface-raised text-content-secondary",
@@ -87,11 +91,12 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
       removeLabel = "Remove tag",
       rightIcon,
       size = "md",
-      variant = "neutral",
+      variant: variantProp = "neutral",
       ...props
     },
     ref
   ) => {
+    const variant = normalizeToError<TagVariant>(variantProp);
     const hasChildren = children !== null && children !== undefined;
     const isRemovable = typeof onRemove === "function";
 
@@ -123,7 +128,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
             disabled={disabled}
             onClick={handleRemoveClick}
             className={cn(
-              "inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
+              "relative before:absolute before:-inset-[4px] before:content-[''] inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
               removeButtonClasses[size]
             )}
           >

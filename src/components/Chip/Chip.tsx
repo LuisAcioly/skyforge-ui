@@ -12,8 +12,11 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToError } from "../../utils/aliases";
 
 export type ChipVariant = "neutral" | "accent" | "info" | "success" | "warning" | "error";
+/** `danger` is accepted as a synonym of `error`. */
+export type ChipVariantInput = ChipVariant | "danger";
 export type ChipSize = "sm" | "md";
 
 export interface ChipProps extends Omit<HTMLAttributes<HTMLSpanElement>, "onClick"> {
@@ -27,8 +30,9 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLSpanElement>, "onClic
   selected?: boolean;
   size?: ChipSize;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  variant?: ChipVariant;
+  variant?: ChipVariantInput;
 }
+
 
 const variantClasses: Record<ChipVariant, string> = {
   neutral: "border-border bg-surface-raised text-content-secondary",
@@ -102,11 +106,12 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
       selected = false,
       size = "md",
       type = "button",
-      variant = "neutral",
+      variant: variantProp = "neutral",
       ...props
     },
     ref
   ) => {
+    const variant = normalizeToError<ChipVariant>(variantProp);
     const hasChildren = children !== null && children !== undefined;
     const isInteractive = typeof onClick === "function";
     const isRemovable = typeof onRemove === "function";
@@ -165,7 +170,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
             disabled={disabled}
             onClick={handleRemoveClick}
             className={cn(
-              "inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
+              "relative before:absolute before:-inset-[4px] before:content-[''] inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
               removeButtonClasses[size]
             )}
           >

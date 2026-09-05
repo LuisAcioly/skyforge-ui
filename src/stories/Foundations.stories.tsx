@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { typographyRuntimeRoles } from "../generated/typography-tokens";
 
 const meta = {
   title: "Design System/Foundations",
@@ -84,19 +85,6 @@ const semanticColorGroups = [
   }
 ];
 
-const typography = [
-  { label: "Display 2XL", className: "font-display text-display-2xl text-content-primary" },
-  { label: "Display XL", className: "font-display text-display-xl text-content-primary" },
-  { label: "Heading large", className: "font-display text-heading-lg text-content-primary" },
-  { label: "Heading medium", className: "font-display text-heading-md text-content-primary" },
-  { label: "Heading small", className: "font-display text-heading-sm text-content-primary" },
-  { label: "Body medium", className: "text-body-md text-content-secondary" },
-  { label: "Body small", className: "text-body-sm text-content-secondary" },
-  { label: "Label", className: "text-label text-content-primary" },
-  { label: "Caption", className: "text-caption text-content-tertiary" },
-  { label: "Eyebrow", className: "text-eyebrow uppercase text-content-tertiary" }
-];
-
 const spacing = [
   { token: "sf-4", widthClass: "w-sf-4" },
   { token: "sf-8", widthClass: "w-sf-8" },
@@ -157,8 +145,8 @@ export const Tokens: Story = {
       <section className="grid gap-sf-16">
         <h2 className="m-0 font-display text-heading-md text-content-primary">Typography</h2>
         <div className="grid gap-sf-12 rounded-sf-lg border border-border bg-surface p-sf-24">
-          {typography.map(({ className, label }) => (
-            <p key={label} className={`m-0 ${className}`}>
+          {typographyRuntimeRoles.map(({ className, label, token }) => (
+            <p key={token} className={`m-0 ${className} ${token === "eyebrow" ? "uppercase" : ""}`}>
               {label}
             </p>
           ))}

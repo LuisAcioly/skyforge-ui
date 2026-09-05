@@ -6,7 +6,7 @@ import { resolveCustomColor } from "../../utils/customColor";
 
 export type AvatarSize = "sm" | "md" | "lg";
 export type AvatarStatus = "online" | "away" | "busy" | "offline";
-export type AvatarVariant = "neutral" | "custom";
+export type AvatarVariant = "neutral" | "accent" | "custom";
 
 type AvatarCustomColorStyle = CSSProperties & {
   "--sf-avatar-custom-bg"?: string;
@@ -29,11 +29,12 @@ export interface AvatarFallbackProps extends Omit<ComponentPropsWithoutRef<typeo
 const sizeClasses: Record<AvatarSize, string> = {
   sm: "h-sf-32 w-sf-32 text-label-sm",
   md: "h-sf-40 w-sf-40 text-label",
-  lg: "h-sf-48 w-sf-48 text-heading-sm"
+  lg: "h-sf-48 w-sf-48 text-label-lg"
 };
 
 const variantClasses: Record<AvatarVariant, string> = {
   neutral: "border-border bg-surface-raised text-content-secondary",
+  accent: "border-accent-border bg-accent-bg text-accent-text",
   custom: "border-[color:var(--sf-avatar-custom-border)] bg-[color:var(--sf-avatar-custom-bg)] text-[color:var(--sf-avatar-custom-text)]"
 };
 
@@ -50,13 +51,20 @@ const statusClasses: Record<AvatarStatus, string> = {
   offline: "bg-disabled-text"
 };
 
+const statusBorderClasses: Record<AvatarVariant, string> = {
+  neutral: "border-surface-raised",
+  accent: "border-accent-bg",
+  custom: "border-[color:var(--sf-avatar-custom-bg)]"
+};
+
 function getAvatarCustomColorStyle(customColor: string | undefined, style: CSSProperties | undefined): AvatarCustomColorStyle {
   return {
     ...style,
     "--sf-avatar-custom-bg": "color-mix(in srgb, var(--sf-avatar-custom-color) 14%, rgb(var(--color-surface-raised)))",
     "--sf-avatar-custom-border": "color-mix(in srgb, var(--sf-avatar-custom-color) 42%, rgb(var(--color-border)))",
     "--sf-avatar-custom-color": resolveCustomColor(customColor),
-    "--sf-avatar-custom-text": "var(--sf-avatar-custom-color)"
+    "--sf-avatar-custom-text":
+      "color-mix(in srgb, var(--sf-avatar-custom-color) 35%, rgb(var(--color-text-primary)))"
   };
 }
 
@@ -83,7 +91,7 @@ export const Avatar = forwardRef<ElementRef<typeof AvatarPrimitive.Root>, Avatar
             aria-hidden="true"
             className={cn(
               "absolute bottom-0 right-0 rounded-sf-full border-2",
-              variant === "custom" ? "border-[color:var(--sf-avatar-custom-bg)]" : "border-surface-raised",
+              statusBorderClasses[variant],
               statusSizeClasses[size],
               statusClasses[status]
             )}
@@ -114,7 +122,7 @@ export const AvatarFallback = forwardRef<ElementRef<typeof AvatarPrimitive.Fallb
         ref={ref}
         delayMs={delayMs}
         className={cn(
-          "flex h-full w-full items-center justify-center rounded-sf-xl bg-surface-sunken text-current group-data-[variant=custom]/avatar:bg-[color:var(--sf-avatar-custom-bg)]",
+          "flex h-full w-full items-center justify-center rounded-sf-xl bg-surface-sunken text-current group-data-[variant=accent]/avatar:bg-accent-bg group-data-[variant=custom]/avatar:bg-[color:var(--sf-avatar-custom-bg)]",
           className
         )}
         {...props}

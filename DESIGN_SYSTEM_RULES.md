@@ -58,15 +58,26 @@ When context conflicts occur, product usability wins inside workflow-heavy scree
 
 Use primitives for token definition, swatches, and documentation only. Product components consume semantic tokens through CSS variables.
 
+A ramp is a ladder, not a set of chosen colours. Every chromatic family steps evenly in OKLCH lightness (ΔL 0.0778 from 50 to 900) and holds one hue, so any step can be predicted from its neighbours. Steps no semantic role currently selects are reserve, not dead weight: they are what makes the next role a lookup rather than a new invention. A brand token names a step; it never restates its value.
+
+Families and what they are for:
+
+| Family | Job |
+| --- | --- |
+| `neutral` | Surfaces, borders, text, disabled. Every step bound. |
+| `teal` | Accent: focus, links, selection, active state. |
+| `green` `amber` `red` `blue` | Status: success, warning, error, information. Never decoration. |
+| `linen` | Editorial. Warm reading surfaces for long-form and documentation. Never carries state, never product chrome. |
+
 | Token | Value | Use |
 | --- | --- | --- |
 | `base.white` | `#FFFFFF` | Raised surfaces and technical foregrounds. |
 | `base.black` | `#000000` | Alpha overlays and compositing only. Never use for visible UI states. |
-| `brand.carbon-black` | `#161B1E` | Brand authority, primary action in light mode, dark canvas. |
-| `brand.shadow-ink` | `#323738` | Dark surface and dark hover tone. |
-| `brand.charcoal` | `#515656` | Structural neutral and secondary text. |
-| `brand.soft-linen` | `#E4E0D5` | Editorial surface used sparingly. |
-| `brand.muted-teal` | `#367656` | Focus, links, and functional accent in light mode. |
+| `brand.carbon-black` | `#18181A` (`neutral.950`) | Brand authority, primary action in light mode, dark canvas. |
+| `brand.shadow-ink` | `#323238` | Dark surface and dark hover tone. |
+| `brand.charcoal` | `#4F4F55` (`neutral.700`) | Structural neutral and secondary text. |
+| `brand.soft-linen` | `#E4E0D5` (`linen.100`) | Editorial surface. The linen family carries reading surfaces; product chrome stays neutral. |
+| `brand.muted-teal` | `#147672` (`teal.600`) | Focus, links, and functional accent in light mode. |
 
 Pure black rule:
 
@@ -76,18 +87,25 @@ Pure black rule:
 
 ### Typography
 
-| Role | Font | Size | Line-height | Weight | Use |
-| --- | --- | --- | --- | --- | --- |
-| `display.2xl` | Bebas Neue | `64px` | `110%` | `700` | Hero and institutional pages. |
-| `display.xl` | Bebas Neue | `48px` | `110%` | `700` | Page titles and high-impact modals. |
-| `heading.lg` | Bebas Neue | `32px` | `120%` | `650/700` | Main sections. |
-| `heading.md` | Bebas Neue | `24px` | `120%` | `650` | Cards, modals, groups. |
-| `heading.sm` | Bebas Neue | `20px` | `120%` | `600` | Subtitles and entities. |
-| `body.md` | Figtree | `16px` | `150%` | `400` | Main body copy. |
-| `body.sm` | Figtree | `14px` | `150%` | `400` | Secondary text, forms, lists. |
-| `caption` | Figtree | `12px` | `150%` | `500` | Metadata and captions. |
-| `label` | Figtree | `12/14px` | `120%` | `600` | Labels, buttons, tabs. |
-| `eyebrow` | Figtree | `12px` | `120%` | `700` | Uppercase editorial markers. |
+<!-- typography-tokens:start -->
+<!-- Generated from design-tokens.json. Run npm run generate:tokens. -->
+| Role | Font | Size | Line-height | Weight | Tracking | Use |
+| --- | --- | --- | --- | --- | --- | --- |
+| `display-2xl` | Bebas Neue | `64px` | `110%` | `400` | `0.015em` | Hero and institutional pages. |
+| `display-xl` | Bebas Neue | `48px` | `110%` | `400` | `0.015em` | Page titles and high-impact modals. |
+| `heading-lg` | Bebas Neue | `32px` | `120%` | `400` | `0.015em` | Main sections. |
+| `heading-md` | Bebas Neue | `24px` | `120%` | `400` | `0.015em` | Cards, modals, and groups. |
+| `heading-sm` | Bebas Neue | `20px` | `120%` | `400` | `0.015em` | Subtitles and entities. |
+| `body-md` | Figtree | `16px` | `150%` | `400` | `0px` | Main body copy. |
+| `body-sm` | Figtree | `14px` | `150%` | `400` | `0px` | Secondary text, forms, and lists. |
+| `label-lg` | Figtree | `20px` | `120%` | `600` | `0px` | Large compact identifiers such as avatar initials. |
+| `label-md` | Figtree | `14px` | `120%` | `600` | `0px` | Default labels, buttons, and tabs. |
+| `label-sm` | Figtree | `12px` | `120%` | `600` | `0px` | Compact labels and controls. |
+| `label` | Figtree | `14px` | `120%` | `600` | `0px` | Compatibility alias for label-md. |
+| `caption` | Figtree | `12px` | `150%` | `500` | `0px` | Metadata and captions. |
+| `eyebrow` | Figtree | `12px` | `120%` | `700` | `0.08em` | Uppercase editorial markers. |
+| `mono` | ui-monospace | `13px` | `150%` | `400` | `0px` | Tokens, code, and tabular technical values. |
+<!-- typography-tokens:end -->
 
 Use Bebas Neue for hierarchy and personality. Use Figtree for product reading, dense information, and forms.
 

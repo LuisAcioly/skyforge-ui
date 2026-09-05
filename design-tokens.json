@@ -1,6 +1,6 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
-  "$description": "Skyforge Design System v2 — color tokens. Carbon Black neutralized to #18181A and the neutral ramp rebuilt off it (R=G, B +2..+6). Feedback hues and linen promoted to full 10-step scales. Additive: no token was renamed or removed.",
+  "$description": "Skyforge Design System v2 — canonical primitives and semantic roles. Carbon Black neutralized to #18181A and the neutral ramp rebuilt off it (R=G, B +1..+6). Feedback hues and linen promoted to full 10-step scales. Additive: no token was renamed or removed.",
   "primitive": {
     "color": {
       "base": {
@@ -18,7 +18,7 @@
       "brand": {
         "carbon-black": {
           "$type": "color",
-          "$value": "#18181A",
+          "$value": "{primitive.color.neutral.950}",
           "$description": "v2: neutralized from #161B1E. Primary brand authority color — light theme CTAs, dark theme canvas. Anchors the neutral ramp."
         },
         "shadow-ink": {
@@ -28,17 +28,17 @@
         },
         "charcoal": {
           "$type": "color",
-          "$value": "#4F4F55",
+          "$value": "{primitive.color.neutral.700}",
           "$description": "v2: neutralized from #515656. Structural brand neutral aligned with neutral 700."
         },
         "soft-linen": {
           "$type": "color",
-          "$value": "#E4E0D5",
+          "$value": "{primitive.color.linen.100}",
           "$description": "Warm editorial surface color used sparingly for narrative emphasis. The only warm family in the system."
         },
         "muted-teal": {
           "$type": "color",
-          "$value": "#367656",
+          "$value": "{primitive.color.teal.600}",
           "$description": "Contrast-safe brand accent for links, focus states, and functional emphasis on light surfaces."
         }
       },
@@ -102,156 +102,156 @@
       "teal": {
         "50": {
           "$type": "color",
-          "$value": "#F0F7F3",
+          "$value": "#EFF7F6",
           "$description": "Accent surface — selected rows, checked controls."
         },
         "100": {
           "$type": "color",
-          "$value": "#D9EEE3",
+          "$value": "#D5EEEC",
           "$description": ""
         },
         "200": {
           "$type": "color",
-          "$value": "#BFE0CE",
+          "$value": "#B8E0DD",
           "$description": "Accent container edge."
         },
         "300": {
           "$type": "color",
-          "$value": "#85B79D",
+          "$value": "#78B7B3",
           "$description": "Dark-theme accent and focus tone."
         },
         "400": {
           "$type": "color",
-          "$value": "#66A384",
+          "$value": "#54A39E",
           "$description": ""
         },
         "500": {
           "$type": "color",
-          "$value": "#4B8F6E",
+          "$value": "#328F8A",
           "$description": ""
         },
         "600": {
           "$type": "color",
-          "$value": "#367656",
+          "$value": "#147672",
           "$description": "Functional accent. Matches brand muted-teal."
         },
         "700": {
           "$type": "color",
-          "$value": "#2B5E47",
+          "$value": "#175E5B",
           "$description": "Text on accent surfaces. Link hover."
         },
         "800": {
           "$type": "color",
-          "$value": "#214837",
+          "$value": "#144845",
           "$description": ""
         },
         "900": {
           "$type": "color",
-          "$value": "#173226",
+          "$value": "#0F3230",
           "$description": ""
         }
       },
       "green": {
         "50": {
           "$type": "color",
-          "$value": "#EAF6EE",
+          "$value": "#EEF8EF",
           "$description": "Success background."
         },
         "100": {
           "$type": "color",
-          "$value": "#D5ECDD",
+          "$value": "#CEE2D0",
           "$description": ""
         },
         "200": {
           "$type": "color",
-          "$value": "#B7DFC4",
+          "$value": "#ABCDAE",
           "$description": "Success border."
         },
         "300": {
           "$type": "color",
-          "$value": "#86C39D",
+          "$value": "#86B98C",
           "$description": ""
         },
         "400": {
           "$type": "color",
-          "$value": "#57A878",
+          "$value": "#61A46C",
           "$description": ""
         },
         "500": {
           "$type": "color",
-          "$value": "#2F7D4F",
+          "$value": "#4B8C56",
           "$description": "Success icon."
         },
         "600": {
           "$type": "color",
-          "$value": "#256641",
+          "$value": "#3D7246",
           "$description": ""
         },
         "700": {
           "$type": "color",
-          "$value": "#1F5A38",
+          "$value": "#2A5B33",
           "$description": "Success text."
         },
         "800": {
           "$type": "color",
-          "$value": "#17442B",
+          "$value": "#1F4325",
           "$description": ""
         },
         "900": {
           "$type": "color",
-          "$value": "#10301E",
+          "$value": "#132D18",
           "$description": ""
         }
       },
       "amber": {
         "50": {
           "$type": "color",
-          "$value": "#FFF7D6",
+          "$value": "#FFF3E2",
           "$description": "Warning background."
         },
         "100": {
           "$type": "color",
-          "$value": "#FDEFB4",
+          "$value": "#F8D6A2",
           "$description": ""
         },
         "200": {
           "$type": "color",
-          "$value": "#F6D77A",
+          "$value": "#ECB965",
           "$description": "Warning border."
         },
         "300": {
           "$type": "color",
-          "$value": "#E9B949",
+          "$value": "#D99D30",
           "$description": ""
         },
         "400": {
           "$type": "color",
-          "$value": "#CF941F",
+          "$value": "#BF8500",
           "$description": ""
         },
         "500": {
           "$type": "color",
-          "$value": "#A16207",
+          "$value": "#A17002",
           "$description": "Warning icon."
         },
         "600": {
           "$type": "color",
-          "$value": "#86520A",
+          "$value": "#845B03",
           "$description": ""
         },
         "700": {
           "$type": "color",
-          "$value": "#713F12",
+          "$value": "#694700",
           "$description": "Warning text."
         },
         "800": {
           "$type": "color",
-          "$value": "#57300D",
+          "$value": "#4E3400",
           "$description": ""
         },
         "900": {
           "$type": "color",
-          "$value": "#3D2109",
+          "$value": "#352200",
           "$description": ""
         }
       },
@@ -315,101 +315,144 @@
         },
         "100": {
           "$type": "color",
-          "$value": "#DBEAFE",
+          "$value": "#CEDDF1",
           "$description": ""
         },
         "200": {
           "$type": "color",
-          "$value": "#BFDBFE",
+          "$value": "#ABC5E8",
           "$description": "Info border."
         },
         "300": {
           "$type": "color",
-          "$value": "#93BDF7",
+          "$value": "#82ACE5",
           "$description": ""
         },
         "400": {
           "$type": "color",
-          "$value": "#5F98E6",
+          "$value": "#5993E0",
           "$description": ""
         },
         "500": {
           "$type": "color",
-          "$value": "#2563A8",
+          "$value": "#447BC4",
           "$description": "Info icon."
         },
         "600": {
           "$type": "color",
-          "$value": "#1F5490",
+          "$value": "#3565A3",
           "$description": ""
         },
         "700": {
           "$type": "color",
-          "$value": "#1E3A70",
+          "$value": "#264F84",
           "$description": "Info text."
         },
         "800": {
           "$type": "color",
-          "$value": "#172C54",
+          "$value": "#1D3A61",
           "$description": ""
         },
         "900": {
           "$type": "color",
-          "$value": "#101D38",
+          "$value": "#132741",
           "$description": ""
         }
       },
       "linen": {
         "50": {
           "$type": "color",
-          "$value": "#FAF9F5",
-          "$description": ""
+          "$value": "#FBFAF6",
+          "$description": "Editorial page ground."
         },
         "100": {
           "$type": "color",
-          "$value": "#F2EFE7",
-          "$description": ""
+          "$value": "#E4E0D5",
+          "$description": "Soft Linen. Editorial surface: table headers, editorial buttons, dark-theme inverse surfaces."
         },
         "200": {
           "$type": "color",
-          "$value": "#E4E0D5",
+          "$value": "#CDC7B6",
           "$description": "Editorial canvas. Matches brand soft-linen."
         },
         "300": {
           "$type": "color",
-          "$value": "#D2CDBD",
-          "$description": ""
+          "$value": "#B6AE99",
+          "$description": "Editorial rule and divider."
         },
         "400": {
           "$type": "color",
-          "$value": "#B8B19C",
+          "$value": "#9E9680",
           "$description": ""
         },
         "500": {
           "$type": "color",
-          "$value": "#99917B",
+          "$value": "#867E6A",
           "$description": ""
         },
         "600": {
           "$type": "color",
-          "$value": "#7C7562",
+          "$value": "#6E6857",
           "$description": ""
         },
         "700": {
           "$type": "color",
-          "$value": "#5F594B",
+          "$value": "#575245",
           "$description": ""
         },
         "800": {
           "$type": "color",
-          "$value": "#423E34",
-          "$description": ""
+          "$value": "#413D33",
+          "$description": "Editorial secondary text; dark-theme editorial surface."
         },
         "900": {
           "$type": "color",
-          "$value": "#2A271F",
+          "$value": "#2D2A21",
           "$description": "Editorial canvas in dark theme."
         }
+      }
+    },
+    "typography": {
+      "font-family": {
+        "display": {
+          "$type": "fontFamily",
+          "$value": ["Bebas Neue", "Figtree", "ui-sans-serif", "system-ui", "sans-serif"]
+        },
+        "body": {
+          "$type": "fontFamily",
+          "$value": ["Figtree", "ui-sans-serif", "system-ui", "sans-serif"]
+        },
+        "mono": {
+          "$type": "fontFamily",
+          "$value": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+        }
+      },
+      "font-size": {
+        "xs": { "$type": "dimension", "$value": { "value": 12, "unit": "px" } },
+        "code": { "$type": "dimension", "$value": { "value": 13, "unit": "px" } },
+        "sm": { "$type": "dimension", "$value": { "value": 14, "unit": "px" } },
+        "base": { "$type": "dimension", "$value": { "value": 16, "unit": "px" } },
+        "lg": { "$type": "dimension", "$value": { "value": 20, "unit": "px" } },
+        "xl": { "$type": "dimension", "$value": { "value": 24, "unit": "px" } },
+        "2xl": { "$type": "dimension", "$value": { "value": 32, "unit": "px" } },
+        "3xl": { "$type": "dimension", "$value": { "value": 48, "unit": "px" } },
+        "4xl": { "$type": "dimension", "$value": { "value": 64, "unit": "px" } }
+      },
+      "font-weight": {
+        "regular": { "$type": "fontWeight", "$value": 400 },
+        "medium": { "$type": "fontWeight", "$value": 500 },
+        "semibold": { "$type": "fontWeight", "$value": 600 },
+        "bold": { "$type": "fontWeight", "$value": 700 }
+      },
+      "line-height": {
+        "tight": { "$type": "number", "$value": 1.1 },
+        "snug": { "$type": "number", "$value": 1.2 },
+        "normal": { "$type": "number", "$value": 1.5 }
+      },
+      "letter-spacing": {
+        "normal": { "$type": "dimension", "$value": { "value": 0, "unit": "px" } },
+        "display": { "$type": "dimension", "$value": { "value": 0.015, "unit": "em" } },
+        "eyebrow": { "$type": "dimension", "$value": { "value": 0.08, "unit": "em" } }
       }
     }
   },
@@ -422,7 +465,8 @@
         },
         "background-editorial": {
           "$type": "color",
-          "$value": "{primitive.color.linen.200}"
+          "$value": "{primitive.color.linen.100}",
+          "$description": "Warm editorial tint behind table headers and footers. Same value it has always had; now the linen family names it."
         },
         "surface": {
           "$type": "color",
@@ -494,11 +538,13 @@
         },
         "icon-success": {
           "$type": "color",
-          "$value": "{primitive.color.green.500}"
+          "$value": "{primitive.color.green.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "icon-warning": {
           "$type": "color",
-          "$value": "{primitive.color.amber.500}"
+          "$value": "{primitive.color.amber.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "icon-error": {
           "$type": "color",
@@ -506,7 +552,8 @@
         },
         "icon-info": {
           "$type": "color",
-          "$value": "{primitive.color.blue.500}"
+          "$value": "{primitive.color.blue.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "primary": {
           "$type": "color",
@@ -570,7 +617,8 @@
         },
         "success-icon": {
           "$type": "color",
-          "$value": "{primitive.color.green.500}"
+          "$value": "{primitive.color.green.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "warning-bg": {
           "$type": "color",
@@ -586,7 +634,8 @@
         },
         "warning-icon": {
           "$type": "color",
-          "$value": "{primitive.color.amber.500}"
+          "$value": "{primitive.color.amber.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "error-bg": {
           "$type": "color",
@@ -618,7 +667,8 @@
         },
         "info-icon": {
           "$type": "color",
-          "$value": "{primitive.color.blue.500}"
+          "$value": "{primitive.color.blue.600}",
+          "$description": "Light-theme status icon. Moved 500 to 600 when the ramp was rebuilt on even lightness steps; 600 holds the contrast the old 500 carried."
         },
         "disabled-bg": {
           "$type": "color",
@@ -638,7 +688,8 @@
         },
         "field-border": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.300}"
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Control boundary on light fields. neutral-300 is 1.90:1 on white and fails WCAG 2.2 1.4.11; neutral-400 holds 3.26:1."
         },
         "field-border-hover": {
           "$type": "color",
@@ -647,6 +698,11 @@
         "field-placeholder": {
           "$type": "color",
           "$value": "{primitive.color.neutral.500}"
+        },
+        "control-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Boundary that identifies a control (checkbox, radio, switch, field). Held at neutral-400 for WCAG 2.2 1.4.11: 3.26:1 on white and 3.02:1 on the light background; 3.91:1 on the dark surface."
         },
         "field-bg-readonly": {
           "$type": "color",
@@ -680,7 +736,27 @@
           "$type": "color",
           "$value": "{primitive.color.neutral.950}"
         },
-        "$description": "Light theme roles. Components consume these, never primitives."
+        "$description": "Light theme roles. Components consume these, never primitives.",
+        "editorial-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.50}",
+          "$description": "Editorial page ground. Long-form and documentation surfaces, never product chrome."
+        },
+        "editorial-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.100}",
+          "$description": "Raised editorial surface. Table headers and editorial buttons read this."
+        },
+        "editorial-border": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.300}",
+          "$description": "Editorial rule. Hairline between editorial blocks."
+        },
+        "editorial-text": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.800}",
+          "$description": "Editorial secondary text."
+        }
       },
       "dark": {
         "background": {
@@ -705,7 +781,7 @@
         },
         "surface-inverse": {
           "$type": "color",
-          "$value": "{primitive.color.linen.200}"
+          "$value": "{primitive.color.linen.100}"
         },
         "border": {
           "$type": "color",
@@ -905,15 +981,21 @@
         },
         "field-border": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.500}"
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Control boundary on dark fields. neutral-400 holds 4.62:1 on the field surface and 3.91:1 on a raised surface; neutral-500 drops to 2.59:1 and fails WCAG 2.2 1.4.11."
         },
         "field-border-hover": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.400}"
+          "$value": "{primitive.color.neutral.300}"
         },
         "field-placeholder": {
           "$type": "color",
           "$value": "{primitive.color.neutral.400}"
+        },
+        "control-border": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Boundary that identifies a control (checkbox, radio, switch, field). Held at neutral-400 for WCAG 2.2 1.4.11: 3.26:1 on white and 3.02:1 on the light background; 3.91:1 on the dark surface."
         },
         "field-bg-readonly": {
           "$type": "color",
@@ -947,7 +1029,177 @@
           "$type": "color",
           "$value": "{primitive.color.base.black}"
         },
-        "$description": "Dark theme roles. Same key set as light — every role resolves in both themes."
+        "$description": "Dark theme roles. Same key set as light — every role resolves in both themes.",
+        "editorial-bg": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.900}",
+          "$description": "Editorial page ground. Long-form and documentation surfaces, never product chrome."
+        },
+        "editorial-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.800}",
+          "$description": "Raised editorial surface. Table headers and editorial buttons read this."
+        },
+        "editorial-border": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.700}",
+          "$description": "Editorial rule. Hairline between editorial blocks."
+        },
+        "editorial-text": {
+          "$type": "color",
+          "$value": "{primitive.color.linen.100}",
+          "$description": "Editorial secondary text."
+        }
+      }
+    },
+    "typography": {
+      "caption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.xs}",
+          "fontWeight": "{primitive.typography.font-weight.medium}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.normal}"
+        },
+        "$description": "Metadata and captions."
+      },
+      "label-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.xs}",
+          "fontWeight": "{primitive.typography.font-weight.semibold}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Compact labels and controls."
+      },
+      "label-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.sm}",
+          "fontWeight": "{primitive.typography.font-weight.semibold}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Default labels, buttons, and tabs."
+      },
+      "label-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.lg}",
+          "fontWeight": "{primitive.typography.font-weight.semibold}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Large compact identifiers such as avatar initials."
+      },
+      "label": {
+        "$type": "typography",
+        "$value": "{semantic.typography.label-md}",
+        "$description": "Compatibility alias for label-md."
+      },
+      "eyebrow": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.xs}",
+          "fontWeight": "{primitive.typography.font-weight.bold}",
+          "letterSpacing": "{primitive.typography.letter-spacing.eyebrow}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Uppercase editorial markers."
+      },
+      "body-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.sm}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.normal}"
+        },
+        "$description": "Secondary text, forms, and lists."
+      },
+      "body-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.body}",
+          "fontSize": "{primitive.typography.font-size.base}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.normal}"
+        },
+        "$description": "Main body copy."
+      },
+      "mono": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.mono}",
+          "fontSize": "{primitive.typography.font-size.code}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.normal}",
+          "lineHeight": "{primitive.typography.line-height.normal}"
+        },
+        "$description": "Tokens, code, and tabular technical values."
+      },
+      "heading-sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.display}",
+          "fontSize": "{primitive.typography.font-size.lg}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.display}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Subtitles and entities."
+      },
+      "heading-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.display}",
+          "fontSize": "{primitive.typography.font-size.xl}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.display}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Cards, modals, and groups."
+      },
+      "heading-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.display}",
+          "fontSize": "{primitive.typography.font-size.2xl}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.display}",
+          "lineHeight": "{primitive.typography.line-height.snug}"
+        },
+        "$description": "Main sections."
+      },
+      "display-xl": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.display}",
+          "fontSize": "{primitive.typography.font-size.3xl}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.display}",
+          "lineHeight": "{primitive.typography.line-height.tight}"
+        },
+        "$description": "Page titles and high-impact modals."
+      },
+      "display-2xl": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{primitive.typography.font-family.display}",
+          "fontSize": "{primitive.typography.font-size.4xl}",
+          "fontWeight": "{primitive.typography.font-weight.regular}",
+          "letterSpacing": "{primitive.typography.letter-spacing.display}",
+          "lineHeight": "{primitive.typography.line-height.tight}"
+        },
+        "$description": "Hero and institutional pages."
       }
     }
   }

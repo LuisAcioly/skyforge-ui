@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import { AutoComplete, type AutoCompleteOption } from "./AutoComplete";
 
@@ -85,4 +86,22 @@ export const States: Story = {
       <AutoComplete label="Empty" options={[]} emptyText="No owner records available." />
     </div>
   )
+};
+
+export const KeyboardNavigation: Story = {
+  args: {
+    defaultValue: null,
+    onInputValueChange: fn(),
+    onValueChange: fn()
+  },
+  tags: ["!autodocs"],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("combobox", { name: "Release owner" });
+
+    await userEvent.click(input);
+    await userEvent.keyboard("{ArrowDown}{ArrowDown}{Enter}");
+    await expect(input).toHaveValue("Vera Calder");
+    await expect(input).toHaveAttribute("aria-expanded", "false");
+  }
 };

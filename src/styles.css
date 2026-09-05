@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700&display=swap");
+@import "./generated/typography-tokens.css";
 
 @tailwind base;
 @tailwind components;
@@ -6,28 +7,6 @@
 
 @layer base {
   :root {
-    --font-display: "Bebas Neue", "Figtree", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
-
-    --font-size-xs: 12px;
-    --font-size-sm: 14px;
-    --font-size-base: 16px;
-    --font-size-lg: 20px;
-    --font-size-xl: 24px;
-    --font-size-2xl: 32px;
-    --font-size-3xl: 48px;
-    --font-size-4xl: 64px;
-
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-
-    --line-height-tight: 1.1;
-    --line-height-snug: 1.2;
-    --line-height-normal: 1.5;
-    --letter-spacing-eyebrow: 0.08em;
-
     --shell-max: 1180px;
 
     --space-4: 4px;
@@ -58,9 +37,28 @@
     --shadow-1: 0 1px 2px rgb(24 24 26 / 0.06), 0 8px 24px rgb(24 24 26 / 0.05);
     --shadow-2: 0 8px 24px rgb(24 24 26 / 0.1), 0 24px 48px rgb(24 24 26 / 0.08);
     --shadow-3: 0 24px 64px rgb(24 24 26 / 0.18), 0 48px 96px rgb(24 24 26 / 0.14);
+    --shadow-inset: inset 0 1px 2px rgb(24 24 26 / 0.06);
 
-    --z-overlay: 40;
-    --z-modal: 50;
+    /* v2: layering scale. Never write a raw z-index in a component.
+       Menus and tooltips sit ABOVE the modal layer, not below it: Radix portals
+       all three to <body>, so a Select or Tooltip opened from inside a dialog
+       would otherwise render behind the dialog that spawned it. */
+    --z-base: 0;
+    --z-sticky: 100;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-dropdown: 500;
+    --z-tooltip: 600;
+    --z-toast: 700;
+
+    /* v2: fixed control heights, so mixed rows align. */
+    --control-h-sm: 32px;
+    --control-h-md: 40px;
+    --control-h-lg: 48px;
+    --row-h-md: 48px;
+    --row-h-sm: 40px;
+
+    --overlay-alpha: 0.44;
 
     --duration-fast: 120ms;
     --duration-normal: 180ms;
@@ -88,6 +86,15 @@
     --component-badge-height-md: 24px;
   }
 
+  /* v2: compact density drops control and row heights one step.
+     Touch surfaces stay at lg. */
+  [data-density="compact"] {
+    --control-h-md: 32px;
+    --control-h-lg: 40px;
+    --row-h-md: 40px;
+    --row-h-sm: 32px;
+  }
+
   :root,
   [data-theme="light"] {
     color-scheme: light;
@@ -108,7 +115,7 @@
     --color-icon-secondary: 93 93 99;
     --color-icon-tertiary: 112 112 118;
     --color-icon-inverse: 246 246 247;
-    --color-icon-accent: 54 118 86;
+    --color-icon-accent: 20 118 114;
     --color-icon-disabled: 112 112 118;
     --color-primary: 24 24 26;
     --color-primary-hover: 50 50 56;
@@ -117,35 +124,72 @@
     --color-secondary: 255 255 255;
     --color-secondary-hover: 236 236 238;
     --color-secondary-foreground: 24 24 26;
-    --color-focus: 54 118 86;
-    --color-link: 54 118 86;
-    --color-link-hover: 33 72 55;
+    --color-focus: 20 118 114;
+    --color-link: 20 118 114;
+    --color-link-hover: 20 72 69;
     --color-hover-surface: 236 236 238;
     --color-active-surface: 216 216 219;
-    --color-success-background: 234 246 238;
-    --color-success-border: 183 223 196;
-    --color-success-text: 31 90 56;
-    --color-success-icon: 47 125 79;
-    --color-warning-background: 255 247 214;
-    --color-warning-border: 246 215 122;
-    --color-warning-text: 113 63 18;
-    --color-warning-icon: 161 98 7;
+    --color-success-background: 238 248 239;
+    --color-success-border: 171 205 174;
+    --color-success-text: 42 91 51;
+    --color-success-icon: 61 114 70;
+    --color-warning-background: 255 243 226;
+    --color-warning-border: 236 185 101;
+    --color-warning-text: 105 71 0;
+    --color-warning-icon: 132 91 3;
     --color-error-background: 255 241 240;
     --color-error-border: 244 183 180;
     --color-error-text: 142 36 33;
     --color-error-icon: 194 65 61;
     --color-info-background: 239 246 255;
-    --color-info-border: 191 219 254;
-    --color-info-text: 30 58 112;
-    --color-info-icon: 37 99 168;
+    --color-info-border: 171 197 232;
+    --color-info-text: 38 79 132;
+    --color-info-icon: 53 101 163;
     --color-disabled-background: 236 236 238;
     --color-disabled-border: 216 216 219;
     --color-disabled-text: 93 93 99;
-    --color-success-bg: 234 246 238;
-    --color-warning-bg: 255 247 214;
+    --color-success-bg: 238 248 239;
+    --color-warning-bg: 255 243 226;
     --color-error-bg: 255 241 240;
     --color-info-bg: 239 246 255;
     --color-disabled-bg: 236 236 238;
+
+    /* v2: field roles. Previously every artifact invented its own input surface. */
+    --color-field-bg: 255 255 255;
+    --color-field-bg-readonly: 246 246 247;
+    --color-field-border: 142 142 147;
+    --color-field-border-hover: 112 112 118;
+    --color-field-placeholder: 112 112 118;
+
+    /* v2: control boundary. neutral-400 = 3.26:1 on white, 3.02:1 on background.
+       WCAG 2.2 1.4.11 requires 3:1 for the boundary that identifies a control,
+       so checkboxes, radios, switches and fields read from this, not --color-border
+       (which stays a 1.32:1 hairline for decorative card edges). */
+    --color-control-border: 142 142 147;
+
+    /* v2: accent surfaces. Selected rows, checked boxes and active tabs share these. */
+    --color-accent-bg: 239 247 246;
+    --color-accent-border: 184 224 221;
+    --color-accent-text: 23 94 91;
+
+    /* v2: editorial family. Warm reading surfaces for long-form and documentation.
+       Product chrome stays on the neutral ramp; linen never carries state. */
+    --color-editorial-bg: 251 250 246;
+    --color-editorial-surface: 228 224 213;
+    --color-editorial-border: 182 174 153;
+    --color-editorial-text: 65 61 51;
+
+    /* v2: aliases the canonical token file declares. Emitted so a consumer of the
+       package resolves the same names the documentation shows. */
+    --color-accent: 20 118 114;
+    --color-accent-hover: 23 94 91;
+    --color-accent-foreground: 246 246 247;
+    --color-icon-success: 61 114 70;
+    --color-icon-warning: 132 91 3;
+    --color-icon-error: 194 65 61;
+    --color-icon-info: 53 101 163;
+
+    --color-overlay: 24 24 26;
   }
 
   [data-theme="dark"] {
@@ -167,7 +211,7 @@
     --color-icon-secondary: 183 183 187;
     --color-icon-tertiary: 142 142 147;
     --color-icon-inverse: 24 24 26;
-    --color-icon-accent: 133 183 157;
+    --color-icon-accent: 120 183 179;
     --color-icon-disabled: 183 183 187;
     --color-primary: 246 246 247;
     --color-primary-hover: 236 236 238;
@@ -176,35 +220,67 @@
     --color-secondary: 50 50 56;
     --color-secondary-hover: 59 59 65;
     --color-secondary-foreground: 246 246 247;
-    --color-focus: 133 183 157;
-    --color-link: 133 183 157;
-    --color-link-hover: 191 224 206;
+    --color-focus: 120 183 179;
+    --color-link: 120 183 179;
+    --color-link-hover: 184 224 221;
     --color-hover-surface: 59 59 65;
     --color-active-surface: 79 79 85;
-    --color-success-background: 16 37 26;
-    --color-success-border: 125 199 154;
-    --color-success-text: 183 223 196;
-    --color-success-icon: 125 199 154;
-    --color-warning-background: 46 34 5;
-    --color-warning-border: 229 184 62;
-    --color-warning-text: 246 215 122;
-    --color-warning-icon: 229 184 62;
-    --color-error-background: 50 18 17;
-    --color-error-border: 229 115 111;
+    --color-success-background: 19 45 24;
+    --color-success-border: 42 91 51;
+    --color-success-text: 171 205 174;
+    --color-success-icon: 134 185 140;
+    --color-warning-background: 53 34 0;
+    --color-warning-border: 105 71 0;
+    --color-warning-text: 236 185 101;
+    --color-warning-icon: 217 157 48;
+    --color-error-background: 74 18 17;
+    --color-error-border: 142 36 33;
     --color-error-text: 244 183 180;
-    --color-error-icon: 229 115 111;
-    --color-info-background: 15 30 51;
-    --color-info-border: 126 182 244;
-    --color-info-text: 191 219 254;
-    --color-info-icon: 126 182 244;
+    --color-error-icon: 232 139 134;
+    --color-info-background: 19 39 65;
+    --color-info-border: 38 79 132;
+    --color-info-text: 171 197 232;
+    --color-info-icon: 130 172 229;
     --color-disabled-background: 59 59 65;
     --color-disabled-border: 79 79 85;
     --color-disabled-text: 142 142 147;
-    --color-success-bg: 16 37 26;
-    --color-warning-bg: 46 34 5;
-    --color-error-bg: 50 18 17;
-    --color-info-bg: 15 30 51;
+    --color-success-bg: 19 45 24;
+    --color-warning-bg: 53 34 0;
+    --color-error-bg: 74 18 17;
+    --color-info-bg: 19 39 65;
     --color-disabled-bg: 59 59 65;
+
+    /* v2: field roles. */
+    --color-field-bg: 38 38 42;
+    --color-field-bg-readonly: 50 50 56;
+    --color-field-border: 142 142 147;
+    --color-field-border-hover: 183 183 187;
+    --color-field-placeholder: 142 142 147;
+
+    /* v2: control boundary. 3.91:1 on surface, 5.44:1 on background. */
+    --color-control-border: 142 142 147;
+
+    /* v2: accent surfaces. */
+    --color-accent-bg: 15 50 48;
+    --color-accent-border: 23 94 91;
+    --color-accent-text: 184 224 221;
+
+    /* v2: editorial family, dark. */
+    --color-editorial-bg: 45 42 33;
+    --color-editorial-surface: 65 61 51;
+    --color-editorial-border: 87 82 69;
+    --color-editorial-text: 228 224 213;
+
+    /* v2: canonical aliases, dark. */
+    --color-accent: 120 183 179;
+    --color-accent-hover: 184 224 221;
+    --color-accent-foreground: 24 24 26;
+    --color-icon-success: 134 185 140;
+    --color-icon-warning: 217 157 48;
+    --color-icon-error: 232 139 134;
+    --color-icon-info: 130 172 229;
+
+    --color-overlay: 0 0 0;
   }
 
   * {
@@ -215,6 +291,8 @@
     min-width: 320px;
     font-family: var(--font-body);
     scroll-behavior: smooth;
+    /* Keeps focused controls clear of a sticky header (WCAG 2.2 2.4.11). */
+    scroll-padding-top: var(--space-96);
   }
 
   body {
@@ -225,6 +303,31 @@
     font-family: var(--font-body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Baseline focus indicator for every focusable element, including consumers'
+     own markup. Components may override with a ring, but nothing is left
+     without a visible indicator. */
+  :focus-visible {
+    outline: var(--border-width-strong) solid rgb(var(--color-focus));
+    outline-offset: 2px;
+  }
+
+  /* Tailwind ring utilities are box-shadows, and box-shadow is not painted in
+     forced-colors mode — without this, every focus indicator in the library
+     disappears in Windows High Contrast. */
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: var(--border-width-strong) solid Highlight;
+      outline-offset: 2px;
+    }
+
+    [data-state="checked"],
+    [data-state="on"] {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      color: HighlightText;
+    }
   }
 
   h1,

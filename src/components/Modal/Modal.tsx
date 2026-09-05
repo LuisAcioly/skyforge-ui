@@ -31,7 +31,7 @@ export const ModalOverlay = forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-sf-overlay bg-[rgb(var(--component-modal-overlay)_/_0.78)] backdrop-blur-sm transition-opacity duration-sf-slow ease-sf-standard data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
+      "fixed inset-0 z-sf-overlay bg-[rgb(var(--color-overlay)_/_var(--overlay-alpha))] backdrop-blur-sm transition-opacity duration-sf-slow ease-sf-standard data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
       className
     )}
     {...props}

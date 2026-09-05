@@ -9,6 +9,8 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
   label?: string | null;
   size?: SpinnerSize;
   tone?: SpinnerTone;
+  /** Alias of `tone`, matching the `variant` prop used elsewhere in the library. */
+  variant?: SpinnerTone;
 }
 
 const sizeClasses: Record<SpinnerSize, string> = {
@@ -24,7 +26,8 @@ const toneClasses: Record<SpinnerTone, string> = {
 };
 
 export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
-  ({ className, label = "Loading", role, size = "md", tone = "secondary", ...props }, ref) => {
+  ({ className, label = "Loading", role, size = "md", tone: toneProp, variant: variantProp, ...props }, ref) => {
+    const tone = toneProp ?? variantProp ?? "secondary";
     const resolvedLabel = typeof label === "string" ? label : undefined;
 
     return (

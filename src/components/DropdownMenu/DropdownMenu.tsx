@@ -30,7 +30,7 @@ export interface DropdownMenuSubTriggerProps
 }
 
 const contentClasses =
-  "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none";
+  "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none";
 
 const itemClasses =
   "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";

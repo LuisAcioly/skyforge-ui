@@ -8,12 +8,15 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToDanger } from "../../utils/aliases";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "editorial";
+/** `error` is accepted as a synonym of `danger`. */
+export type ButtonVariantInput = ButtonVariant | "error";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
+  variant?: ButtonVariantInput;
   size?: ButtonSize;
   fullWidth?: boolean;
   loading?: boolean;
@@ -35,9 +38,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-sf-32 px-sf-12 text-label-sm",
-  md: "h-sf-40 px-sf-16 text-label",
-  lg: "h-sf-48 px-sf-24 text-label"
+  sm: "h-control-sm px-sf-12 text-label-sm",
+  md: "h-control-md px-sf-16 text-label",
+  lg: "h-control-lg px-sf-24 text-label"
 };
 
 const loadingInsetClasses: Record<ButtonSize, string> = {
@@ -83,11 +86,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       size = "md",
       type = "button",
-      variant = "primary",
+      variant: variantProp = "primary",
       ...props
     },
     ref
   ) => {
+    const variant = normalizeToDanger<ButtonVariant>(variantProp);
     const isDisabled = disabled || loading;
     const hasChildren = children !== null && children !== undefined;
 
@@ -107,7 +111,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        <span className={cn("inline-flex min-w-0 items-center justify-center gap-sf-8", loading && "invisible")}>
+        <span className={cn("inline-flex min-w-0 items-center justify-center gap-sf-8", loading && "opacity-0")}>
           {renderIcon(leftIcon, size)}
           {hasChildren ? <span className="min-w-0 truncate">{children}</span> : null}
           {renderIcon(rightIcon, size)}

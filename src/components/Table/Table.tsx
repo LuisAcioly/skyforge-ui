@@ -9,15 +9,20 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeDensity, normalizeSurface } from "../../utils/aliases";
 
 export type TableDensity = "default" | "compact";
+/** `comfortable` is accepted as a synonym of `default`. */
+export type TableDensityInput = TableDensity | "comfortable";
 export type TableTextAlign = "left" | "center" | "right";
 export type TableSurface = "outline" | "plain";
+/** `ghost` is accepted as a synonym of `plain`, matching the rest of the library. */
+export type TableSurfaceInput = TableSurface | "ghost";
 
 export interface TableProps extends HTMLAttributes<HTMLTableElement> {
   containerClassName?: string;
-  density?: TableDensity;
-  surface?: TableSurface;
+  density?: TableDensityInput;
+  surface?: TableSurfaceInput;
 }
 
 export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
@@ -61,7 +66,10 @@ const surfaceClasses: Record<TableSurface, string> = {
 const TableDensityContext = createContext<TableDensity>("default");
 
 export const Table = forwardRef<HTMLTableElement, TableProps>(
-  ({ className, containerClassName, density = "default", surface = "outline", ...props }, ref) => (
+  ({ className, containerClassName, density: densityProp = "default", surface: surfaceProp = "outline", ...props }, ref) => {
+    const density = normalizeDensity<TableDensity>(densityProp);
+    const surface = normalizeSurface<TableSurface>(surfaceProp);
+    return (
     <TableDensityContext.Provider value={density}>
       <div className={cn("w-full overflow-x-auto", surfaceClasses[surface], containerClassName)}>
         <table
@@ -72,7 +80,8 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         />
       </div>
     </TableDensityContext.Provider>
-  )
+    );
+  }
 );
 
 Table.displayName = "Table";
@@ -102,7 +111,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
     <tr
       ref={ref}
       className={cn(
-        "relative transition duration-sf-slow ease-sf-standard hover:bg-hover-surface data-[selected=true]:bg-active-surface [&[data-selected=true]>td:first-child]:border-l-4 [&[data-selected=true]>td:first-child]:border-primary",
+        "relative transition duration-sf-slow ease-sf-standard hover:bg-hover-surface data-[selected=true]:bg-accent-bg [&[data-selected=true]>td:first-child]:border-l-4 [&[data-selected=true]>td:first-child]:border-icon-accent",
         className
       )}
       {...props}

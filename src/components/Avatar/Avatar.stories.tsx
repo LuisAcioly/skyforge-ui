@@ -20,11 +20,11 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: ["neutral", "custom"]
+      options: ["neutral", "accent", "custom"]
     }
   },
   args: {
-    customColor: "#367656",
+    customColor: "#147672",
     size: "md",
     status: "online",
     variant: "neutral"
@@ -60,6 +60,22 @@ export const Sizes: Story = {
   )
 };
 
+export const Variants: Story = {
+  render: () => (
+    <div className="flex items-center gap-sf-12">
+      <Avatar variant="neutral">
+        <AvatarFallback>MR</AvatarFallback>
+      </Avatar>
+      <Avatar variant="accent">
+        <AvatarFallback>SF</AvatarFallback>
+      </Avatar>
+      <Avatar customColor="#5e4a8a" variant="custom">
+        <AvatarFallback>UI</AvatarFallback>
+      </Avatar>
+    </div>
+  )
+};
+
 export const Status: Story = {
   render: () => (
     <div className="flex items-center gap-sf-12">
@@ -82,10 +98,10 @@ export const Status: Story = {
 export const CustomColor: Story = {
   render: () => (
     <div className="flex items-center gap-sf-12">
-      <Avatar customColor="#367656" variant="custom">
+      <Avatar customColor="#147672" variant="custom">
         <AvatarFallback>SF</AvatarFallback>
       </Avatar>
-      <Avatar customColor="rgb(54 118 86)" status="online" variant="custom">
+      <Avatar customColor="rgb(20 118 114)" status="online" variant="custom">
         <AvatarFallback>UI</AvatarFallback>
       </Avatar>
     </div>
@@ -95,13 +111,13 @@ export const CustomColor: Story = {
 export const Group: Story = {
   render: () => (
     <AvatarGroup>
-      <Avatar>
+      <Avatar customColor="#147672" variant="custom">
         <AvatarFallback>MR</AvatarFallback>
       </Avatar>
-      <Avatar>
+      <Avatar customColor="#8a4f2b" variant="custom">
         <AvatarFallback>VC</AvatarFallback>
       </Avatar>
-      <Avatar>
+      <Avatar customColor="#5e4a8a" variant="custom">
         <AvatarFallback>NS</AvatarFallback>
       </Avatar>
     </AvatarGroup>

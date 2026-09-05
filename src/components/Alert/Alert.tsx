@@ -14,14 +14,17 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToError } from "../../utils/aliases";
 
 export type AlertVariant = "info" | "success" | "warning" | "error";
+/** `danger` is accepted as a synonym of `error`. */
+export type AlertVariantInput = AlertVariant | "danger";
 
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   action?: ReactNode;
   icon?: ReactNode;
   title?: string | null;
-  variant?: AlertVariant;
+  variant?: AlertVariantInput;
 }
 
 const variantClasses: Record<AlertVariant, string> = {
@@ -67,7 +70,8 @@ function renderAlertIcon(icon: ReactNode | undefined, variant: AlertVariant) {
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ action, children, className, icon, role, title, variant = "info", ...props }, ref) => {
+  ({ action, children, className, icon, role, title, variant: variantProp = "info", ...props }, ref) => {
+    const variant = normalizeToError<AlertVariant>(variantProp);
     const renderedIcon = renderAlertIcon(icon, variant);
     const resolvedTitle = typeof title === "string" ? title : undefined;
     const hasTitle = resolvedTitle !== undefined;

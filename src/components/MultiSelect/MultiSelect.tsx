@@ -3,6 +3,12 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useId, useState, type HTMLAttributes } from "react";
 
 import { cn } from "../../utils/cn";
+import {
+  fieldStatusBorderClasses,
+  fieldStatusMessageClasses,
+  resolveFieldStatus,
+  type FieldStatus
+} from "../../utils/fieldStatus";
 
 export type MultiSelectSize = "md" | "lg";
 export type MultiSelectVariant = "outline" | "filled" | "ghost";
@@ -19,6 +25,9 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "
   disabled?: boolean;
   emptyText?: string | null;
   errorText?: string | null;
+  /** Validation state. Parity with Input: success and warning, not only error. */
+  status?: FieldStatus;
+  statusText?: string | null;
   helperText?: string | null;
   label?: string | null;
   maxVisibleTags?: number;
@@ -31,14 +40,14 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 }
 
 const variantClasses: Record<MultiSelectVariant, string> = {
-  outline: "border-border bg-surface-raised hover:border-border-strong data-[state=open]:border-border-strong",
+  outline: "border-field-border bg-field-bg hover:border-field-border-hover data-[state=open]:border-field-border-hover",
   filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
   ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<MultiSelectSize, string> = {
-  md: "min-h-sf-40 px-sf-12 py-sf-8 text-body-sm",
-  lg: "min-h-sf-48 px-sf-16 py-sf-12 text-body-md"
+  md: "min-h-control-md px-sf-12 py-sf-8 text-body-sm",
+  lg: "min-h-control-lg px-sf-16 py-sf-12 text-body-md"
 };
 
 export const MultiSelect = ({
@@ -57,6 +66,8 @@ export const MultiSelect = ({
   options,
   placeholder = "Select options",
   size = "md",
+  status,
+  statusText,
   value,
   variant = "outline",
   ...props
@@ -77,8 +88,12 @@ export const MultiSelect = ({
   const resolvedEmptyText = typeof emptyText === "string" ? emptyText : undefined;
   const helperId = hasHelperText ? `${triggerId}-helper` : undefined;
   const errorId = hasErrorText ? `${triggerId}-error` : undefined;
-  const isInvalid = hasErrorText || ariaInvalid === true || ariaInvalid === "true";
-  const describedBy = [ariaDescribedBy, helperId, errorId].filter(Boolean).join(" ") || undefined;
+  const resolvedStatusText = typeof statusText === "string" ? statusText : undefined;
+  const { status: resolvedStatus, isInvalid } = resolveFieldStatus(status, resolvedErrorText, ariaInvalid);
+  const feedbackText = resolvedErrorText ?? resolvedStatusText;
+  const hasFeedbackText = feedbackText !== undefined;
+  const feedbackId = hasFeedbackText ? `${triggerId}-feedback` : undefined;
+  const describedBy = [ariaDescribedBy, helperId, feedbackId].filter(Boolean).join(" ") || undefined;
 
   const commitValue = (nextValue: string[]) => {
     if (value === undefined) {
@@ -113,9 +128,11 @@ export const MultiSelect = ({
             aria-describedby={describedBy}
             aria-invalid={isInvalid ? true : ariaInvalid}
             data-invalid={isInvalid || undefined}
+              data-status={resolvedStatus}
             className={cn(
               "sf-premium-control inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
               variantClasses[variant],
+              fieldStatusBorderClasses[resolvedStatus],
               sizeClasses[size]
             )}
           >
@@ -143,7 +160,7 @@ export const MultiSelect = ({
             align="start"
             sideOffset={8}
             className={cn(
-              "sf-popover-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
+              "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
             )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
@@ -186,9 +203,9 @@ export const MultiSelect = ({
         </p>
       ) : null}
 
-      {hasErrorText ? (
-        <p id={errorId} className="m-0 text-caption text-error-text">
-          {resolvedErrorText}
+      {hasFeedbackText ? (
+        <p id={feedbackId} className={cn("m-0 text-caption", fieldStatusMessageClasses[resolvedStatus])}>
+          {feedbackText}
         </p>
       ) : null}
     </div>

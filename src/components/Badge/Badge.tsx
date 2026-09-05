@@ -9,9 +9,12 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToError } from "../../utils/aliases";
 import { resolveCustomColor } from "../../utils/customColor";
 
 export type BadgeVariant = "neutral" | "accent" | "info" | "success" | "warning" | "error" | "custom";
+/** `danger` is accepted as a synonym of `error`. */
+export type BadgeVariantInput = BadgeVariant | "danger";
 export type BadgeSize = "sm" | "md";
 
 type BadgeCustomColorStyle = CSSProperties & {
@@ -26,12 +29,12 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   dot?: boolean;
   icon?: ReactNode;
   size?: BadgeSize;
-  variant?: BadgeVariant;
+  variant?: BadgeVariantInput;
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
   neutral: "border-border bg-surface-raised text-content-secondary",
-  accent: "border-primary/30 bg-primary/10 text-content-primary",
+  accent: "border-accent-border bg-accent-bg text-accent-text",
   info: "border-info-border bg-info-bg text-info-text",
   success: "border-success-border bg-success-bg text-success-text",
   warning: "border-warning-border bg-warning-bg text-warning-text",
@@ -46,7 +49,7 @@ const iconClasses: Record<BadgeVariant, string> = {
   success: "text-success-icon",
   warning: "text-warning-icon",
   error: "text-error-icon",
-  custom: "text-[color:var(--sf-badge-custom-color)]"
+  custom: "text-[color:var(--sf-badge-custom-text)]"
 };
 
 const dotClasses: Record<BadgeVariant, string> = {
@@ -56,7 +59,7 @@ const dotClasses: Record<BadgeVariant, string> = {
   success: "bg-success-icon",
   warning: "bg-warning-icon",
   error: "bg-error-icon",
-  custom: "bg-[color:var(--sf-badge-custom-color)]"
+  custom: "bg-[color:var(--sf-badge-custom-text)]"
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
@@ -99,12 +102,14 @@ function getBadgeCustomColorStyle(customColor: string | undefined, style: CSSPro
     "--sf-badge-custom-bg": "color-mix(in srgb, var(--sf-badge-custom-color) 14%, rgb(var(--color-surface-raised)))",
     "--sf-badge-custom-border": "color-mix(in srgb, var(--sf-badge-custom-color) 42%, rgb(var(--color-border)))",
     "--sf-badge-custom-color": resolveCustomColor(customColor),
-    "--sf-badge-custom-text": "var(--sf-badge-custom-color)"
+    "--sf-badge-custom-text":
+      "color-mix(in srgb, var(--sf-badge-custom-color) 35%, rgb(var(--color-text-primary)))"
   };
 }
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ children, className, customColor, dot = false, icon, size = "md", style, variant = "neutral", ...props }, ref) => {
+  ({ children, className, customColor, dot = false, icon, size = "md", style, variant: variantProp = "neutral", ...props }, ref) => {
+    const variant = normalizeToError<BadgeVariant>(variantProp);
     const hasChildren = children !== null && children !== undefined;
     const resolvedStyle = variant === "custom" ? getBadgeCustomColorStyle(customColor, style) : style;
 

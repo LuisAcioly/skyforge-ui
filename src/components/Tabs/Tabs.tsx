@@ -32,9 +32,9 @@ const triggerClasses: Record<TabsVariant, string> = {
   underline:
     "!rounded-none border-b-2 border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-primary data-[state=active]:text-content-primary data-[state=active]:hover:bg-transparent",
   segmented:
-    "h-sf-32 rounded-sf-md bg-transparent px-sf-12 hover:bg-hover-surface hover:text-content-primary data-[state=active]:bg-surface-raised data-[state=active]:text-content-primary data-[state=active]:shadow-[0_8px_18px_rgb(var(--color-surface-inverse)_/_0.06)]",
+    "h-sf-32 rounded-sf-md bg-transparent px-sf-12 hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-accent-border data-[state=active]:bg-accent-bg data-[state=active]:text-accent-text",
   rail:
-    "w-full justify-start border border-transparent bg-transparent text-left hover:border-border hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-border-strong data-[state=active]:bg-surface-raised data-[state=active]:text-content-primary"
+    "w-full justify-start border border-transparent bg-transparent text-left hover:border-border hover:bg-hover-surface hover:text-content-primary data-[state=active]:border-accent-border data-[state=active]:bg-accent-bg data-[state=active]:text-accent-text"
 };
 
 export const Tabs = forwardRef<ElementRef<typeof TabsPrimitive.Root>, TabsProps>(

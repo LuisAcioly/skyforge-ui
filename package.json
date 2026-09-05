@@ -42,11 +42,19 @@
     "access": "public"
   },
   "scripts": {
+    "generate:tokens": "node scripts/generate-typography-tokens.mjs",
+    "check:tokens": "node scripts/generate-typography-tokens.mjs --check",
+    "prestorybook": "npm run generate:tokens",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "npm run generate:tokens",
     "build-storybook": "storybook build",
+    "prebuild": "npm run generate:tokens",
     "build": "vite build && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run typecheck && npm run build",
-    "typecheck": "tsc --noEmit"
+    "pretypecheck": "npm run generate:tokens",
+    "typecheck": "tsc --noEmit",
+    "prebuild:docbundle": "npm run generate:tokens",
+    "build:docbundle": "vite build --config vite.docbundle.config.ts"
   },
   "peerDependencies": {
     "react": ">=18.2.0",

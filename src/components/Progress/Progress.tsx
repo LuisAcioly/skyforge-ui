@@ -8,9 +8,12 @@ import {
 } from "react";
 
 import { cn } from "../../utils/cn";
+import { normalizeToError } from "../../utils/aliases";
 
 export type ProgressSize = "sm" | "md" | "lg";
 export type ProgressTone = "primary" | "success" | "warning" | "error";
+/** `danger` is accepted as a synonym of `error`. */
+export type ProgressToneInput = ProgressTone | "danger";
 
 export interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
   containerClassName?: string;
@@ -18,7 +21,9 @@ export interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressP
   label?: string | null;
   showValue?: boolean;
   size?: ProgressSize;
-  tone?: ProgressTone;
+  tone?: ProgressToneInput;
+  /** Alias of `tone`, matching the `variant` prop used by Badge, Tag, Chip and Alert. */
+  variant?: ProgressToneInput;
   valueFormatter?: (value: number, max: number) => string;
 }
 
@@ -72,13 +77,15 @@ export const Progress = forwardRef<ElementRef<typeof ProgressPrimitive.Root>, Pr
       max,
       showValue = false,
       size = "md",
-      tone = "primary",
+      tone: toneProp,
+      variant: variantProp,
       value,
       valueFormatter,
       ...props
     },
     ref
   ) => {
+    const tone = normalizeToError<ProgressTone>(toneProp ?? variantProp ?? "primary");
     const generatedId = useId();
     const progressId = id ?? `${generatedId}-progress`;
     const resolvedLabel = typeof label === "string" ? label : undefined;

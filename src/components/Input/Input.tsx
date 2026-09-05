@@ -36,7 +36,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 
 const variantClasses: Record<InputVariant, string> = {
   outline:
-    "border-border bg-surface-raised hover:border-border-strong focus-visible:border-border-strong",
+    "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover",
   filled:
     "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
   ghost:
@@ -44,8 +44,8 @@ const variantClasses: Record<InputVariant, string> = {
 };
 
 const sizeClasses: Record<InputSize, string> = {
-  md: "h-sf-40 text-body-sm",
-  lg: "h-sf-48 text-body-md"
+  md: "h-control-md text-body-sm",
+  lg: "h-control-lg text-body-md"
 };
 
 const statusClasses: Record<InputStatus, string> = {
@@ -168,7 +168,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             data-loading={loading || undefined}
             data-status={resolvedStatus}
             className={cn(
-              "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
+              "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-field-placeholder focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
               variantClasses[variant],
               sizeClasses[size],
               statusClasses[resolvedStatus],

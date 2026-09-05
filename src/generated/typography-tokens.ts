@@ -1,0 +1,382 @@
+// Generated from design-tokens.json by scripts/generate-typography-tokens.mjs.
+export const skyforgeFontFamily: Record<string, string[]> = {
+  "display": [
+    "var(--font-display)"
+  ],
+  "body": [
+    "var(--font-body)"
+  ],
+  "mono": [
+    "var(--font-mono)"
+  ]
+};
+
+export const skyforgeFontSize: Record<string, [string, { lineHeight: string; letterSpacing: string; fontWeight: string }]> = {
+  "display-2xl": [
+    "var(--font-size-4xl)",
+    {
+      "lineHeight": "var(--line-height-tight)",
+      "letterSpacing": "var(--letter-spacing-display)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "display-xl": [
+    "var(--font-size-3xl)",
+    {
+      "lineHeight": "var(--line-height-tight)",
+      "letterSpacing": "var(--letter-spacing-display)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "heading-lg": [
+    "var(--font-size-2xl)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-display)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "heading-md": [
+    "var(--font-size-xl)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-display)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "heading-sm": [
+    "var(--font-size-lg)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-display)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "body-md": [
+    "var(--font-size-base)",
+    {
+      "lineHeight": "var(--line-height-normal)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "body-sm": [
+    "var(--font-size-sm)",
+    {
+      "lineHeight": "var(--line-height-normal)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ],
+  "label-lg": [
+    "var(--font-size-lg)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-semibold)"
+    }
+  ],
+  "label-md": [
+    "var(--font-size-sm)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-semibold)"
+    }
+  ],
+  "label-sm": [
+    "var(--font-size-xs)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-semibold)"
+    }
+  ],
+  "label": [
+    "var(--font-size-sm)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-semibold)"
+    }
+  ],
+  "caption": [
+    "var(--font-size-xs)",
+    {
+      "lineHeight": "var(--line-height-normal)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-medium)"
+    }
+  ],
+  "eyebrow": [
+    "var(--font-size-xs)",
+    {
+      "lineHeight": "var(--line-height-snug)",
+      "letterSpacing": "var(--letter-spacing-eyebrow)",
+      "fontWeight": "var(--font-weight-bold)"
+    }
+  ],
+  "mono": [
+    "var(--font-size-code)",
+    {
+      "lineHeight": "var(--line-height-normal)",
+      "letterSpacing": "var(--letter-spacing-normal)",
+      "fontWeight": "var(--font-weight-regular)"
+    }
+  ]
+};
+
+export const typographyRuntimeRoles = [
+  {
+    "token": "display-2xl",
+    "label": "Display 2XL",
+    "fontFamily": "display",
+    "fontFamilyValue": "var(--font-display)",
+    "fontName": "Bebas Neue",
+    "fontSize": "64px",
+    "fontSizeValue": "var(--font-size-4xl)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0.015em",
+    "letterSpacingValue": "var(--letter-spacing-display)",
+    "lineHeight": 1.1,
+    "lineHeightValue": "var(--line-height-tight)",
+    "textTransform": "none",
+    "description": "Hero and institutional pages.",
+    "className": "font-display text-display-2xl text-content-primary"
+  },
+  {
+    "token": "display-xl",
+    "label": "Display XL",
+    "fontFamily": "display",
+    "fontFamilyValue": "var(--font-display)",
+    "fontName": "Bebas Neue",
+    "fontSize": "48px",
+    "fontSizeValue": "var(--font-size-3xl)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0.015em",
+    "letterSpacingValue": "var(--letter-spacing-display)",
+    "lineHeight": 1.1,
+    "lineHeightValue": "var(--line-height-tight)",
+    "textTransform": "none",
+    "description": "Page titles and high-impact modals.",
+    "className": "font-display text-display-xl text-content-primary"
+  },
+  {
+    "token": "heading-lg",
+    "label": "Heading large",
+    "fontFamily": "display",
+    "fontFamilyValue": "var(--font-display)",
+    "fontName": "Bebas Neue",
+    "fontSize": "32px",
+    "fontSizeValue": "var(--font-size-2xl)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0.015em",
+    "letterSpacingValue": "var(--letter-spacing-display)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Main sections.",
+    "className": "font-display text-heading-lg text-content-primary"
+  },
+  {
+    "token": "heading-md",
+    "label": "Heading medium",
+    "fontFamily": "display",
+    "fontFamilyValue": "var(--font-display)",
+    "fontName": "Bebas Neue",
+    "fontSize": "24px",
+    "fontSizeValue": "var(--font-size-xl)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0.015em",
+    "letterSpacingValue": "var(--letter-spacing-display)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Cards, modals, and groups.",
+    "className": "font-display text-heading-md text-content-primary"
+  },
+  {
+    "token": "heading-sm",
+    "label": "Heading small",
+    "fontFamily": "display",
+    "fontFamilyValue": "var(--font-display)",
+    "fontName": "Bebas Neue",
+    "fontSize": "20px",
+    "fontSizeValue": "var(--font-size-lg)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0.015em",
+    "letterSpacingValue": "var(--letter-spacing-display)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Subtitles and entities.",
+    "className": "font-display text-heading-sm text-content-primary"
+  },
+  {
+    "token": "body-md",
+    "label": "Body medium",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "16px",
+    "fontSizeValue": "var(--font-size-base)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.5,
+    "lineHeightValue": "var(--line-height-normal)",
+    "textTransform": "none",
+    "description": "Main body copy.",
+    "className": "font-body text-body-md text-content-secondary"
+  },
+  {
+    "token": "body-sm",
+    "label": "Body small",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "14px",
+    "fontSizeValue": "var(--font-size-sm)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.5,
+    "lineHeightValue": "var(--line-height-normal)",
+    "textTransform": "none",
+    "description": "Secondary text, forms, and lists.",
+    "className": "font-body text-body-sm text-content-secondary"
+  },
+  {
+    "token": "label-lg",
+    "label": "Label large",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "20px",
+    "fontSizeValue": "var(--font-size-lg)",
+    "fontWeight": 600,
+    "fontWeightValue": "var(--font-weight-semibold)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Large compact identifiers such as avatar initials.",
+    "className": "font-body text-label-lg text-content-primary"
+  },
+  {
+    "token": "label-md",
+    "label": "Label medium",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "14px",
+    "fontSizeValue": "var(--font-size-sm)",
+    "fontWeight": 600,
+    "fontWeightValue": "var(--font-weight-semibold)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Default labels, buttons, and tabs.",
+    "className": "font-body text-label-md text-content-primary"
+  },
+  {
+    "token": "label-sm",
+    "label": "Label small",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "12px",
+    "fontSizeValue": "var(--font-size-xs)",
+    "fontWeight": 600,
+    "fontWeightValue": "var(--font-weight-semibold)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Compact labels and controls.",
+    "className": "font-body text-label-sm text-content-primary"
+  },
+  {
+    "token": "label",
+    "label": "Label",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "14px",
+    "fontSizeValue": "var(--font-size-sm)",
+    "fontWeight": 600,
+    "fontWeightValue": "var(--font-weight-semibold)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "none",
+    "description": "Compatibility alias for label-md.",
+    "className": "font-body text-label text-content-primary"
+  },
+  {
+    "token": "caption",
+    "label": "Caption",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "12px",
+    "fontSizeValue": "var(--font-size-xs)",
+    "fontWeight": 500,
+    "fontWeightValue": "var(--font-weight-medium)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.5,
+    "lineHeightValue": "var(--line-height-normal)",
+    "textTransform": "none",
+    "description": "Metadata and captions.",
+    "className": "font-body text-caption text-content-tertiary"
+  },
+  {
+    "token": "eyebrow",
+    "label": "Eyebrow",
+    "fontFamily": "body",
+    "fontFamilyValue": "var(--font-body)",
+    "fontName": "Figtree",
+    "fontSize": "12px",
+    "fontSizeValue": "var(--font-size-xs)",
+    "fontWeight": 700,
+    "fontWeightValue": "var(--font-weight-bold)",
+    "letterSpacing": "0.08em",
+    "letterSpacingValue": "var(--letter-spacing-eyebrow)",
+    "lineHeight": 1.2,
+    "lineHeightValue": "var(--line-height-snug)",
+    "textTransform": "uppercase",
+    "description": "Uppercase editorial markers.",
+    "className": "font-body text-eyebrow text-content-tertiary"
+  },
+  {
+    "token": "mono",
+    "label": "Mono",
+    "fontFamily": "mono",
+    "fontFamilyValue": "var(--font-mono)",
+    "fontName": "ui-monospace",
+    "fontSize": "13px",
+    "fontSizeValue": "var(--font-size-code)",
+    "fontWeight": 400,
+    "fontWeightValue": "var(--font-weight-regular)",
+    "letterSpacing": "0px",
+    "letterSpacingValue": "var(--letter-spacing-normal)",
+    "lineHeight": 1.5,
+    "lineHeightValue": "var(--line-height-normal)",
+    "textTransform": "none",
+    "description": "Tokens, code, and tabular technical values.",
+    "className": "font-mono text-mono text-content-primary"
+  }
+];

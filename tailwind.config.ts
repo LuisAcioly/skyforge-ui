@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { skyforgeFontFamily, skyforgeFontSize } from "./src/generated/typography-tokens";
 
 const colorVar = (name: string) => `rgb(var(${name}) / <alpha-value>)`;
 
@@ -24,7 +25,17 @@ const config = {
     "border-info-border",
     "text-info-text",
     "bg-info-icon",
-    "ring-info-icon"
+    "ring-info-icon",
+    "bg-accent-bg",
+    "border-accent-border",
+    "text-accent-text",
+    "bg-editorial-bg",
+    "bg-editorial-surface",
+    "border-editorial-border",
+    "text-editorial-text",
+    "border-control-border",
+    "bg-field-bg",
+    "border-field-border"
   ],
   theme: {
     extend: {
@@ -38,6 +49,27 @@ const config = {
         border: colorVar("--color-border"),
         "border-strong": colorVar("--color-border-strong"),
         divider: colorVar("--color-divider"),
+        "control-border": colorVar("--color-control-border"),
+        field: {
+          DEFAULT: colorVar("--color-field-bg"),
+          bg: colorVar("--color-field-bg"),
+          "bg-readonly": colorVar("--color-field-bg-readonly"),
+          border: colorVar("--color-field-border"),
+          "border-hover": colorVar("--color-field-border-hover"),
+          placeholder: colorVar("--color-field-placeholder")
+        },
+        accent: {
+          bg: colorVar("--color-accent-bg"),
+          border: colorVar("--color-accent-border"),
+          text: colorVar("--color-accent-text")
+        },
+        editorial: {
+          bg: colorVar("--color-editorial-bg"),
+          surface: colorVar("--color-editorial-surface"),
+          border: colorVar("--color-editorial-border"),
+          text: colorVar("--color-editorial-text")
+        },
+        overlay: colorVar("--color-overlay"),
         "content-primary": colorVar("--color-text-primary"),
         "content-secondary": colorVar("--color-text-secondary"),
         "content-tertiary": colorVar("--color-text-tertiary"),
@@ -115,11 +147,29 @@ const config = {
       boxShadow: {
         "sf-1": "var(--shadow-1)",
         "sf-2": "var(--shadow-2)",
-        "sf-3": "var(--shadow-3)"
+        "sf-3": "var(--shadow-3)",
+        "sf-inset": "var(--shadow-inset)"
+      },
+      height: {
+        "control-sm": "var(--control-h-sm)",
+        "control-md": "var(--control-h-md)",
+        "control-lg": "var(--control-h-lg)",
+        "row-sm": "var(--row-h-sm)",
+        "row-md": "var(--row-h-md)"
+      },
+      minHeight: {
+        "control-sm": "var(--control-h-sm)",
+        "control-md": "var(--control-h-md)",
+        "control-lg": "var(--control-h-lg)"
       },
       zIndex: {
+        "sf-base": "var(--z-base)",
+        "sf-sticky": "var(--z-sticky)",
+        "sf-dropdown": "var(--z-dropdown)",
         "sf-overlay": "var(--z-overlay)",
-        "sf-modal": "var(--z-modal)"
+        "sf-modal": "var(--z-modal)",
+        "sf-tooltip": "var(--z-tooltip)",
+        "sf-toast": "var(--z-toast)"
       },
       maxWidth: {
         shell: "var(--shell-max)",
@@ -128,58 +178,8 @@ const config = {
         "modal-lg": "var(--component-modal-width-lg)",
         "modal-xl": "var(--component-modal-width-xl)"
       },
-      fontFamily: {
-        display: ["var(--font-display)"],
-        body: ["var(--font-body)"]
-      },
-      fontSize: {
-        caption: [
-          "var(--font-size-xs)",
-          { lineHeight: "var(--line-height-normal)", fontWeight: "var(--font-weight-medium)" }
-        ],
-        "label-sm": [
-          "var(--font-size-xs)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-semibold)" }
-        ],
-        "label-md": [
-          "var(--font-size-sm)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-semibold)" }
-        ],
-        label: [
-          "var(--font-size-sm)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-semibold)" }
-        ],
-        eyebrow: [
-          "var(--font-size-xs)",
-          {
-            lineHeight: "var(--line-height-snug)",
-            letterSpacing: "var(--letter-spacing-eyebrow)",
-            fontWeight: "var(--font-weight-bold)"
-          }
-        ],
-        "body-sm": ["var(--font-size-sm)", { lineHeight: "var(--line-height-normal)" }],
-        "body-md": ["var(--font-size-base)", { lineHeight: "var(--line-height-normal)" }],
-        "heading-sm": [
-          "var(--font-size-lg)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-semibold)" }
-        ],
-        "heading-md": [
-          "var(--font-size-xl)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-semibold)" }
-        ],
-        "heading-lg": [
-          "var(--font-size-2xl)",
-          { lineHeight: "var(--line-height-snug)", fontWeight: "var(--font-weight-bold)" }
-        ],
-        "display-xl": [
-          "var(--font-size-3xl)",
-          { lineHeight: "var(--line-height-tight)", fontWeight: "var(--font-weight-bold)" }
-        ],
-        "display-2xl": [
-          "var(--font-size-4xl)",
-          { lineHeight: "var(--line-height-tight)", fontWeight: "var(--font-weight-bold)" }
-        ]
-      },
+      fontFamily: skyforgeFontFamily,
+      fontSize: skyforgeFontSize,
       transitionDuration: {
         "sf-fast": "var(--duration-fast)",
         "sf-normal": "var(--duration-normal)",

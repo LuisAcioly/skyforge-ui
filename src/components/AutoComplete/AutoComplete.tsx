@@ -1,8 +1,14 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { CheckIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useId, useState, type ChangeEvent, type HTMLAttributes } from "react";
+import { useId, useState, type ChangeEvent, type HTMLAttributes, type KeyboardEvent } from "react";
 
 import { cn } from "../../utils/cn";
+import {
+  fieldStatusBorderClasses,
+  fieldStatusMessageClasses,
+  resolveFieldStatus,
+  type FieldStatus
+} from "../../utils/fieldStatus";
 
 export type AutoCompleteSize = "md" | "lg";
 export type AutoCompleteVariant = "outline" | "filled" | "ghost";
@@ -19,6 +25,9 @@ export interface AutoCompleteProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   disabled?: boolean;
   emptyText?: string | null;
   errorText?: string | null;
+  /** Validation state. Parity with Input: success and warning, not only error. */
+  status?: FieldStatus;
+  statusText?: string | null;
   helperText?: string | null;
   inputValue?: string;
   label?: string | null;
@@ -32,15 +41,15 @@ export interface AutoCompleteProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 }
 
 const variantClasses: Record<AutoCompleteVariant, string> = {
-  outline: "border-border bg-surface-raised hover:border-border-strong focus-visible:border-border-strong",
+  outline: "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover",
   filled:
     "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
   ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
 };
 
 const sizeClasses: Record<AutoCompleteSize, string> = {
-  md: "h-sf-40 pl-sf-40 pr-sf-12 text-body-sm",
-  lg: "h-sf-48 pl-sf-40 pr-sf-16 text-body-md"
+  md: "h-control-md pl-sf-40 pr-sf-12 text-body-sm",
+  lg: "h-control-lg pl-sf-40 pr-sf-16 text-body-md"
 };
 
 export const AutoComplete = ({
@@ -60,6 +69,8 @@ export const AutoComplete = ({
   options,
   placeholder = "Search options",
   size = "md",
+  status,
+  statusText,
   value,
   variant = "outline",
   ...props
@@ -67,14 +78,14 @@ export const AutoComplete = ({
   const generatedId = useId();
   const inputId = id ?? `${generatedId}-autocomplete`;
   const [open, setOpen] = useState(false);
-  const [focused, setFocused] = useState(false);
+  const [activeValue, setActiveValue] = useState<string | null>(null);
   const [internalValue, setInternalValue] = useState<string | null>(defaultValue);
   const selectedValue = value !== undefined ? value : internalValue;
   const selectedOption = options.find((option) => option.value === selectedValue);
   const [internalInputValue, setInternalInputValue] = useState(selectedOption?.label ?? "");
   const currentInputValue = inputValue ?? internalInputValue;
   const normalizedQuery = currentInputValue.trim().toLowerCase();
-  const showAllOptions = open && focused && currentInputValue === selectedOption?.label;
+  const showAllOptions = open && currentInputValue === selectedOption?.label;
   const filteredOptions = showAllOptions
     ? options
     : normalizedQuery
@@ -87,14 +98,18 @@ export const AutoComplete = ({
   const resolvedHelperText = typeof helperText === "string" ? helperText : undefined;
   const hasHelperText = resolvedHelperText !== undefined;
   const resolvedErrorText = typeof errorText === "string" ? errorText : undefined;
-  const hasErrorText = resolvedErrorText !== undefined;
   const resolvedPlaceholder = typeof placeholder === "string" ? placeholder : "Search options";
   const resolvedEmptyText = typeof emptyText === "string" ? emptyText : undefined;
   const helperId = hasHelperText ? `${inputId}-helper` : undefined;
-  const errorId = hasErrorText ? `${inputId}-error` : undefined;
   const listboxId = `${inputId}-listbox`;
-  const isInvalid = hasErrorText || ariaInvalid === true || ariaInvalid === "true";
-  const describedBy = [ariaDescribedBy, helperId, errorId].filter(Boolean).join(" ") || undefined;
+  const activeIndex = filteredOptions.findIndex((option) => option.value === activeValue && !option.disabled);
+  const activeOptionId = activeIndex >= 0 ? `${listboxId}-option-${activeIndex}` : undefined;
+  const resolvedStatusText = typeof statusText === "string" ? statusText : undefined;
+  const { status: resolvedStatus, isInvalid } = resolveFieldStatus(status, resolvedErrorText, ariaInvalid);
+  const feedbackText = resolvedErrorText ?? resolvedStatusText;
+  const hasFeedbackText = feedbackText !== undefined;
+  const feedbackId = hasFeedbackText ? `${inputId}-feedback` : undefined;
+  const describedBy = [ariaDescribedBy, helperId, feedbackId].filter(Boolean).join(" ") || undefined;
 
   const commitInputValue = (nextValue: string) => {
     if (inputValue === undefined) {
@@ -122,6 +137,45 @@ export const AutoComplete = ({
     commitValue(option.value, option);
     commitInputValue(option.label);
     setOpen(false);
+    setActiveValue(null);
+  };
+
+  const moveActiveOption = (direction: 1 | -1) => {
+    if (filteredOptions.length === 0) {
+      return;
+    }
+
+    let nextIndex = activeIndex >= 0 ? activeIndex : direction === 1 ? -1 : 0;
+
+    for (let attempt = 0; attempt < filteredOptions.length; attempt += 1) {
+      nextIndex = (nextIndex + direction + filteredOptions.length) % filteredOptions.length;
+
+      if (!filteredOptions[nextIndex].disabled) {
+        setActiveValue(filteredOptions[nextIndex].value);
+        return;
+      }
+    }
+  };
+
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      setOpen(true);
+      moveActiveOption(event.key === "ArrowDown" ? 1 : -1);
+      return;
+    }
+
+    if (event.key === "Enter" && open && activeIndex >= 0) {
+      event.preventDefault();
+      selectOption(filteredOptions[activeIndex]);
+      return;
+    }
+
+    if (event.key === "Escape" && open) {
+      event.preventDefault();
+      setOpen(false);
+      setActiveValue(null);
+    }
   };
 
   return (
@@ -132,7 +186,13 @@ export const AutoComplete = ({
         </label>
       ) : null}
 
-      <PopoverPrimitive.Root open={open && !disabled} onOpenChange={setOpen}>
+      <PopoverPrimitive.Root
+        open={open && !disabled}
+        onOpenChange={(nextOpen) => {
+          setOpen(nextOpen);
+          if (!nextOpen) setActiveValue(null);
+        }}
+      >
         <PopoverPrimitive.Anchor asChild>
           <div className="relative">
             <span
@@ -147,21 +207,30 @@ export const AutoComplete = ({
               value={currentInputValue}
               disabled={disabled}
               placeholder={resolvedPlaceholder}
+              role="combobox"
               aria-autocomplete="list"
-              aria-controls={open ? listboxId : undefined}
+              aria-controls={listboxId}
+              aria-activedescendant={open ? activeOptionId : undefined}
               aria-expanded={open}
+              aria-haspopup="listbox"
               aria-describedby={describedBy}
               aria-invalid={isInvalid ? true : ariaInvalid}
               data-invalid={isInvalid || undefined}
+              data-status={resolvedStatus}
               onChange={handleInputChange}
               onFocus={() => {
-                setFocused(true);
                 setOpen(true);
               }}
+              onBlur={() => {
+                setOpen(false);
+                setActiveValue(null);
+              }}
+              onKeyDown={handleInputKeyDown}
               onClick={() => setOpen(true)}
               className={cn(
-                "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-content-tertiary focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-field-placeholder focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                 variantClasses[variant],
+                fieldStatusBorderClasses[resolvedStatus],
                 sizeClasses[size]
               )}
             />
@@ -171,27 +240,34 @@ export const AutoComplete = ({
           <PopoverPrimitive.Content
             id={listboxId}
             role="listbox"
+            aria-label={resolvedLabel ?? resolvedPlaceholder}
             align="start"
             sideOffset={8}
             onOpenAutoFocus={(event) => event.preventDefault()}
             className={cn(
-              "sf-autocomplete-content sf-premium-surface z-sf-modal max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
+              "sf-autocomplete-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
             )}
           >
             <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
               {filteredOptions.length > 0 ? (
-                filteredOptions.map((option) => {
+                filteredOptions.map((option, index) => {
                   const isSelected = option.value === selectedValue;
+                  const isActive = index === activeIndex;
 
                   return (
                     <button
                       key={option.value}
+                      id={`${listboxId}-option-${index}`}
                       type="button"
                       role="option"
+                      tabIndex={-1}
                       disabled={option.disabled}
                       aria-selected={isSelected}
+                      data-active={isActive || undefined}
+                      onMouseDown={(event) => event.preventDefault()}
+                      onMouseMove={() => setActiveValue(option.value)}
                       onClick={() => selectOption(option)}
-                      className="sf-autocomplete-option sf-premium-item flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface focus-visible:bg-hover-surface disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
+                      className="sf-autocomplete-option sf-premium-item flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface data-[active=true]:bg-hover-surface disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
                     >
                       <span className="grid min-w-0 flex-1 gap-sf-4">
                         <span className="truncate text-content-primary">{option.label}</span>
@@ -219,9 +295,9 @@ export const AutoComplete = ({
         </p>
       ) : null}
 
-      {hasErrorText ? (
-        <p id={errorId} className="m-0 text-caption text-error-text">
-          {resolvedErrorText}
+      {hasFeedbackText ? (
+        <p id={feedbackId} className={cn("m-0 text-caption", fieldStatusMessageClasses[resolvedStatus])}>
+          {feedbackText}
         </p>
       ) : null}
     </div>

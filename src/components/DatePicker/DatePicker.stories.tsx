@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "storybook/test";
 
 import { DatePicker } from "./DatePicker";
 
@@ -71,4 +72,21 @@ export const Locales: Story = {
       <DatePicker label="Português do Brasil" defaultValue="18-05-2026" locale="pt-BR" />
     </div>
   )
+};
+
+export const KeyboardNavigation: Story = {
+  tags: ["!autodocs"],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const page = within(canvasElement.ownerDocument.body);
+
+    await userEvent.click(canvas.getByRole("button", { name: "Open calendar" }));
+
+    const dialog = page.getByRole("dialog", { name: "Choose date" });
+    const selectedDate = within(dialog).getByRole("button", { name: "Monday, May 18, 2026" });
+    selectedDate.focus();
+    await userEvent.keyboard("{ArrowRight}");
+
+    await expect(within(dialog).getByRole("button", { name: "Tuesday, May 19, 2026" })).toHaveFocus();
+  }
 };

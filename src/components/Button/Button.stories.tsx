@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ArrowDownTrayIcon, ArrowRightIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { expect, within } from "storybook/test";
 
 import { Button } from "./Button";
 
@@ -61,7 +62,14 @@ export const SizesAndStates: Story = {
         </Button>
       </div>
     </div>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const loadingButton = canvas.getByRole("button", { name: "Saving" });
+
+    await expect(loadingButton).toBeDisabled();
+    await expect(loadingButton).toHaveAttribute("aria-busy", "true");
+  }
 };
 
 export const WithIcons: Story = {

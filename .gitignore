@@ -6,3 +6,5 @@ storybook-static/
 DESIGN_SYSTEM_RULES.md
 SKYFORGE-UI.md
 design-tokens.json
+# self-contained bundle for the standalone documentation exports
+dist-docbundle/

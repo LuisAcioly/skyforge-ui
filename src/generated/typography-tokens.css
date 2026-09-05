@@ -1,0 +1,31 @@
+/* Generated from design-tokens.json by scripts/generate-typography-tokens.mjs. */
+@layer base {
+  :root {
+    --font-display: "Bebas Neue", "Figtree", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+
+    --font-size-xs: 12px;
+    --font-size-code: 13px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+    --font-size-3xl: 48px;
+    --font-size-4xl: 64px;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.2;
+    --line-height-normal: 1.5;
+
+    --letter-spacing-normal: 0px;
+    --letter-spacing-display: 0.015em;
+    --letter-spacing-eyebrow: 0.08em;
+  }
+}
