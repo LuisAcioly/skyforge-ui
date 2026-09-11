@@ -35,7 +35,16 @@ const config = {
     "text-editorial-text",
     "border-control-border",
     "bg-field-bg",
-    "border-field-border"
+    "border-field-border",
+    // Dense geometry utilities for consumers of the compiled stylesheet.
+    "h-row-xs",
+    "h-row-2xs",
+    "min-h-row-xs",
+    "min-h-row-2xs",
+    "h-control-sm",
+    "w-control-sm",
+    "min-w-control-sm",
+    "pl-row-indent"
   ],
   theme: {
     extend: {
@@ -88,6 +97,10 @@ const config = {
         "secondary-hover": colorVar("--color-secondary-hover"),
         "secondary-foreground": colorVar("--color-secondary-foreground"),
         focus: colorVar("--color-focus"),
+        // Surface directly behind a focused control, painted as the 1px gap of the
+        // focus halo. Containers that paint their own surface set --sf-focus-gap;
+        // everything else falls back to the themed canvas.
+        "focus-gap": "rgb(var(--sf-focus-gap, var(--color-background)) / <alpha-value>)",
         link: colorVar("--color-link"),
         "link-hover": colorVar("--color-link-hover"),
         "hover-surface": colorVar("--color-hover-surface"),
@@ -134,7 +147,8 @@ const config = {
         "sf-48": "var(--space-48)",
         "sf-64": "var(--space-64)",
         "sf-96": "var(--space-96)",
-        "sf-128": "var(--space-128)"
+        "sf-128": "var(--space-128)",
+        "row-indent": "var(--row-indent)"
       },
       borderRadius: {
         "sf-sm": "var(--radius-sm)",
@@ -154,10 +168,27 @@ const config = {
         "control-sm": "var(--control-h-sm)",
         "control-md": "var(--control-h-md)",
         "control-lg": "var(--control-h-lg)",
+        "row-2xs": "var(--row-h-2xs)",
+        "row-xs": "var(--row-h-xs)",
         "row-sm": "var(--row-h-sm)",
         "row-md": "var(--row-h-md)"
       },
       minHeight: {
+        "control-sm": "var(--control-h-sm)",
+        "control-md": "var(--control-h-md)",
+        "control-lg": "var(--control-h-lg)",
+        "row-2xs": "var(--row-h-2xs)",
+        "row-xs": "var(--row-h-xs)",
+        "row-sm": "var(--row-h-sm)",
+        "row-md": "var(--row-h-md)"
+      },
+      // Square controls (icon-only triggers) take their width from the height scale.
+      width: {
+        "control-sm": "var(--control-h-sm)",
+        "control-md": "var(--control-h-md)",
+        "control-lg": "var(--control-h-lg)"
+      },
+      minWidth: {
         "control-sm": "var(--control-h-sm)",
         "control-md": "var(--control-h-md)",
         "control-lg": "var(--control-h-lg)"

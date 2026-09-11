@@ -43,7 +43,7 @@ Do not use removed or unsupported components: `Label`, `Loading`, `TableCaption`
 
 ## Package Installation
 
-Current documented package version: `0.2.1`.
+Current documented package version: `0.5.0`.
 
 Install Skyforge UI from npm:
 
@@ -61,6 +61,8 @@ Import package stylesheet once at app entry if your bundler does not apply style
 ```tsx
 import "@luiswagnerab/skyforge-ui/styles.css";
 ```
+
+Bebas Neue and Figtree ship inside the package (`dist/fonts`, SIL OFL). The stylesheet loads nothing from the network and uses no `data:` URIs, so it works offline and under `font-src 'self'`. Do not add Google Fonts links or `@import` rules for these families.
 
 Import components from the package entry:
 
@@ -102,6 +104,10 @@ Use Bebas Neue for display and hierarchy. Use Figtree for dense product reading 
 
 Use spacing tokens: `sf-4`, `sf-8`, `sf-12`, `sf-16`, `sf-24`, `sf-32`, `sf-48`, `sf-64`, `sf-96`, `sf-128`.
 
+Use row heights `h-row-md` (48px), `h-row-sm` (40px), `h-row-xs` (30px) and `h-row-2xs` (26px). `[data-density="compact"]` drops `md` and `sm` one step; `xs` and `2xs` are the floor of the scale and never shrink. For trees and IDE-style lists, use `h-row-xs` for top-level rows, `h-row-2xs` for repeated rows, `px-sf-8` inline padding and `var(--row-indent)` (12px) per nesting level. Square compact controls use `h-control-sm w-control-sm` (32px). Density changes geometry, never the palette.
+
+Use `border-border` to delimit containers and `border-divider` / `divide-divider` for separations inside a container. The two roles have distinct values in both themes; never swap one for the other to get more or less contrast.
+
 Use radius tokens: `sf-sm`, `sf-md`, `sf-lg`, `sf-xl`, `sf-2xl`, `sf-full`.
 
 Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer shadows, or structural layers instead.
@@ -131,7 +137,7 @@ Do not use inner shadows. Use borders, outlines, rings, tonal contrast, outer sh
 | `Skeleton` | Shape-matched loading state | `variant`, `size`, `lines` |
 | `Spinner` | Compact inline loading | `size`, `tone`, `label` |
 | `Switch` | Binary setting toggle | `label`, `helperText`, `errorText`, `size` |
-| `Tabs` | Related panels | `variant="underline" | "segmented" | "rail"` |
+| `Tabs` | Related panels and view switchers | `variant="underline" | "segmented" | "rail" | "ghost"`, `iconOnly`; `TabsTrigger` `icon`, `label` |
 | `Table` | Structured data | `density`, `surface`, `TableEmpty`, `TableLoading` |
 | `Tag` | Compact metadata, status labels, removable filters | `variant="neutral" | "accent" | "info" | "success" | "warning" | "error"`, `size`, `onRemove` |
 | `Textarea` | Multi-line text entry | `variant`, `size`, `status`, `loading` |
@@ -388,6 +394,31 @@ Use `Tabs` for related panels, not multi-select filters.
   <TabsContent value="tokens">Token content.</TabsContent>
 </Tabs>
 ```
+
+Variants: `underline`, `segmented` (sunken track, bordered accent selection), `rail`, `ghost` (no track, border or padding; selection on `surface-sunken` with the icon kept on the accent). Use `ghost` for toolbars that already sit on a surface.
+
+Use `iconOnly` for dense view switchers on pointer-driven desktop surfaces. Every trigger takes `icon` and `label`; `label` becomes the accessible name and the tooltip, so wrap the tabs in `TooltipProvider`. Triggers are 32×32px with 20px icons — not a touch target; on touch surfaces use labelled tabs. Disabled triggers get no tooltip.
+
+```tsx
+<TooltipProvider>
+  <Tabs variant="ghost" iconOnly value={view} onValueChange={setView}>
+    <TabsList aria-label="Visão do painel">
+      <TabsTrigger value="agents" icon={<Squares2X2Icon />} label="Visão de Agentes" />
+      <TabsTrigger value="code" icon={<CodeBracketIcon />} label="Visão de Código" />
+    </TabsList>
+    <TabsContent value="agents">...</TabsContent>
+    <TabsContent value="code">...</TabsContent>
+  </Tabs>
+</TooltipProvider>
+```
+
+Always render a `TabsContent` for the selected value: the selected trigger's `aria-controls` must point to an existing panel. When the switched view lives elsewhere in the layout, place `Tabs` higher in the tree and wrap that view in `TabsContent`.
+
+Outside `iconOnly`, `icon` plus `label` renders the icon before the visible label. A trigger without children must have a `label` (enforced by the types); an `iconOnly` trigger missing a label or an icon reports an error in development and renders as text.
+
+Selection styles read `aria-selected`. Icon-only triggers are wrapped by `TooltipTrigger`, whose `data-state` replaces the tab's, so do not target `data-[state=active]` in `className` overrides.
+
+Focus uses a halo: 1px of the surface behind the trigger, then a 2px focus ring, so a focused trigger never reads as merely selected. The gap surface comes from `--sf-focus-gap`; `segmented` sets it to `surface-sunken`, other variants inherit it from the container and fall back to `background`. On a custom surface, set it on the container: `className="bg-surface [--sf-focus-gap:var(--color-surface)]"`.
 
 Use `Pagination` for page navigation.
 

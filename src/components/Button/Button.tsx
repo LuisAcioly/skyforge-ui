@@ -1,14 +1,8 @@
-import {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  type ButtonHTMLAttributes,
-  type ReactElement,
-  type ReactNode
-} from "react";
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 
 import { cn } from "../../utils/cn";
 import { normalizeToDanger } from "../../utils/aliases";
+import { normalizeIcon } from "../../utils/icon";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "editorial";
 /** `error` is accepted as a synonym of `danger`. */
@@ -60,12 +54,7 @@ function renderIcon(icon: ReactNode, size: ButtonSize) {
     return null;
   }
 
-  const normalizedIcon = isValidElement<{ className?: string; strokeWidth?: number | string }>(icon)
-    ? cloneElement(icon as ReactElement<{ className?: string; strokeWidth?: number | string }>, {
-        className: cn(iconSizeClasses[size], icon.props.className),
-        strokeWidth: icon.props.strokeWidth ?? 1.5
-      })
-    : icon;
+  const normalizedIcon = normalizeIcon(icon, iconSizeClasses[size]);
 
   return (
     <span aria-hidden="true" className="inline-flex shrink-0 text-current transition-transform duration-sf-slow ease-sf-standard group-hover:translate-x-[1px] group-hover:-translate-y-px group-hover:scale-105">

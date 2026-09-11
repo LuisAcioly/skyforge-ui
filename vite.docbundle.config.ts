@@ -7,6 +7,8 @@ import path from "node:path";
 // because the doc shell supplies it through window shims.
 export default defineConfig({
   plugins: [react()],
+  // Relative font URLs, so the bundle's CSS resolves its fonts wherever it is hosted.
+  base: "./",
   define: { "process.env.NODE_ENV": JSON.stringify("production") },
   build: {
     lib: { entry: path.resolve(__dirname, "src/index.ts"), formats: ["es"], fileName: () => "docbundle.mjs" },
@@ -15,7 +17,11 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
-      output: { inlineDynamicImports: true }
+      output: {
+        inlineDynamicImports: true,
+        assetFileNames: (asset) =>
+          asset.names.some((name) => name.endsWith(".css")) ? "skyforge-ui.css" : "fonts/[name][extname]"
+      }
     }
   }
 });

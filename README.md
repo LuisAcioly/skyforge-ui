@@ -51,6 +51,14 @@ export function Example() {
 }
 ```
 
+## Fonts, Offline Use, And CSP
+
+Bebas Neue and Figtree ship inside the package as WOFF2 files in `dist/fonts`, with their SIL Open Font License files. `styles.css` references them with relative URLs and makes no network requests: no CDN, no `@import` of remote CSS, no `data:` URIs.
+
+- Works offline and in air-gapped environments.
+- Compatible with a restrictive Content Security Policy such as `font-src 'self'`, as long as your bundler serves the package assets from your origin (Vite, webpack, and Next.js do this when CSS is imported from `node_modules`).
+- Do not add Google Fonts links for these families; the package already declares the `@font-face` rules.
+
 ## Theming
 
 Use `ThemeProvider` when your app shell does not already set `data-theme`:
@@ -164,6 +172,13 @@ Validate TypeScript:
 npm run typecheck
 ```
 
+Run the story tests (every story renders in headless Chromium; play functions and axe checks run as tests):
+
+```bash
+npx playwright install chromium
+npm test
+```
+
 Build package output:
 
 ```bash
@@ -182,6 +197,7 @@ Run before publishing:
 
 ```bash
 npm run typecheck
+npm test
 npm run build
 npm pack --dry-run
 ```

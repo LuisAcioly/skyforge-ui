@@ -98,6 +98,22 @@ const spacing = [
   { token: "sf-128", widthClass: "w-sf-128" }
 ];
 
+// Dense rows are the floor of the scale: compact density moves md and sm, never xs or 2xs.
+const rowHeights = [
+  { token: "row-md", heightClass: "h-row-md", value: "--row-h-md", size: "48px · compact 40px" },
+  { token: "row-sm", heightClass: "h-row-sm", value: "--row-h-sm", size: "40px · compact 32px" },
+  { token: "row-xs", heightClass: "h-row-xs", value: "--row-h-xs", size: "30px, leading or top-level dense row" },
+  { token: "row-2xs", heightClass: "h-row-2xs", value: "--row-h-2xs", size: "26px, repeated dense row" }
+];
+
+const denseTree = [
+  { depth: 0, label: "src", heightClass: "h-row-xs" },
+  { depth: 1, label: "components", heightClass: "h-row-2xs" },
+  { depth: 2, label: "Tabs.tsx", heightClass: "h-row-2xs" },
+  { depth: 2, label: "Tooltip.tsx", heightClass: "h-row-2xs" },
+  { depth: 1, label: "styles.css", heightClass: "h-row-2xs" }
+];
+
 const iconography = [
   { label: "Library", value: "Heroicons" },
   { label: "Default style", value: "Outline" },
@@ -170,6 +186,36 @@ export const Tokens: Story = {
               <div key={label} className="rounded-sf-md border border-border bg-surface-sunken p-sf-12">
                 <p className="m-0 text-label text-content-primary">{label}</p>
                 <p className="m-0 mt-sf-4 text-body-sm text-content-secondary">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="grid gap-sf-16">
+        <h2 className="m-0 font-display text-heading-md text-content-primary">Row heights</h2>
+        <div className="grid gap-sf-24 rounded-sf-lg border border-border bg-surface p-sf-24 md:grid-cols-2">
+          <div className="grid content-start gap-sf-8">
+            {rowHeights.map(({ heightClass, size, token, value }) => (
+              <div key={token} className={`${heightClass} flex items-center justify-between gap-sf-16 border-b border-divider px-sf-8`}>
+                <code className="text-body-sm text-content-primary">{token}</code>
+                <span className="text-caption text-content-tertiary">
+                  {value} · {size}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="grid content-start">
+            <p className="m-0 mb-sf-8 text-caption text-content-tertiary">
+              Tree: row-xs top level, row-2xs children, row-indent per level, sf-8 inline padding.
+            </p>
+            {denseTree.map(({ depth, heightClass, label }) => (
+              <div
+                key={label}
+                className={`${heightClass} flex items-center rounded-sf-sm px-sf-8 text-body-sm text-content-secondary hover:bg-hover-surface`}
+                style={{ paddingInlineStart: `calc(var(--space-8) + ${depth} * var(--row-indent))` }}
+              >
+                {label}
               </div>
             ))}
           </div>

@@ -46,6 +46,11 @@ const preview: Preview = {
     },
     backgrounds: {
       disable: true
+    },
+    a11y: {
+      // Violations are reported, not failing, for the library at large. Stories
+      // that guard an accessibility contract opt into "error".
+      test: "todo"
     }
   }
 };

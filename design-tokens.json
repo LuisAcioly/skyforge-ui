@@ -1,6 +1,6 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
-  "$description": "Skyforge Design System v2 — canonical primitives and semantic roles. Carbon Black neutralized to #18181A and the neutral ramp rebuilt off it (R=G, B +1..+6). Feedback hues and linen promoted to full 10-step scales. Additive: no token was renamed or removed.",
+  "$description": "Skyforge Design System v2 — canonical primitives and semantic roles. Carbon Black neutralized to #18181A and the neutral ramp rebuilt off it (R=G, B +1..+6). Feedback hues and linen promoted to full 10-step scales. Additive: no token was renamed or removed. v2.1: light border and border-strong moved one ramp step up so border and divider no longer share a value.",
   "primitive": {
     "color": {
       "base": {
@@ -56,17 +56,17 @@
         "200": {
           "$type": "color",
           "$value": "#D8D8DB",
-          "$description": "Default light border and divider tone."
+          "$description": "Light divider and disabled border tone: quiet internal separation."
         },
         "300": {
           "$type": "color",
           "$value": "#B7B7BB",
-          "$description": "Strong light border for selected or emphasized boundaries."
+          "$description": "Light container border; strong border tone in dark theme."
         },
         "400": {
           "$type": "color",
           "$value": "#8E8E93",
-          "$description": "Dark-theme border tone."
+          "$description": "Dark-theme border and light strong border; control boundary in both themes."
         },
         "500": {
           "$type": "color",
@@ -486,15 +486,18 @@
         },
         "border": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.200}"
+          "$value": "{primitive.color.neutral.300}",
+          "$description": "Delimits containers: cards, panels, tables, popovers. 2.00:1 on surface, 1.85:1 on background. One step above divider so the two roles stay distinct."
         },
         "border-strong": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.300}"
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Hover, open and emphasized boundaries. Stays one step above border."
         },
         "divider": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.200}"
+          "$value": "{primitive.color.neutral.200}",
+          "$description": "Quiet internal separation inside a container: rows, list separators, tab rails."
         },
         "text-primary": {
           "$type": "color",
@@ -785,15 +788,18 @@
         },
         "border": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.400}"
+          "$value": "{primitive.color.neutral.400}",
+          "$description": "Delimits containers. 3.91:1 on surface."
         },
         "border-strong": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.300}"
+          "$value": "{primitive.color.neutral.300}",
+          "$description": "Hover, open and emphasized boundaries."
         },
         "divider": {
           "$type": "color",
-          "$value": "{primitive.color.neutral.800}"
+          "$value": "{primitive.color.neutral.800}",
+          "$description": "Quiet internal separation inside a container."
         },
         "text-primary": {
           "$type": "color",

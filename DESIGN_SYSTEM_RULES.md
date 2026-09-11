@@ -85,6 +85,17 @@ Pure black rule:
 2. Do not use pure black for button active states, text, borders, icons, cards, or visible surfaces.
 3. Use `brand.carbon-black`, `brand.shadow-ink`, or neutral tokens for visible UI.
 
+Boundary roles:
+
+| Role | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `border` | `neutral.300` | `neutral.400` | Delimits containers: cards, panels, tables, popovers, tab tracks. |
+| `border-strong` | `neutral.400` | `neutral.300` | Hover, open, and emphasized boundaries. Always one step more contrast than `border`. |
+| `divider` | `neutral.200` | `neutral.800` | Quiet separation inside a container: rows, menu separators, tab rails. |
+| `control-border` | `neutral.400` | `neutral.400` | The 3:1 boundary that identifies a form control. |
+
+`border` and `divider` must never share a value in a theme. Consumers pick the role, not a contrast level, and never mix or branch colors per theme to separate them.
+
 ### Typography
 
 <!-- typography-tokens:start -->
@@ -160,6 +171,26 @@ Accessibility:
 ### Spacing, Radius, Motion, And Elevation
 
 Use `4`, `8`, `12`, `16`, `24`, `32`, `48`, `64`, `96`, and `128` for spacing. Use `4`, `8`, `12`, `16`, `24`, and `9999` for radius.
+
+Control and row heights:
+
+| Token | Default | `data-density="compact"` | Use |
+| --- | --- | --- | --- |
+| `--control-h-sm` | `32px` | `32px` | Compact controls and square icon-only triggers (`h-control-sm w-control-sm`). |
+| `--control-h-md` | `40px` | `32px` | Default controls. |
+| `--control-h-lg` | `48px` | `40px` | Large controls; touch surfaces stay at lg. |
+| `--row-h-md` | `48px` | `40px` | Default rows. |
+| `--row-h-sm` | `40px` | `32px` | Compact rows. |
+| `--row-h-xs` | `30px` | `30px` | Leading or top-level dense row (tree roots, section rows in tool panes). |
+| `--row-h-2xs` | `26px` | `26px` | Repeated dense row (tree children, file lists). |
+| `--row-indent` | `var(--space-12)` | same | Indentation per nesting level. |
+
+Dense row rules:
+
+1. `xs` and `2xs` are the floor of the scale. Density never shrinks them, so `md > sm > xs > 2xs` holds in every density.
+2. Dense rows use `sf-8` inline padding and `calc(var(--space-8) + depth * var(--row-indent))` for nested start padding. Do not add dense-specific spacing tokens.
+3. Density changes geometry only. It never changes color, border, or elevation tokens.
+4. Dense rows and 32px controls are for pointer-driven `product-operational` surfaces. Touch surfaces keep `sm` or larger rows and `lg` controls.
 
 Spacing by context:
 
@@ -293,6 +324,25 @@ Modals must trap focus, close by keyboard, use an accessible title, and render o
 ### Tabs
 
 Use tabs for related content, not for multi-select filters. Implement `role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`, `role="tabpanel"`, and keyboard behavior in production.
+
+Variants: `underline`, `segmented`, `rail`, `ghost`.
+
+| Variant | Wrapper | Selected item |
+| --- | --- | --- |
+| `segmented` | `surface-sunken` track, `border`, radius, `4px` padding | `accent-bg`, `accent-border`, `accent-text` |
+| `ghost` | Transparent, no border, no visible padding | `surface-sunken`, no border, icon on `icon-accent` |
+
+Hover uses `hover-surface` in both. In light theme `hover-surface` and `surface-sunken` can coincide, so a selected `ghost` item keeps its icon on the accent to stay distinguishable from hover.
+
+Icon-only tabs (`iconOnly` on `Tabs`, `icon` and `label` on each `TabsTrigger`):
+
+1. `label` is required and is both the `aria-label` and the tooltip content. The tooltip does not also describe the trigger.
+2. Triggers are 32×32px squares with 20px icons and a transparent border at rest, so selection never shifts layout.
+3. 32×32px targets are for pointer-driven desktop surfaces (they meet WCAG 2.2 2.5.8 AA, not 2.5.5 AAA). Use labelled tabs on touch surfaces.
+4. Disabled triggers get no hover and no tooltip.
+5. Render a panel for the selected tab so `aria-controls` always resolves.
+
+Focus is a halo, never a lone ring that can read as selection: `1px` of the surface directly behind the control, then a `2px` `focus` ring. The gap color comes from the inheritable `--sf-focus-gap` property (Tailwind `ring-offset-focus-gap`): containers that paint their own surface set it (`segmented` sets `surface-sunken`), everything else falls back to `background`. Never hardcode the gap to one surface.
 
 ### Badge And Alert
 

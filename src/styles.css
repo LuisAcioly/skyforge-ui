@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700&display=swap");
+@import "./assets/fonts/fonts.css";
 @import "./generated/typography-tokens.css";
 
 @tailwind base;
@@ -57,6 +57,14 @@
     --control-h-lg: 48px;
     --row-h-md: 48px;
     --row-h-sm: 40px;
+    /* Dense rows for trees, file lists and tool panes. xs is the leading or
+       top-level row, 2xs the repeated row. They are the floor of the scale, so
+       density never shrinks them further: the order md > sm > xs > 2xs holds in
+       every density. Pair with --row-indent per nesting level and sf-8 inline
+       padding. Density changes geometry only, never the palette. */
+    --row-h-xs: 30px;
+    --row-h-2xs: 26px;
+    --row-indent: var(--space-12);
 
     --overlay-alpha: 0.44;
 
@@ -104,8 +112,11 @@
     --color-surface-raised: 255 255 255;
     --color-surface-sunken: 236 236 238;
     --color-surface-inverse: 24 24 26;
-    --color-border: 216 216 219;
-    --color-border-strong: 183 183 187;
+    /* Border delimits containers (neutral-300, 2.00:1 on white). Divider is the
+       quieter internal separation (neutral-200, 1.42:1). Strong border keeps one
+       step above border so hover and emphasis stay visible. */
+    --color-border: 183 183 187;
+    --color-border-strong: 142 142 147;
     --color-divider: 216 216 219;
     --color-text-primary: 24 24 26;
     --color-text-secondary: 79 79 85;
@@ -164,7 +175,7 @@
     /* v2: control boundary. neutral-400 = 3.26:1 on white, 3.02:1 on background.
        WCAG 2.2 1.4.11 requires 3:1 for the boundary that identifies a control,
        so checkboxes, radios, switches and fields read from this, not --color-border
-       (which stays a 1.32:1 hairline for decorative card edges). */
+       (a 1.85:1 container edge on background, not a control boundary). */
     --color-control-border: 142 142 147;
 
     /* v2: accent surfaces. Selected rows, checked boxes and active tabs share these. */
