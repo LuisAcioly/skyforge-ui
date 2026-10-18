@@ -237,7 +237,6 @@ Exemplo de árvore densa:
 | Nível | Utilitário | Uso |
 | --- | --- | --- |
 | Nenhuma | — | Cards, painéis e grupos padrão: borda e contraste tonal |
-| Botão | `shadow-sf-button` / `shadow-sf-button-hover` | Só nas variantes preenchidas de `Button` (`primary`, `danger`, `editorial`); já aplicado pelo componente |
 | 1 | `shadow-sf-1` | Cards interativos e menus pequenos |
 | 2 | `shadow-sf-2` | Popovers e painéis flutuantes |
 | Listas | `shadow-sf-popover` | Painéis de `Select`, `MultiSelect` e `DropdownMenu`: sem borda visível, só a sombra; no dark ganha a linha de luz no topo, como o modal |

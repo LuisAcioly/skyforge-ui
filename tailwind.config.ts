@@ -190,8 +190,6 @@ const config = {
         "sf-3": "var(--shadow-3)",
         "sf-modal": "var(--component-modal-shadow)",
         "sf-popover": "var(--component-popover-shadow)",
-        "sf-button": "var(--component-button-shadow)",
-        "sf-button-hover": "var(--component-button-shadow-hover)",
         "sf-inset": "var(--shadow-inset)"
       },
       height: {

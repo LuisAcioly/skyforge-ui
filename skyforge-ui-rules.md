@@ -26,7 +26,7 @@ Palavras normativas: **DEVE** / **NUNCA** são obrigatórias; **PREFIRA** admite
 | R-OURO-5 | **DEVE** funcionar em `light` e `dark`, inclusive nas camadas em portal (menus, modais, tooltips). |
 | R-OURO-6 | **DEVE** importar tudo do entry principal: `import { Button } from "@luiswagnerab/skyforge-ui"`. Nunca de caminhos internos (`/dist/components/...`). |
 
-### Inventário completo (v1.0.0)
+### Inventário completo (v1.0.1)
 
 Se não está nesta lista, **não existe** na lib:
 
@@ -415,7 +415,7 @@ Antes de entregar, confirme e informe o resultado:
 
 ## Apêndice A — Tokens mapeados (valores de referência)
 
-Valores extraídos de `src/styles.css` (runtime) e `design-tokens.json` (primitivos) na v1.0.0. Servem para o agente **entender** a escala, o contraste e a relação entre os papéis.
+Valores extraídos de `src/styles.css` (runtime) e `design-tokens.json` (primitivos) na v1.0.1. Servem para o agente **entender** a escala, o contraste e a relação entre os papéis.
 
 | ID | Regra |
 | --- | --- |
@@ -674,7 +674,6 @@ Bordas: `--border-width-default` 1px (padrão em tudo), `--border-width-strong` 
 | --- | --- | --- | --- |
 | `--component-popover-shadow` (`shadow-sf-popover`) | `0 1px 2px rgb(24 24 26 / .06), 0 8px 24px rgb(24 24 26 / .08)` | linha de luz no topo + `0 1px 2px rgb(0 0 0 / .24), 0 8px 24px rgb(0 0 0 / .28)` | Listas de opções |
 | `--component-modal-shadow` (`shadow-sf-modal`) | `var(--shadow-3)` | linha de luz no topo + `0 2px 8px rgb(0 0 0 / .4), 0 24px 64px rgb(0 0 0 / .55)` | `ModalContent` |
-| `--component-button-shadow` / `-hover` (`shadow-sf-button` / `-hover`) | `0 1px 2px` / `0 6px 16px rgb(24 24 26 / .16)` | `0 1px 2px rgb(0 0 0 / .6)` / `0 6px 16px rgb(0 0 0 / .5)` | Variantes preenchidas de `Button` |
 
 As sombras `--shadow-*` são as mesmas nos dois temas e quase invisíveis no dark: no dark a separação vem do contraste tonal das superfícies. Os tokens de componente acima são a exceção e trocam para uma pilha em preto no dark. A linha de luz (`inset 0 1px 0 rgb(255 255 255 / .06)`) é interna ao componente; `--shadow-inset` existe, mas é proibido em componentes e telas (R-LAYOUT-3).
 

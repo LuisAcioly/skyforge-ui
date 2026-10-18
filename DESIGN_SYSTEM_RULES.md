@@ -204,7 +204,6 @@ Elevation is border-first:
 | Elevation | Use | Rule |
 | --- | --- | --- |
 | `shadow.none` | Default cards, panels, content groups | No shadow; use borders and tonal contrast. |
-| `component-button-shadow` | Filled buttons (`primary`, `danger`, `editorial`) | Small drop shadow, deeper on hover. Outline and ghost buttons stay flat. |
 | `shadow.1` | Interactive cards, small menus | Optional subtle shadow. |
 | `shadow.2` | Popovers and floating panels | Raised surface only. |
 | `component-popover-shadow` | Option lists (Select, MultiSelect, DropdownMenu) | No visible edge: elevation alone separates the panel. Sits between `shadow.1` and `shadow.2`. |
@@ -316,7 +315,7 @@ Sizes:
 | `md` | `40px` | `16px` |
 | `lg` | `48px` | `24px` |
 
-Labels must be short verbs. Loading must preserve width. Danger is a solid fill built on the error family (`component-button-danger*`, base = `error-icon`). Editorial uses the linen editorial family, so it never duplicates `primary`. Secondary is outline-only: transparent fill, `control-border` edge, `secondary-hover` fill on hover (not `hover-surface`, which equals the dark modal surface). Only filled variants (`primary`, `danger`, `editorial`) carry a drop shadow. Button focus is a 2px `focus` ring with a 2px `focus-gap` offset.
+Labels must be short verbs. Loading must preserve width. Danger is a solid fill built on the error family (`component-button-danger*`, base = `error-icon`). Editorial uses the linen editorial family, so it never duplicates `primary`. Secondary is outline-only: transparent fill, `control-border` edge, `secondary-hover` fill on hover (not `hover-surface`, which equals the dark modal surface). Every variant shares the same hover: 1px lift, 1.01 scale and the `sf-premium-control` shadow. Button focus is a 2px `focus` ring with a 2px `focus-gap` offset.
 
 Premium CTA rule:
 
