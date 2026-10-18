@@ -4,7 +4,7 @@ import { expect, fireEvent, waitFor, within } from "storybook/test";
 
 import { cn } from "../../utils/cn";
 import { TooltipProvider } from "../Tooltip/Tooltip";
-import { Tabs, TabsContent, TabsList, TabsTrigger, type TabsVariant } from "./Tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger, type TabsAppearance, type TabsVariant } from "./Tabs";
 
 type DemoState = "rest" | "hover" | "focus" | "active" | "active-focus" | "disabled" | "tooltip";
 
@@ -18,7 +18,17 @@ const rows: Array<{ state: DemoState; label: string }> = [
   { state: "tooltip", label: "Tooltip aberto" }
 ];
 
-function StateRow({ state, label, variant }: { state: DemoState; label: string; variant: TabsVariant }) {
+function StateRow({
+  appearance,
+  state,
+  label,
+  variant
+}: {
+  appearance: TabsAppearance;
+  state: DemoState;
+  label: string;
+  variant: TabsVariant;
+}) {
   const selectsTarget = state === "active" || state === "active-focus";
 
   return (
@@ -26,7 +36,7 @@ function StateRow({ state, label, variant }: { state: DemoState; label: string; 
     <div className={cn("grid grid-cols-[120px_auto] items-center gap-sf-16", state === "tooltip" && "mt-sf-48")}>
       <span className="text-caption text-content-tertiary">{label}</span>
       <TooltipProvider>
-        <Tabs variant={variant} iconOnly defaultValue={selectsTarget ? "code" : "agents"}>
+        <Tabs appearance={appearance} variant={variant} iconOnly defaultValue={selectsTarget ? "code" : "agents"}>
           <TabsList aria-label={`${label} (${variant})`}>
             <TabsTrigger value="agents" icon={<Squares2X2Icon />} label="Visão de Agentes" />
             <TabsTrigger
@@ -50,11 +60,11 @@ function StateRow({ state, label, variant }: { state: DemoState; label: string; 
   );
 }
 
-function StateMatrix({ variant }: { variant: TabsVariant }) {
+function StateMatrix({ appearance = "solid", variant }: { appearance?: TabsAppearance; variant: TabsVariant }) {
   return (
     <div className="grid gap-sf-16 pb-sf-48 pt-sf-8">
       {rows.map((row) => (
-        <StateRow key={row.state} variant={variant} {...row} />
+        <StateRow key={row.state} appearance={appearance} variant={variant} {...row} />
       ))}
     </div>
   );
@@ -101,7 +111,7 @@ function target(canvasElement: HTMLElement, state: DemoState) {
   return canvasElement.querySelector<HTMLElement>(`[data-demo="${state}"]`)!;
 }
 
-async function playStates(canvasElement: HTMLElement, variant: TabsVariant) {
+async function playStates(canvasElement: HTMLElement, variant: TabsVariant, appearance: TabsAppearance = "solid") {
   const page = within(canvasElement.ownerDocument.body);
   const hover = target(canvasElement, "hover");
   const active = target(canvasElement, "active");
@@ -111,12 +121,13 @@ async function playStates(canvasElement: HTMLElement, variant: TabsVariant) {
   const iconOf = (element: HTMLElement) => element.querySelector("svg")!.parentElement!;
 
   const gapToken = variant === "segmented" ? "--color-surface-sunken" : "--color-background";
+  const hoverToken = variant === "ghost" ? "--color-hover-subtle" : "--color-hover-surface";
 
   forcePseudoStates(canvasElement);
 
   // Settled (post-transition) styles.
   await waitFor(() => {
-    expect(getComputedStyle(hover).backgroundColor).toBe(rgb(hover, "--color-hover-surface"));
+    expect(getComputedStyle(hover).backgroundColor).toBe(rgb(hover, hoverToken));
     expect(getComputedStyle(activeFocus).boxShadow).toContain(`${rgb(activeFocus, gapToken)} 0px 0px 0px 1px`);
     expect(getComputedStyle(activeFocus).boxShadow).toContain(`${rgb(activeFocus, "--color-focus")} 0px 0px 0px 3px`);
   });
@@ -134,9 +145,15 @@ async function playStates(canvasElement: HTMLElement, variant: TabsVariant) {
     await waitFor(() => {
       expect(getComputedStyle(active).backgroundColor).toBe(rgb(active, "--color-surface-sunken"));
       expect(getComputedStyle(active).borderColor).toBe("rgba(0, 0, 0, 0)");
-      // Hover and selection can share a surface in light theme; the icon tells them apart.
-      expect(getComputedStyle(iconOf(active)).color).toBe(rgb(active, "--color-icon-accent"));
-      expect(getComputedStyle(iconOf(hover)).color).not.toBe(getComputedStyle(iconOf(active)).color);
+      expect(getComputedStyle(iconOf(active)).color).toBe(rgb(active, "--color-text-primary"));
+      // Hover and selection share the icon colour, so the surfaces must differ.
+      expect(getComputedStyle(hover).backgroundColor).not.toBe(getComputedStyle(active).backgroundColor);
+    });
+  } else if (appearance === "solid") {
+    await waitFor(() => {
+      expect(getComputedStyle(active).backgroundColor).toBe(rgb(active, "--color-neutral-solid"));
+      expect(getComputedStyle(active).borderColor).toBe("rgba(0, 0, 0, 0)");
+      expect(getComputedStyle(active).color).toBe(rgb(active, "--color-on-solid"));
     });
   } else {
     await waitFor(() => {
@@ -163,6 +180,20 @@ export const SegmentedDark: Story = {
   globals: { theme: "dark" },
   render: () => <StateMatrix variant="segmented" />,
   play: ({ canvasElement }) => playStates(canvasElement, "segmented")
+};
+
+export const SegmentedSoftLight: Story = {
+  name: "Segmented soft · light",
+  globals: { theme: "light" },
+  render: () => <StateMatrix appearance="soft" variant="segmented" />,
+  play: ({ canvasElement }) => playStates(canvasElement, "segmented", "soft")
+};
+
+export const SegmentedSoftDark: Story = {
+  name: "Segmented soft · dark",
+  globals: { theme: "dark" },
+  render: () => <StateMatrix appearance="soft" variant="segmented" />,
+  play: ({ canvasElement }) => playStates(canvasElement, "segmented", "soft")
 };
 
 export const GhostLight: Story = {

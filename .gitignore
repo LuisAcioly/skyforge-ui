@@ -4,7 +4,7 @@ storybook-static/
 .DS_Store
 *.log
 DESIGN_SYSTEM_RULES.md
-SKYFORGE-UI.md
+skyforge-ui.md
 design-tokens.json
 # self-contained bundle for the standalone documentation exports
 dist-docbundle/

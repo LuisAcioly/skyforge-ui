@@ -63,6 +63,7 @@ const config = {
           DEFAULT: colorVar("--color-field-bg"),
           bg: colorVar("--color-field-bg"),
           "bg-readonly": colorVar("--color-field-bg-readonly"),
+          "bg-filled": colorVar("--color-field-bg-filled"),
           border: colorVar("--color-field-border"),
           "border-hover": colorVar("--color-field-border-hover"),
           placeholder: colorVar("--color-field-placeholder")
@@ -70,8 +71,11 @@ const config = {
         accent: {
           bg: colorVar("--color-accent-bg"),
           border: colorVar("--color-accent-border"),
-          text: colorVar("--color-accent-text")
+          text: colorVar("--color-accent-text"),
+          solid: colorVar("--color-accent-solid")
         },
+        "neutral-solid": colorVar("--color-neutral-solid"),
+        "on-solid": colorVar("--color-on-solid"),
         editorial: {
           bg: colorVar("--color-editorial-bg"),
           surface: colorVar("--color-editorial-surface"),
@@ -79,6 +83,23 @@ const config = {
           text: colorVar("--color-editorial-text")
         },
         overlay: colorVar("--color-overlay"),
+        modal: {
+          border: colorVar("--component-modal-border"),
+          close: colorVar("--component-modal-close-bg"),
+          "close-hover": colorVar("--component-modal-close-bg-hover")
+        },
+        option: {
+          highlight: colorVar("--component-option-highlight"),
+          divider: colorVar("--component-option-divider")
+        },
+        button: {
+          danger: colorVar("--component-button-danger"),
+          "danger-hover": colorVar("--component-button-danger-hover"),
+          "danger-active": colorVar("--component-button-danger-active"),
+          "danger-foreground": colorVar("--component-button-danger-foreground"),
+          "editorial-hover": colorVar("--component-button-editorial-hover"),
+          "editorial-active": colorVar("--component-button-editorial-active")
+        },
         "content-primary": colorVar("--color-text-primary"),
         "content-secondary": colorVar("--color-text-secondary"),
         "content-tertiary": colorVar("--color-text-tertiary"),
@@ -104,30 +125,35 @@ const config = {
         link: colorVar("--color-link"),
         "link-hover": colorVar("--color-link-hover"),
         "hover-surface": colorVar("--color-hover-surface"),
+        "hover-subtle": colorVar("--color-hover-subtle"),
         "active-surface": colorVar("--color-active-surface"),
         success: {
           bg: colorVar("--color-success-bg"),
           border: colorVar("--color-success-border"),
           text: colorVar("--color-success-text"),
-          icon: colorVar("--color-success-icon")
+          icon: colorVar("--color-success-icon"),
+          solid: colorVar("--color-success-solid")
         },
         warning: {
           bg: colorVar("--color-warning-bg"),
           border: colorVar("--color-warning-border"),
           text: colorVar("--color-warning-text"),
-          icon: colorVar("--color-warning-icon")
+          icon: colorVar("--color-warning-icon"),
+          solid: colorVar("--color-warning-solid")
         },
         error: {
           bg: colorVar("--color-error-bg"),
           border: colorVar("--color-error-border"),
           text: colorVar("--color-error-text"),
-          icon: colorVar("--color-error-icon")
+          icon: colorVar("--color-error-icon"),
+          solid: colorVar("--color-error-solid")
         },
         info: {
           bg: colorVar("--color-info-bg"),
           border: colorVar("--color-info-border"),
           text: colorVar("--color-info-text"),
-          icon: colorVar("--color-info-icon")
+          icon: colorVar("--color-info-icon"),
+          solid: colorVar("--color-info-solid")
         },
         disabled: {
           bg: colorVar("--color-disabled-bg"),
@@ -162,6 +188,10 @@ const config = {
         "sf-1": "var(--shadow-1)",
         "sf-2": "var(--shadow-2)",
         "sf-3": "var(--shadow-3)",
+        "sf-modal": "var(--component-modal-shadow)",
+        "sf-popover": "var(--component-popover-shadow)",
+        "sf-button": "var(--component-button-shadow)",
+        "sf-button-hover": "var(--component-button-shadow-hover)",
         "sf-inset": "var(--shadow-inset)"
       },
       height: {

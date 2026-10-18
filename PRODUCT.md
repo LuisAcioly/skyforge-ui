@@ -51,7 +51,7 @@ The library is consumed as the public npm package `@luiswagnerab/skyforge-ui`. D
 - Canonical design tokens: `design-tokens.json`.
 - Runtime theme and CSS implementation: `src/styles.css`.
 - Design-system rules: `DESIGN_SYSTEM_RULES.md`.
-- Agent-facing component and usage guide: `SKYFORGE-UI.md`.
+- Agent-facing component and usage guide: `skyforge-ui.md`.
 - Component behavior and APIs: `src/components/`.
 - Visual examples and states: Storybook stories under `src/`.
 - Package purpose, installation, exports, and supported component inventory: `README.md` and `package.json`.

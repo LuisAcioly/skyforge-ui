@@ -18,9 +18,15 @@ export type ChipVariant = "neutral" | "accent" | "info" | "success" | "warning" 
 /** `danger` is accepted as a synonym of `error`. */
 export type ChipVariantInput = ChipVariant | "danger";
 export type ChipSize = "sm" | "md";
+/**
+ * `solid` (default) fills a selected or static chip with the tone and leaves an
+ * unselected interactive chip outlined; `soft` is the quieter tinted surface.
+ */
+export type ChipAppearance = "soft" | "solid";
 
 export interface ChipProps extends Omit<HTMLAttributes<HTMLSpanElement>, "onClick"> {
   actionLabel?: string;
+  appearance?: ChipAppearance;
   disabled?: boolean;
   leftIcon?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -42,6 +48,22 @@ const variantClasses: Record<ChipVariant, string> = {
   warning: "border-warning-border bg-warning-bg text-warning-text",
   error: "border-error-border bg-error-bg text-error-text"
 };
+
+const solidVariantClasses: Record<ChipVariant, string> = {
+  neutral: "border-transparent bg-neutral-solid text-on-solid",
+  accent: "border-transparent bg-accent-solid text-on-solid",
+  info: "border-transparent bg-info-solid text-on-solid",
+  success: "border-transparent bg-success-solid text-on-solid",
+  warning: "border-transparent bg-warning-solid text-on-solid",
+  error: "border-transparent bg-error-solid text-on-solid"
+};
+
+// An unselected interactive chip in the solid family: outlined, so the fill alone marks selection.
+const solidIdleClasses = "border-border bg-transparent text-content-secondary";
+
+// Darkening reads on both themes: the light fills are dark, the dark fills are light.
+const solidOverlayClasses = "hover:bg-[rgb(24_24_26/0.14)] active:bg-[rgb(24_24_26/0.24)]";
+const softOverlayClasses = "hover:bg-current/10";
 
 const iconClasses: Record<ChipVariant, string> = {
   neutral: "text-icon-secondary",
@@ -72,14 +94,14 @@ const removeButtonClasses: Record<ChipSize, string> = {
   md: "mr-sf-4 h-sf-16 w-sf-16"
 };
 
-function renderChipIcon(icon: ReactNode, size: ChipSize, variant: ChipVariant) {
+function renderChipIcon(icon: ReactNode, size: ChipSize, iconClassName: string) {
   if (!icon) {
     return null;
   }
 
   const normalizedIcon = isValidElement<{ className?: string; strokeWidth?: number | string }>(icon)
     ? cloneElement(icon as ReactElement<{ className?: string; strokeWidth?: number | string }>, {
-        className: cn(iconSizeClasses[size], iconClasses[variant], icon.props.className),
+        className: cn(iconSizeClasses[size], iconClassName, icon.props.className),
         strokeWidth: icon.props.strokeWidth ?? 1.5
       })
     : icon;
@@ -95,6 +117,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
   (
     {
       actionLabel,
+      appearance = "solid",
       children,
       className,
       disabled = false,
@@ -116,12 +139,21 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
     const isInteractive = typeof onClick === "function";
     const isRemovable = typeof onRemove === "function";
     const leadingIcon = selected && !leftIcon ? <CheckIcon /> : leftIcon;
+    const isSolid = appearance === "solid";
+    const isFilled = isSolid && (selected || !isInteractive);
+    const toneClasses = !isSolid
+      ? cn(variantClasses[variant], "data-[selected=true]:ring-1 data-[selected=true]:ring-current/25")
+      : isFilled
+        ? solidVariantClasses[variant]
+        : solidIdleClasses;
+    const iconClassName = isFilled ? "text-current" : isSolid ? "text-icon-secondary" : iconClasses[variant];
+    const overlayClasses = isFilled ? solidOverlayClasses : softOverlayClasses;
 
     const chipContent = (
       <>
-        {renderChipIcon(leadingIcon, size, variant)}
+        {renderChipIcon(leadingIcon, size, iconClassName)}
         {hasChildren ? <span className="min-w-0 truncate">{children}</span> : null}
-        {renderChipIcon(rightIcon, size, variant)}
+        {renderChipIcon(rightIcon, size, iconClassName)}
       </>
     );
 
@@ -134,12 +166,13 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
       <span
         ref={ref}
         aria-disabled={disabled || undefined}
+        data-appearance={appearance}
         data-disabled={disabled || undefined}
         data-interactive={isInteractive || undefined}
         data-selected={selected || undefined}
         className={cn(
-          "inline-flex max-w-full shrink-0 select-none items-center overflow-hidden rounded-sf-full border font-body font-semibold leading-none tracking-[0.01em] transition-colors duration-sf-normal ease-sf-standard data-[disabled=true]:border-disabled-border data-[disabled=true]:bg-disabled-bg data-[disabled=true]:text-disabled-text data-[selected=true]:ring-1 data-[selected=true]:ring-current/25",
-          variantClasses[variant],
+          "inline-flex max-w-full shrink-0 select-none items-center overflow-hidden rounded-sf-full border font-body font-semibold leading-none tracking-[0.01em] transition-colors duration-sf-normal ease-sf-standard data-[disabled=true]:border-disabled-border data-[disabled=true]:bg-disabled-bg data-[disabled=true]:text-disabled-text",
+          toneClasses,
           sizeClasses[size],
           className
         )}
@@ -153,7 +186,8 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
             disabled={disabled}
             onClick={onClick}
             className={cn(
-              "inline-flex h-full min-w-0 items-center rounded-sf-full bg-transparent text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
+              "inline-flex h-full min-w-0 items-center rounded-sf-full bg-transparent text-current outline-none transition duration-sf-fast ease-sf-standard active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
+              overlayClasses,
               contentClasses[size]
             )}
           >
@@ -170,7 +204,8 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(
             disabled={disabled}
             onClick={handleRemoveClick}
             className={cn(
-              "relative before:absolute before:-inset-[4px] before:content-[''] inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard hover:bg-current/10 active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
+              "relative before:absolute before:-inset-[4px] before:content-[''] inline-flex shrink-0 items-center justify-center rounded-sf-full text-current outline-none transition duration-sf-fast ease-sf-standard active:scale-90 focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60",
+              overlayClasses,
               removeButtonClasses[size]
             )}
           >

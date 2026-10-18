@@ -19,6 +19,10 @@ const meta = {
   component: Tabs,
   tags: ["autodocs"],
   argTypes: {
+    appearance: {
+      control: "inline-radio",
+      options: ["solid", "soft"]
+    },
     variant: {
       control: "select",
       options: ["underline", "segmented", "rail", "ghost"]
@@ -28,6 +32,7 @@ const meta = {
     }
   },
   args: {
+    appearance: "solid",
     defaultValue: "foundation",
     variant: "segmented"
   },
@@ -87,7 +92,7 @@ export const Variants: Story = {
           <TabsTrigger value="terminal" icon={<CommandLineIcon />} label="Terminal" />
         </TabsList>
         <TabsContent value="agents">Ghost tabs drop the track and border for toolbars inside an existing surface.</TabsContent>
-        <TabsContent value="code">The selected item sits on the sunken surface and keeps its icon on the accent.</TabsContent>
+        <TabsContent value="code">The selected item sits on the sunken surface with primary text and icon.</TabsContent>
         <TabsContent value="terminal">The focus halo gap inherits the surface of the container.</TabsContent>
       </Tabs>
 
@@ -109,6 +114,111 @@ export const Variants: Story = {
       </Tabs>
     </div>
   )
+};
+
+/** `appearance="soft"` keeps the tinted accent surface on segmented and rail. */
+export const Soft: Story = {
+  render: () => (
+    <div className="grid max-w-modal-lg gap-sf-32">
+      <Tabs appearance="soft" defaultValue="foundation" variant="segmented">
+        <TabsList aria-label="Soft segmented tabs">
+          <TabsTrigger value="foundation">Foundation</TabsTrigger>
+          <TabsTrigger value="component">Component</TabsTrigger>
+          <TabsTrigger value="usage">Usage</TabsTrigger>
+        </TabsList>
+        <TabsContent value="foundation">The selected segment sits on the tinted accent surface.</TabsContent>
+        <TabsContent value="component">Use it where a solid fill would compete with nearby content.</TabsContent>
+        <TabsContent value="usage">The list remains keyboard navigable by default.</TabsContent>
+      </Tabs>
+
+      <Tabs appearance="soft" defaultValue="audit" variant="rail" className="grid gap-sf-16 md:grid-cols-[180px_1fr]">
+        <TabsList aria-label="Soft rail tabs">
+          <TabsTrigger value="audit">Audit</TabsTrigger>
+          <TabsTrigger value="tokens">Tokens</TabsTrigger>
+          <TabsTrigger value="release">Release</TabsTrigger>
+        </TabsList>
+        <TabsContent value="audit" className="mt-0">
+          Soft rail tabs keep the selected row tinted instead of filled.
+        </TabsContent>
+        <TabsContent value="tokens" className="mt-0">
+          Token references remain visible without adding another navigation layer.
+        </TabsContent>
+        <TabsContent value="release" className="mt-0">
+          Release notes stay in a focused panel beside the rail.
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+};
+
+/**
+ * `count` and `dot` mark pending items with an accent badge, so the charcoal
+ * fill stays reserved for selection. The count joins the accessible name;
+ * a `dot` needs `badgeLabel` to be announced.
+ */
+export const WithCount: Story = {
+  render: () => (
+    <TooltipProvider>
+      <div className="grid max-w-modal-lg gap-sf-32">
+        <Tabs defaultValue="agents" variant="segmented" iconOnly>
+          <TabsList aria-label="Painel com contadores">
+            <TabsTrigger value="agents" icon={<Squares2X2Icon />} label="Agentes" />
+            <TabsTrigger value="code" icon={<CodeBracketIcon />} label="Código" count={3} badgeLabel="3 novidades" />
+            <TabsTrigger value="terminal" icon={<CommandLineIcon />} label="Terminal" count={128} />
+            <TabsTrigger value="deploy" icon={<RocketLaunchIcon />} label="Deploy" dot badgeLabel="há novidades" />
+          </TabsList>
+          <TabsContent value="agents">Agentes em execução.</TabsContent>
+          <TabsContent value="code">Três arquivos alterados.</TabsContent>
+          <TabsContent value="terminal">Saída do terminal.</TabsContent>
+          <TabsContent value="deploy">Novo deploy disponível.</TabsContent>
+        </Tabs>
+
+        <Tabs defaultValue="inbox" variant="segmented">
+          <TabsList aria-label="Caixa com contadores">
+            <TabsTrigger value="inbox" count={12}>
+              Entrada
+            </TabsTrigger>
+            <TabsTrigger value="review" count={4}>
+              Em revisão
+            </TabsTrigger>
+            <TabsTrigger value="done">Concluídas</TabsTrigger>
+          </TabsList>
+          <TabsContent value="inbox">Doze itens aguardando.</TabsContent>
+          <TabsContent value="review">Quatro itens em revisão.</TabsContent>
+          <TabsContent value="done">Nenhum item pendente.</TabsContent>
+        </Tabs>
+
+        <Tabs defaultValue="inbox" variant="rail" className="max-w-[220px]">
+          <TabsList aria-label="Rail com contadores">
+            <TabsTrigger value="inbox" icon={<CircleStackIcon />} count={12}>
+              Entrada
+            </TabsTrigger>
+            <TabsTrigger value="search" icon={<MagnifyingGlassIcon />} dot badgeLabel="há novidades">
+              Busca
+            </TabsTrigger>
+            <TabsTrigger value="code" icon={<CodeBracketIcon />}>
+              Código
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="inbox">Doze itens aguardando.</TabsContent>
+          <TabsContent value="search">Resultados novos.</TabsContent>
+          <TabsContent value="code">Editor de código.</TabsContent>
+        </Tabs>
+      </div>
+    </TooltipProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("tab", { name: "Código, 3 novidades" })).toBeInTheDocument();
+    await expect(canvas.getByRole("tab", { name: "Terminal, 99+" })).toBeInTheDocument();
+    await expect(canvas.getByRole("tab", { name: "Deploy, há novidades" })).toBeInTheDocument();
+    await expect(canvas.getByRole("tab", { name: "Agentes" })).toBeInTheDocument();
+    // Text triggers join visible text and the visually hidden badge text.
+    await expect(canvas.getAllByRole("tab", { name: /^Entrada\s*, 12$/ })).toHaveLength(2);
+    await expect(canvas.getByRole("tab", { name: /^Busca\s*, há novidades$/ })).toBeInTheDocument();
+    await expect(canvas.getByRole("tab", { name: "Concluídas" })).toBeInTheDocument();
+  }
 };
 
 export const States: Story = {

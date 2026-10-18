@@ -134,6 +134,8 @@ Unsupported components: `Label`, `Loading`, `TableCaption`.
 - Use `Skeleton` for layout-shaped loading states.
 - Use `Spinner` for compact inline activity.
 - Use `Tag` for compact metadata, status labels, and removable filters.
+- `Alert`, `Badge`, `Tag`, `Chip`, and `Tabs` (`segmented`, `rail`) default to `appearance="solid"`, filled with the tone. Pass `appearance="soft"` for the tinted surface.
+- Use `count`, `dot`, and `badgeLabel` on `TabsTrigger` for pending items instead of placing a `Badge` inside the trigger.
 - Use `TableEmpty` and `TableLoading` for table states.
 - Use Heroicons for product icons and keep `strokeWidth={1.5}`.
 - Use semantic tokens instead of hardcoded colors.

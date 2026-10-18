@@ -9,6 +9,12 @@ import {
   resolveFieldStatus,
   type FieldStatus
 } from "../../utils/fieldStatus";
+import {
+  optionCheckboxClasses,
+  optionItemClasses,
+  optionPanelClasses,
+  optionSeparatorClasses
+} from "../../utils/optionStyles";
 
 export type MultiSelectSize = "md" | "lg";
 export type MultiSelectVariant = "outline" | "filled" | "ghost";
@@ -21,7 +27,11 @@ export interface MultiSelectOption {
 }
 
 export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue" | "onChange"> {
+  /** Label of the footer action that clears the selection. `null` hides the footer. */
+  clearLabel?: string | null;
   defaultValue?: string[];
+  /** Footer summary of the selection. */
+  formatSelectedCount?: (count: number) => string;
   disabled?: boolean;
   emptyText?: string | null;
   errorText?: string | null;
@@ -41,8 +51,8 @@ export interface MultiSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 
 const variantClasses: Record<MultiSelectVariant, string> = {
   outline: "border-field-border bg-field-bg hover:border-field-border-hover data-[state=open]:border-field-border-hover",
-  filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
+  filled: "border-transparent bg-field-bg-filled",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<MultiSelectSize, string> = {
@@ -54,7 +64,9 @@ export const MultiSelect = ({
   "aria-describedby": ariaDescribedBy,
   "aria-invalid": ariaInvalid,
   className,
+  clearLabel = "Clear",
   defaultValue = [],
+  formatSelectedCount = (count) => `${count} selected`,
   disabled = false,
   emptyText = "No options available.",
   errorText,
@@ -111,6 +123,12 @@ export const MultiSelect = ({
     commitValue(nextValue);
   };
 
+  // Disabled options cannot be toggled, so clearing leaves them as they are.
+  const lockedValue = selectedValue.filter((item) => options.some((option) => option.value === item && option.disabled));
+  const canClear = selectedValue.length > lockedValue.length;
+  const resolvedClearLabel = typeof clearLabel === "string" ? clearLabel : undefined;
+  const hasFooter = resolvedClearLabel !== undefined && options.length > 0;
+
   return (
     <div className={cn("grid w-full gap-sf-8", className)} {...props}>
       {hasLabel ? (
@@ -130,7 +148,8 @@ export const MultiSelect = ({
             data-invalid={isInvalid || undefined}
               data-status={resolvedStatus}
             className={cn(
-              "sf-premium-control inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon data-[state=open]:border-border-strong data-[state=open]:bg-hover-surface",
+              variant !== "ghost" && "sf-premium-control",
+              "inline-flex max-w-full w-full cursor-pointer select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
               variantClasses[variant],
               fieldStatusBorderClasses[resolvedStatus],
               sizeClasses[size]
@@ -160,10 +179,11 @@ export const MultiSelect = ({
             align="start"
             sideOffset={8}
             className={cn(
-              "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none"
+              "sf-popover-content z-sf-dropdown max-w-[calc(100vw-2rem)] w-[var(--radix-popover-trigger-width)] p-sf-8",
+              optionPanelClasses
             )}
           >
-            <div className="grid max-h-[320px] gap-sf-4 overflow-y-auto">
+            <div className="grid max-h-[320px] overflow-y-auto">
               {options.length > 0 ? (
                 options.map((option) => {
                   const isSelected = selectedValue.includes(option.value);
@@ -174,13 +194,18 @@ export const MultiSelect = ({
                       type="button"
                       disabled={option.disabled}
                       aria-pressed={isSelected}
+                      data-state={isSelected ? "checked" : "unchecked"}
+                      data-disabled={option.disabled ? "" : undefined}
                       onClick={() => toggleValue(option.value)}
-                      className="sf-premium-item flex min-h-sf-40 w-full cursor-pointer select-none items-start gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 text-left font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:bg-hover-surface focus-visible:bg-hover-surface disabled:cursor-not-allowed disabled:text-disabled-text disabled:opacity-100"
+                      className={cn(optionItemClasses, "hover:bg-option-highlight focus-visible:bg-option-highlight")}
                     >
-                      <span className={cn("mt-sf-4 inline-flex h-sf-16 w-sf-16 shrink-0 items-center justify-center rounded-sf-sm border", isSelected ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface")}>
-                        {isSelected ? <CheckIcon aria-hidden="true" className="h-sf-12 w-sf-12" strokeWidth={1.5} /> : null}
+                      {/* One body-sm line tall, so the box centres on the label, not the block. */}
+                      <span className="flex h-sf-20 shrink-0 items-center self-start">
+                        <span className={optionCheckboxClasses}>
+                          {isSelected ? <CheckIcon aria-hidden="true" className="h-sf-12 w-sf-12" strokeWidth={1.5} /> : null}
+                        </span>
                       </span>
-                      <span className="grid min-w-0 gap-sf-4">
+                      <span className="grid min-w-0">
                         <span className="truncate text-content-primary">{option.label}</span>
                         {typeof option.description === "string" ? (
                           <span className="text-caption text-content-tertiary">{option.description}</span>
@@ -193,6 +218,24 @@ export const MultiSelect = ({
                 <p className="m-0 px-sf-12 py-sf-8 text-body-sm text-content-tertiary">{resolvedEmptyText}</p>
               ) : null}
             </div>
+            {hasFooter ? (
+              <>
+                <div aria-hidden="true" className={optionSeparatorClasses} />
+                <div className="flex items-center justify-between gap-sf-8 pl-sf-12">
+                  <span aria-live="polite" className="font-body text-caption text-content-tertiary">
+                    {formatSelectedCount(selectedValue.length)}
+                  </span>
+                  <button
+                    type="button"
+                    disabled={!canClear}
+                    onClick={() => commitValue(lockedValue)}
+                    className="inline-flex h-sf-32 items-center rounded-sf-md px-sf-8 font-body text-label text-link outline-none transition duration-sf-slow ease-sf-standard hover:bg-option-highlight focus-visible:ring-2 focus-visible:ring-focus disabled:cursor-not-allowed disabled:bg-transparent disabled:text-disabled-text"
+                  >
+                    {resolvedClearLabel}
+                  </button>
+                </div>
+              </>
+            ) : null}
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>
       </PopoverPrimitive.Root>

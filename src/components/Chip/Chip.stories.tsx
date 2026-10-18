@@ -8,6 +8,10 @@ const meta = {
   component: Chip,
   tags: ["autodocs"],
   argTypes: {
+    appearance: {
+      control: "inline-radio",
+      options: ["solid", "soft"]
+    },
     disabled: {
       control: "boolean"
     },
@@ -24,6 +28,7 @@ const meta = {
     }
   },
   args: {
+    appearance: "solid",
     children: "Priority",
     disabled: false,
     selected: false,
@@ -49,6 +54,28 @@ export const Selectable: Story = {
         Validated
       </Chip>
       <Chip disabled onClick={() => undefined}>
+        Archived
+      </Chip>
+    </div>
+  )
+};
+
+export const Soft: Story = {
+  render: () => (
+    <div className="flex max-w-modal-md flex-wrap items-center gap-sf-8">
+      <Chip appearance="soft" onClick={() => undefined}>
+        Open
+      </Chip>
+      <Chip appearance="soft" onClick={() => undefined} selected variant="accent">
+        Active
+      </Chip>
+      <Chip appearance="soft" onClick={() => undefined} selected variant="success">
+        Validated
+      </Chip>
+      <Chip appearance="soft" onRemove={() => undefined} variant="info">
+        Removable
+      </Chip>
+      <Chip appearance="soft" disabled onClick={() => undefined}>
         Archived
       </Chip>
     </div>

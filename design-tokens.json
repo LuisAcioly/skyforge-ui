@@ -39,7 +39,7 @@
         "muted-teal": {
           "$type": "color",
           "$value": "{primitive.color.teal.600}",
-          "$description": "Contrast-safe brand accent for links, focus states, and functional emphasis on light surfaces."
+          "$description": "Contrast-safe brand accent for links, selection, and functional emphasis on light surfaces. Never focus."
         }
       },
       "neutral": {
@@ -118,7 +118,7 @@
         "300": {
           "$type": "color",
           "$value": "#78B7B3",
-          "$description": "Dark-theme accent and focus tone."
+          "$description": "Dark-theme accent tone and dark accent-solid fill."
         },
         "400": {
           "$type": "color",
@@ -588,7 +588,7 @@
         },
         "focus": {
           "$type": "color",
-          "$value": "{primitive.color.teal.600}"
+          "$value": "{primitive.color.neutral.950}"
         },
         "link": {
           "$type": "color",
@@ -601,6 +601,11 @@
         "hover-surface": {
           "$type": "color",
           "$value": "{primitive.color.neutral.100}"
+        },
+        "hover-subtle": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.50}",
+          "$description": "Hover that stays apart from surface-sunken, which hover-surface equals in light theme. Ghost tabs select with sunken."
         },
         "active-surface": {
           "$type": "color",
@@ -711,6 +716,11 @@
           "$type": "color",
           "$value": "{primitive.color.neutral.50}"
         },
+        "field-bg-filled": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.200}",
+          "$description": "Fill of the borderless filled field variant: 1.32:1 on the background, 1.40:1 on white. Placeholders on it use text-tertiary (4.6:1), not field-placeholder."
+        },
         "accent": {
           "$type": "color",
           "$value": "{primitive.color.teal.600}"
@@ -734,6 +744,35 @@
         "accent-text": {
           "$type": "color",
           "$value": "{primitive.color.teal.700}"
+        },
+        "neutral-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.700}",
+          "$description": "Solid fill for high-emphasis Alert and Badge. Every *-solid fill holds at least 5:1 against on-solid."
+        },
+        "accent-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.600}"
+        },
+        "info-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.600}"
+        },
+        "success-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.green.600}"
+        },
+        "warning-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.600}"
+        },
+        "error-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.red.500}"
+        },
+        "on-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.base.white}"
         },
         "overlay": {
           "$type": "color",
@@ -887,7 +926,7 @@
         },
         "focus": {
           "$type": "color",
-          "$value": "{primitive.color.teal.300}"
+          "$value": "{primitive.color.neutral.50}"
         },
         "link": {
           "$type": "color",
@@ -898,6 +937,10 @@
           "$value": "{primitive.color.teal.200}"
         },
         "hover-surface": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.800}"
+        },
+        "hover-subtle": {
           "$type": "color",
           "$value": "{primitive.color.neutral.800}"
         },
@@ -1007,6 +1050,11 @@
           "$type": "color",
           "$value": "{primitive.color.brand.shadow-ink}"
         },
+        "field-bg-filled": {
+          "$type": "color",
+          "$value": "{primitive.color.brand.shadow-ink}",
+          "$description": "Fill of the borderless filled field variant, one step above field-bg so it separates from the canvas. surface-sunken cannot be used: it equals the dark background. Placeholders use text-tertiary (6.2:1)."
+        },
         "accent": {
           "$type": "color",
           "$value": "{primitive.color.teal.300}"
@@ -1030,6 +1078,35 @@
         "accent-text": {
           "$type": "color",
           "$value": "{primitive.color.teal.200}"
+        },
+        "neutral-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.300}",
+          "$description": "Dark solids flip to the .300 steps with neutral-950 text, at least 7:1 on every fill."
+        },
+        "accent-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.teal.300}"
+        },
+        "info-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.300}"
+        },
+        "success-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.green.300}"
+        },
+        "warning-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.amber.300}"
+        },
+        "error-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.red.300}"
+        },
+        "on-solid": {
+          "$type": "color",
+          "$value": "{primitive.color.neutral.950}"
         },
         "overlay": {
           "$type": "color",

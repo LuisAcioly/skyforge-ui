@@ -14,6 +14,13 @@ import {
   resolveFieldStatus,
   type FieldStatus
 } from "../../utils/fieldStatus";
+import {
+  optionGroupLabelClasses,
+  optionInsetClasses,
+  optionItemClasses,
+  optionPanelClasses,
+  optionSeparatorClasses
+} from "../../utils/optionStyles";
 
 export type SelectSize = "md" | "lg";
 export type SelectVariant = "outline" | "filled" | "ghost";
@@ -38,8 +45,8 @@ export interface SelectItemProps extends ComponentPropsWithoutRef<typeof SelectP
 
 const variantClasses: Record<SelectVariant, string> = {
   outline: "border-field-border bg-field-bg hover:border-field-border-hover data-[state=open]:border-field-border-hover",
-  filled: "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface data-[state=open]:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised data-[state=open]:border-border-strong"
+  filled: "border-transparent bg-field-bg-filled",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong data-[state=open]:border-border-strong"
 };
 
 const sizeClasses: Record<SelectSize, string> = {
@@ -51,9 +58,6 @@ const iconSizeClasses: Record<SelectSize, string> = {
   md: "h-sf-16 w-sf-16",
   lg: "h-sf-20 w-sf-20"
 };
-
-const itemClasses =
-  "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 pl-sf-32 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";
 
 export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
@@ -116,7 +120,8 @@ export const SelectTrigger = forwardRef<ElementRef<typeof SelectPrimitive.Trigge
           data-invalid={isInvalid || undefined}
           data-status={resolvedStatus}
           className={cn(
-            "sf-premium-control inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
+            variant !== "ghost" && "sf-premium-control",
+              "inline-flex max-w-full w-full select-none items-center justify-between gap-sf-8 rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon [&>span]:truncate [&>span[data-placeholder]]:text-content-tertiary",
             variantClasses[variant],
             sizeClasses[size],
             fieldStatusBorderClasses[resolvedStatus],
@@ -158,7 +163,8 @@ export const SelectContent = forwardRef<
       position={position}
       sideOffset={sideOffset}
       className={cn(
-        "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden rounded-sf-xl border border-border bg-surface-raised text-content-primary outline-none",
+        "sf-popover-content z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[var(--radix-select-trigger-width)] origin-[var(--radix-select-content-transform-origin)] overflow-hidden",
+        optionPanelClasses,
         className
       )}
       {...props}
@@ -189,11 +195,15 @@ SelectViewport.displayName = "SelectViewport";
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, SelectItemProps>(
   ({ children, className, inset = false, ...props }, ref) => (
-    <SelectPrimitive.Item ref={ref} className={cn(itemClasses, inset && "pl-sf-40", className)} {...props}>
-      <SelectPrimitive.ItemIndicator className="absolute left-sf-8 inline-flex h-sf-16 w-sf-16 items-center justify-center text-icon-accent">
+    <SelectPrimitive.Item
+      ref={ref}
+      className={cn(optionItemClasses, "data-[state=checked]:font-semibold", inset && optionInsetClasses, className)}
+      {...props}
+    >
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemIndicator className="ml-auto inline-flex shrink-0 text-icon-accent">
         <CheckIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   )
 );
@@ -204,7 +214,7 @@ export const SelectLabel = forwardRef<
   ElementRef<typeof SelectPrimitive.Label>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label ref={ref} className={cn("px-sf-12 py-sf-8 font-body text-label text-content-secondary", className)} {...props} />
+  <SelectPrimitive.Label ref={ref} className={cn(optionGroupLabelClasses, className)} {...props} />
 ));
 
 SelectLabel.displayName = "SelectLabel";
@@ -213,7 +223,7 @@ export const SelectSeparator = forwardRef<
   ElementRef<typeof SelectPrimitive.Separator>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Separator ref={ref} className={cn("my-sf-4 h-px bg-divider", className)} {...props} />
+  <SelectPrimitive.Separator ref={ref} className={cn(optionSeparatorClasses, className)} {...props} />
 ));
 
 SelectSeparator.displayName = "SelectSeparator";

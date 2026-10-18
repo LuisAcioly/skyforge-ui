@@ -88,6 +88,13 @@
     --component-modal-width-lg: 720px;
     --component-modal-width-xl: 960px;
     --component-modal-overlay: 24 24 26;
+    /* Highest surface. Dark theme swaps in a black-based stack, since shadows
+       tinted with neutral-900 vanish on a dark canvas. */
+    --component-modal-shadow: var(--shadow-3);
+    /* Option lists (Select, MultiSelect, DropdownMenu). The panel has no visible
+       edge: elevation alone separates it, so the shadow sits between shadow-1
+       and shadow-2. */
+    --component-popover-shadow: 0 1px 2px rgb(24 24 26 / 0.06), 0 8px 24px rgb(24 24 26 / 0.08);
     --component-tabs-height: 40px;
     --component-tabs-indicator-height: 2px;
     --component-badge-height-sm: 20px;
@@ -135,10 +142,15 @@
     --color-secondary: 255 255 255;
     --color-secondary-hover: 236 236 238;
     --color-secondary-foreground: 24 24 26;
-    --color-focus: 20 118 114;
+    /* Neutral ink, not the teal accent: focus reads as a state of the control,
+       never as selection or a link. 17.2:1 on background. */
+    --color-focus: 24 24 26;
     --color-link: 20 118 114;
     --color-link-hover: 20 72 69;
     --color-hover-surface: 236 236 238;
+    /* A hover that stays apart from surface-sunken, which hover-surface equals in
+       light theme. Ghost tabs select with sunken, so their hover reads from this. */
+    --color-hover-subtle: 246 246 247;
     --color-active-surface: 216 216 219;
     --color-success-background: 238 248 239;
     --color-success-border: 171 205 174;
@@ -165,9 +177,23 @@
     --color-info-bg: 239 246 255;
     --color-disabled-bg: 236 236 238;
 
+    /* Solid fills for high-emphasis Alert and Badge. Every fill holds at least
+       5:1 against --color-on-solid (white); error is the floor at 5.1:1. */
+    --color-neutral-solid: 79 79 85;
+    --color-accent-solid: 20 118 114;
+    --color-info-solid: 53 101 163;
+    --color-success-solid: 61 114 70;
+    --color-warning-solid: 132 91 3;
+    --color-error-solid: 194 65 61;
+    --color-on-solid: 255 255 255;
+
     /* v2: field roles. Previously every artifact invented its own input surface. */
     --color-field-bg: 255 255 255;
     --color-field-bg-readonly: 246 246 247;
+    /* Filled fields: borderless, so the fill alone separates the field.
+       surface-sunken can't fill this role: it equals the dark canvas and sits
+       1.07:1 off the light one. Placeholders on it use text-tertiary (4.6:1). */
+    --color-field-bg-filled: 216 216 219;
     --color-field-border: 142 142 147;
     --color-field-border-hover: 112 112 118;
     --color-field-placeholder: 112 112 118;
@@ -201,6 +227,26 @@
     --color-icon-info: 53 101 163;
 
     --color-overlay: 24 24 26;
+
+    /* Modal chrome. The panel edge sits one step below border-strong so the
+       raised surface reads by elevation, not by a heavy outline. */
+    --component-modal-border: 183 183 187;
+    --component-modal-close-bg: 236 236 238;
+    --component-modal-close-bg-hover: 216 216 219;
+
+    /* Option rows inside list panels. */
+    --component-option-highlight: 236 236 238;
+    --component-option-divider: 216 216 219;
+
+    /* Button. */
+    --component-button-danger: 194 65 61;
+    --component-button-danger-hover: 168 51 47;
+    --component-button-danger-active: 142 36 33;
+    --component-button-danger-foreground: 246 246 247;
+    --component-button-editorial-hover: 218 213 200;
+    --component-button-editorial-active: 207 201 185;
+    --component-button-shadow: 0 1px 2px rgb(24 24 26 / 0.16);
+    --component-button-shadow-hover: 0 6px 16px rgb(24 24 26 / 0.16);
   }
 
   [data-theme="dark"] {
@@ -229,12 +275,15 @@
     --color-primary-active: 216 216 219;
     --color-primary-foreground: 24 24 26;
     --color-secondary: 50 50 56;
-    --color-secondary-hover: 59 59 65;
+    /* One step above surface-raised, which secondary controls sit on; at 59 59 65
+       the hover painted nothing. */
+    --color-secondary-hover: 69 69 75;
     --color-secondary-foreground: 246 246 247;
-    --color-focus: 120 183 179;
+    --color-focus: 246 246 247;
     --color-link: 120 183 179;
     --color-link-hover: 184 224 221;
     --color-hover-surface: 59 59 65;
+    --color-hover-subtle: 59 59 65;
     --color-active-surface: 79 79 85;
     --color-success-background: 19 45 24;
     --color-success-border: 42 91 51;
@@ -261,9 +310,20 @@
     --color-info-bg: 19 39 65;
     --color-disabled-bg: 59 59 65;
 
+    /* Solid fills, dark. The ramp flips to the .300 steps with neutral-950 text,
+       at least 7:1 on every fill. */
+    --color-neutral-solid: 183 183 187;
+    --color-accent-solid: 120 183 179;
+    --color-info-solid: 130 172 229;
+    --color-success-solid: 134 185 140;
+    --color-warning-solid: 217 157 48;
+    --color-error-solid: 232 139 134;
+    --color-on-solid: 24 24 26;
+
     /* v2: field roles. */
     --color-field-bg: 38 38 42;
     --color-field-bg-readonly: 50 50 56;
+    --color-field-bg-filled: 50 50 56;
     --color-field-border: 142 142 147;
     --color-field-border-hover: 183 183 187;
     --color-field-placeholder: 142 142 147;
@@ -292,6 +352,36 @@
     --color-icon-info: 130 172 229;
 
     --color-overlay: 0 0 0;
+    /* The canvas is already neutral-900, so the scrim needs more alpha to
+       separate the modal from the page. */
+    --overlay-alpha: 0.64;
+
+    /* Modal chrome, dark. border (neutral-400) glares as an outline on the
+       raised surface, and hover-surface equals surface-raised, so both get
+       their own steps. The inset line lights the top edge. */
+    --component-modal-border: 79 79 85;
+    --component-modal-close-bg: 79 79 85;
+    --component-modal-close-bg-hover: 93 93 99;
+    --component-modal-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 2px 8px rgb(0 0 0 / 0.4),
+      0 24px 64px rgb(0 0 0 / 0.55);
+
+    /* Option lists, dark. hover-surface and divider both equal surface-raised,
+       so rows and separators take the next step up; the panel keeps the modal's
+       lit top edge with a black-based shadow. */
+    --component-option-highlight: 79 79 85;
+    --component-option-divider: 79 79 85;
+    --component-popover-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 1px 2px rgb(0 0 0 / 0.24),
+      0 8px 24px rgb(0 0 0 / 0.28);
+
+    /* Button, dark. Danger flips to the light coral with ink text (7:1). */
+    --component-button-danger: 232 139 134;
+    --component-button-danger-hover: 240 161 157;
+    --component-button-danger-active: 221 122 116;
+    --component-button-danger-foreground: 24 24 26;
+    --component-button-editorial-hover: 75 70 59;
+    --component-button-editorial-active: 87 82 69;
+    --component-button-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+    --component-button-shadow-hover: 0 6px 16px rgb(0 0 0 / 0.5);
   }
 
   * {

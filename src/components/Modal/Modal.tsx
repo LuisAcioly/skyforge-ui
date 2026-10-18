@@ -47,7 +47,7 @@ export const ModalContent = forwardRef<ElementRef<typeof DialogPrimitive.Content
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
-          "sf-premium-surface fixed left-1/2 top-1/2 z-sf-modal max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-auto rounded-sf-2xl border border-border-strong bg-surface-raised p-sf-24 text-content-primary outline-none ring-1 ring-inset ring-surface-raised transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.96] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100 sm:p-sf-32",
+          "fixed left-1/2 top-1/2 z-sf-modal max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-auto rounded-sf-2xl border border-modal-border bg-surface-raised p-sf-24 text-content-primary shadow-sf-modal outline-none transition duration-sf-slow ease-sf-standard data-[state=closed]:scale-[0.96] data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100 sm:p-sf-32",
           sizeClasses[size],
           className
         )}
@@ -55,7 +55,7 @@ export const ModalContent = forwardRef<ElementRef<typeof DialogPrimitive.Content
       >
         {children}
         {showClose ? (
-          <DialogPrimitive.Close className="sf-premium-control absolute right-sf-16 top-sf-16 inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-full border border-border bg-surface-raised text-icon-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:border-border-strong hover:bg-hover-surface hover:text-icon-primary active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+          <DialogPrimitive.Close className="sf-premium-control absolute right-sf-16 top-sf-16 inline-flex h-sf-32 w-sf-32 items-center justify-center rounded-sf-full border border-transparent bg-modal-close text-content-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:bg-modal-close-hover hover:text-icon-primary active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background">
             <XMarkIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
             <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>
@@ -79,7 +79,7 @@ export const ModalTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("m-0 font-display text-heading-md tracking-[-0.02em] text-content-primary", className)}
+    className={cn("m-0 font-display text-heading-lg text-content-primary", className)}
     {...props}
   />
 ));
@@ -92,7 +92,7 @@ export const ModalDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("m-0 text-body-sm text-content-secondary", className)}
+    className={cn("m-0 text-body-md text-content-secondary", className)}
     {...props}
   />
 ));
@@ -100,13 +100,13 @@ export const ModalDescription = forwardRef<
 ModalDescription.displayName = "ModalDescription";
 
 export const ModalBody = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("mt-sf-24 text-body-sm text-content-secondary", className)} {...props} />
+  <div className={cn("mt-sf-20 text-body-sm text-content-secondary", className)} {...props} />
 );
 
 ModalBody.displayName = "ModalBody";
 
 export const ModalFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("mt-sf-24 flex flex-col-reverse gap-sf-8 sm:flex-row sm:justify-end", className)} {...props} />
+  <div className={cn("mt-sf-32 flex flex-col-reverse gap-sf-8 sm:flex-row sm:justify-end", className)} {...props} />
 );
 
 ModalFooter.displayName = "ModalFooter";

@@ -18,17 +18,25 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
 }
 
+// Filled variants carry a small drop shadow; outlined and ghost stay flat.
+const filledShadow = "shadow-sf-button hover:shadow-sf-button-hover active:shadow-sf-button";
+
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
+  primary: cn(
     "border-primary bg-primary text-primary-foreground hover:border-primary-hover hover:bg-primary-hover active:border-primary-active active:bg-primary-active",
+    filledShadow
+  ),
   secondary:
-    "border-border bg-surface-raised text-secondary-foreground hover:border-border-strong hover:bg-secondary-hover active:border-border-strong active:bg-active-surface",
-  ghost:
-    "border-transparent bg-transparent text-content-primary hover:border-border hover:bg-hover-surface active:border-border-strong active:bg-active-surface",
-  danger:
-    "border-error-border bg-error-bg text-error-text hover:border-error-icon hover:bg-error-border/20 active:border-error-icon active:bg-error-border/30",
-  editorial:
-    "border-border-strong bg-surface-inverse text-content-inverse hover:border-border-strong hover:bg-surface-inverse/90 active:border-border-strong active:bg-surface-inverse/80"
+    "border-[1.5px] border-control-border bg-transparent text-secondary-foreground hover:border-border-strong hover:bg-secondary-hover active:border-border-strong active:bg-active-surface",
+  ghost: "border-transparent bg-transparent text-content-primary hover:bg-hover-surface active:bg-active-surface",
+  danger: cn(
+    "border-button-danger bg-button-danger text-button-danger-foreground hover:border-button-danger-hover hover:bg-button-danger-hover active:border-button-danger-active active:bg-button-danger-active",
+    filledShadow
+  ),
+  editorial: cn(
+    "border-editorial-border bg-editorial-surface text-editorial-text hover:bg-button-editorial-hover active:bg-button-editorial-active",
+    filledShadow
+  )
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -92,7 +100,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading || undefined}
         data-loading={loading || undefined}
         className={cn(
-          "sf-premium-control group relative inline-flex max-w-full shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-full border font-body font-semibold leading-none tracking-[0.01em] outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px hover:scale-[1.01] active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100",
+          "group relative inline-flex max-w-full shrink-0 select-none items-center justify-center overflow-hidden rounded-sf-full border font-body font-semibold leading-none tracking-[0.01em] outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-focus-gap disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:scale-100 disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:shadow-none",
           variantClasses[variant],
           sizeClasses[size],
           fullWidth && "w-full",

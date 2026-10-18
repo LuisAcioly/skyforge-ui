@@ -41,10 +41,10 @@ export interface AutoCompleteProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 }
 
 const variantClasses: Record<AutoCompleteVariant, string> = {
-  outline: "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover",
+  outline: "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover placeholder:text-field-placeholder",
   filled:
-    "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
-  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
+    "border-transparent bg-field-bg-filled placeholder:text-content-tertiary",
+  ghost: "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong placeholder:text-field-placeholder"
 };
 
 const sizeClasses: Record<AutoCompleteSize, string> = {
@@ -228,7 +228,8 @@ export const AutoComplete = ({
               onKeyDown={handleInputKeyDown}
               onClick={() => setOpen(true)}
               className={cn(
-                "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-field-placeholder focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
+                variant !== "ghost" && "sf-premium-control",
+              "sf-input-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text data-[invalid=true]:border-error-border data-[invalid=true]:focus-visible:ring-error-icon",
                 variantClasses[variant],
                 fieldStatusBorderClasses[resolvedStatus],
                 sizeClasses[size]

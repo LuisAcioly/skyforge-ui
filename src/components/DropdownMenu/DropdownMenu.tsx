@@ -3,6 +3,16 @@ import { CheckIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAttributes } from "react";
 
 import { cn } from "../../utils/cn";
+import {
+  optionCheckboxClasses,
+  optionGroupLabelClasses,
+  optionInsetClasses,
+  optionItemClasses,
+  optionPanelClasses,
+  optionRadioClasses,
+  optionSeparatorClasses,
+  optionShortcutClasses
+} from "../../utils/optionStyles";
 
 export type DropdownMenuTriggerVariant = "secondary" | "ghost";
 
@@ -17,10 +27,12 @@ export interface DropdownMenuItemProps extends ComponentPropsWithoutRef<typeof D
 
 export interface DropdownMenuCheckboxItemProps
   extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem> {
+  /** @deprecated The checkbox now sits in the leading slot, so labels already align. No effect. */
   inset?: boolean;
 }
 
 export interface DropdownMenuRadioItemProps extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem> {
+  /** @deprecated The radio now sits in the leading slot, so labels already align. No effect. */
   inset?: boolean;
 }
 
@@ -29,11 +41,10 @@ export interface DropdownMenuSubTriggerProps
   inset?: boolean;
 }
 
-const contentClasses =
-  "sf-popover-content sf-premium-surface z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible rounded-sf-xl border border-border bg-surface-raised p-sf-8 text-content-primary outline-none";
-
-const itemClasses =
-  "sf-premium-item relative flex min-h-sf-40 cursor-pointer select-none items-center gap-sf-8 rounded-sf-md px-sf-12 py-sf-8 font-body text-body-sm text-content-primary outline-none transition duration-sf-slow ease-sf-standard data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:text-disabled-text data-[disabled]:opacity-100 data-[highlighted]:bg-hover-surface data-[highlighted]:text-content-primary";
+const contentClasses = cn(
+  "sf-popover-content z-sf-dropdown max-w-[calc(100vw-2rem)] min-w-[220px] origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-visible p-sf-8",
+  optionPanelClasses
+);
 
 const triggerVariantClasses: Record<DropdownMenuTriggerVariant, string> = {
   secondary:
@@ -87,9 +98,9 @@ export const DropdownMenuItem = forwardRef<ElementRef<typeof DropdownMenuPrimiti
     <DropdownMenuPrimitive.Item
       ref={ref}
       className={cn(
-        itemClasses,
-        inset && "pl-sf-32",
-        danger && "text-error-text data-[highlighted]:bg-error-bg data-[highlighted]:text-error-text data-[highlighted]:outline data-[highlighted]:outline-1 data-[highlighted]:-outline-offset-1 data-[highlighted]:outline-error-border",
+        optionItemClasses,
+        inset && optionInsetClasses,
+        danger && "text-error-text data-[highlighted]:bg-error-bg data-[highlighted]:text-error-text",
         className
       )}
       {...props}
@@ -102,15 +113,13 @@ DropdownMenuItem.displayName = "DropdownMenuItem";
 export const DropdownMenuCheckboxItem = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
   DropdownMenuCheckboxItemProps
->(({ children, className, inset = false, ...props }, ref) => (
-  <DropdownMenuPrimitive.CheckboxItem
-    ref={ref}
-    className={cn(itemClasses, "pl-sf-32", inset && "pl-sf-40", className)}
-    {...props}
-  >
-    <DropdownMenuPrimitive.ItemIndicator className="absolute left-sf-8 inline-flex h-sf-16 w-sf-16 items-center justify-center text-icon-accent">
-      <CheckIcon aria-hidden="true" className="h-sf-16 w-sf-16" strokeWidth={1.5} />
-    </DropdownMenuPrimitive.ItemIndicator>
+>(({ children, className, inset: _inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.CheckboxItem ref={ref} className={cn(optionItemClasses, className)} {...props}>
+    <span aria-hidden="true" className={optionCheckboxClasses}>
+      <DropdownMenuPrimitive.ItemIndicator className="inline-flex">
+        <CheckIcon className="h-sf-12 w-sf-12" strokeWidth={1.5} />
+      </DropdownMenuPrimitive.ItemIndicator>
+    </span>
     {children}
   </DropdownMenuPrimitive.CheckboxItem>
 ));
@@ -120,13 +129,11 @@ DropdownMenuCheckboxItem.displayName = "DropdownMenuCheckboxItem";
 export const DropdownMenuRadioItem = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
   DropdownMenuRadioItemProps
->(({ children, className, inset = false, ...props }, ref) => (
-  <DropdownMenuPrimitive.RadioItem
-    ref={ref}
-    className={cn(itemClasses, "pl-sf-32", inset && "pl-sf-40", className)}
-    {...props}
-  >
-    <DropdownMenuPrimitive.ItemIndicator className="absolute left-sf-12 inline-flex h-sf-8 w-sf-8 items-center justify-center rounded-sf-full bg-primary" />
+>(({ children, className, inset: _inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.RadioItem ref={ref} className={cn(optionItemClasses, className)} {...props}>
+    <span aria-hidden="true" className={optionRadioClasses}>
+      <DropdownMenuPrimitive.ItemIndicator className="block h-sf-8 w-sf-8 rounded-sf-full bg-primary" />
+    </span>
     {children}
   </DropdownMenuPrimitive.RadioItem>
 ));
@@ -139,7 +146,7 @@ export const DropdownMenuLabel = forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-sf-12 py-sf-8 font-body text-label tracking-[0.04em] text-content-secondary", className)}
+    className={cn(optionGroupLabelClasses, className)}
     {...props}
   />
 ));
@@ -150,7 +157,7 @@ export const DropdownMenuSeparator = forwardRef<
   ElementRef<typeof DropdownMenuPrimitive.Separator>,
   ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator ref={ref} className={cn("my-sf-4 h-px bg-divider", className)} {...props} />
+  <DropdownMenuPrimitive.Separator ref={ref} className={cn(optionSeparatorClasses, className)} {...props} />
 ));
 
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
@@ -161,7 +168,7 @@ export const DropdownMenuSubTrigger = forwardRef<
 >(({ children, className, inset = false, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
-    className={cn(itemClasses, inset && "pl-sf-32", "data-[state=open]:bg-active-surface", className)}
+    className={cn(optionItemClasses, inset && optionInsetClasses, "data-[state=open]:bg-option-highlight", className)}
     {...props}
   >
     {children}
@@ -186,7 +193,7 @@ export const DropdownMenuSubContent = forwardRef<
 DropdownMenuSubContent.displayName = "DropdownMenuSubContent";
 
 export const DropdownMenuShortcut = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => (
-  <span className={cn("ml-auto pl-sf-24 text-caption text-content-tertiary", className)} {...props} />
+  <span className={cn(optionShortcutClasses, className)} {...props} />
 );
 
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut";

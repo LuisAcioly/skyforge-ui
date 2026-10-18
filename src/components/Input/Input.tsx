@@ -36,11 +36,11 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 
 const variantClasses: Record<InputVariant, string> = {
   outline:
-    "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover",
+    "border-field-border bg-field-bg hover:border-field-border-hover focus-visible:border-field-border-hover placeholder:text-field-placeholder",
   filled:
-    "border-transparent bg-surface-sunken hover:border-border hover:bg-hover-surface focus-visible:border-border-strong",
+    "border-transparent bg-field-bg-filled placeholder:text-content-tertiary",
   ghost:
-    "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong"
+    "border-transparent bg-transparent hover:border-border hover:bg-surface-raised focus-visible:border-border-strong placeholder:text-field-placeholder"
 };
 
 const sizeClasses: Record<InputSize, string> = {
@@ -168,7 +168,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             data-loading={loading || undefined}
             data-status={resolvedStatus}
             className={cn(
-              "sf-input-control sf-premium-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard placeholder:text-field-placeholder focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
+              variant !== "ghost" && "sf-premium-control",
+              "sf-input-control block min-w-0 w-full rounded-sf-lg border font-body text-content-primary outline-none transition duration-sf-slow ease-sf-standard focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:border-disabled-border disabled:bg-disabled-bg disabled:text-disabled-text disabled:opacity-100 disabled:placeholder:text-disabled-text",
               variantClasses[variant],
               sizeClasses[size],
               statusClasses[resolvedStatus],

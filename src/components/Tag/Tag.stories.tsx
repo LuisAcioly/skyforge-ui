@@ -8,6 +8,10 @@ const meta = {
   component: Tag,
   tags: ["autodocs"],
   argTypes: {
+    appearance: {
+      control: "inline-radio",
+      options: ["solid", "soft"]
+    },
     disabled: {
       control: "boolean"
     },
@@ -21,6 +25,7 @@ const meta = {
     }
   },
   args: {
+    appearance: "solid",
     children: "Stable",
     disabled: false,
     size: "md",
@@ -33,6 +38,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
+
+export const Soft: Story = {
+  render: () => (
+    <div className="flex max-w-modal-md flex-wrap items-center gap-sf-8">
+      <Tag appearance="soft" variant="neutral">Draft</Tag>
+      <Tag appearance="soft" variant="accent">Pinned</Tag>
+      <Tag appearance="soft" variant="info">Queued</Tag>
+      <Tag appearance="soft" variant="success">Validated</Tag>
+      <Tag appearance="soft" variant="warning">Review</Tag>
+      <Tag appearance="soft" variant="error">Blocked</Tag>
+    </div>
+  )
+};
 
 export const Variants: Story = {
   render: () => (

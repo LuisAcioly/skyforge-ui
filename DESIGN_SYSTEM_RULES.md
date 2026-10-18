@@ -64,8 +64,8 @@ Families and what they are for:
 
 | Family | Job |
 | --- | --- |
-| `neutral` | Surfaces, borders, text, disabled. Every step bound. |
-| `teal` | Accent: focus, links, selection, active state. |
+| `neutral` | Surfaces, borders, text, disabled, and focus (`neutral.950` light, `neutral.50` dark). Every step bound. |
+| `teal` | Accent: links, selection, active state. Never focus. |
 | `green` `amber` `red` `blue` | Status: success, warning, error, information. Never decoration. |
 | `linen` | Editorial. Warm reading surfaces for long-form and documentation. Never carries state, never product chrome. |
 
@@ -77,7 +77,7 @@ Families and what they are for:
 | `brand.shadow-ink` | `#323238` | Dark surface and dark hover tone. |
 | `brand.charcoal` | `#4F4F55` (`neutral.700`) | Structural neutral and secondary text. |
 | `brand.soft-linen` | `#E4E0D5` (`linen.100`) | Editorial surface. The linen family carries reading surfaces; product chrome stays neutral. |
-| `brand.muted-teal` | `#147672` (`teal.600`) | Focus, links, and functional accent in light mode. |
+| `brand.muted-teal` | `#147672` (`teal.600`) | Links and functional accent in light mode. |
 
 Pure black rule:
 
@@ -204,11 +204,15 @@ Elevation is border-first:
 | Elevation | Use | Rule |
 | --- | --- | --- |
 | `shadow.none` | Default cards, panels, content groups | No shadow; use borders and tonal contrast. |
+| `component-button-shadow` | Filled buttons (`primary`, `danger`, `editorial`) | Small drop shadow, deeper on hover. Outline and ghost buttons stay flat. |
 | `shadow.1` | Interactive cards, small menus | Optional subtle shadow. |
 | `shadow.2` | Popovers and floating panels | Raised surface only. |
-| `shadow.3` | Modals and overlays | Highest surface only. |
+| `component-popover-shadow` | Option lists (Select, MultiSelect, DropdownMenu) | No visible edge: elevation alone separates the panel. Sits between `shadow.1` and `shadow.2`. |
+| `shadow.3` / `component-modal-shadow` | Modals and overlays | Highest surface only. |
 
 If everything is elevated, nothing is elevated. Standard cards must be flat unless elevation communicates functional hierarchy.
+
+Dark theme: shadows tinted with `neutral.900` vanish on a dark canvas, so the component shadows (popover, modal, button) switch to a black-based stack, and popover and modal add a 1px light line on the top edge. That line is internal to those components and is the only sanctioned inset; the inner shadow rule below still applies everywhere else.
 
 Inner shadow rule:
 
@@ -257,9 +261,20 @@ Use this naming pattern:
 | Icon primary | `--color-icon-primary` | `text-icon-primary` |
 | Primary action | `--color-primary` | `bg-primary` |
 | Focus | `--color-focus` | `ring-focus` |
+| Subtle hover | `--color-hover-subtle` | `bg-hover-subtle` |
+| Filled field | `--color-field-bg-filled` | `bg-field-bg-filled` |
 | Error text | `--color-error-text` | `text-error-text` |
+| Solid fill | `--color-{neutral,accent,info,success,warning,error}-solid` | `bg-success-solid` |
+| Text on solid fill | `--color-on-solid` | `text-on-solid` |
 
 Do not use `text-primary` for content text because `primary` represents action color.
+
+Role notes:
+
+1. `focus` is neutral ink (`neutral.950` light, `neutral.50` dark, 17.2:1 on the light background). Focus reads as a state of the control, never as selection or a link.
+2. `hover-subtle` exists because `hover-surface` equals `surface-sunken` in light theme. Use it wherever the selected state is already `surface-sunken`.
+3. `*-solid` fills are the high-emphasis tone for Alert, Badge, Tag, Chip, and Tabs, and always pair with `on-solid`. Light uses the `.600` steps (error `.500`) with white text, at least 5:1 (error is the floor at 5.1:1). Dark flips to the `.300` steps with `neutral.950` text, at least 7:1.
+4. `field-bg-filled` fills the borderless `filled` field variant. `surface-sunken` cannot fill that role: it equals the dark canvas and sits 1.07:1 off the light one.
 
 ## Component Requirements
 
@@ -301,7 +316,7 @@ Sizes:
 | `md` | `40px` | `16px` |
 | `lg` | `48px` | `24px` |
 
-Labels must be short verbs. Loading must preserve width. Danger uses error semantic tokens.
+Labels must be short verbs. Loading must preserve width. Danger is a solid fill built on the error family (`component-button-danger*`, base = `error-icon`). Editorial uses the linen editorial family, so it never duplicates `primary`. Secondary is outline-only: transparent fill, `control-border` edge, `secondary-hover` fill on hover (not `hover-surface`, which equals the dark modal surface). Only filled variants (`primary`, `danger`, `editorial`) carry a drop shadow. Button focus is a 2px `focus` ring with a 2px `focus-gap` offset.
 
 Premium CTA rule:
 
@@ -313,6 +328,24 @@ Premium CTA rule:
 
 Labels sit above the input. Helper text is optional but should exist in markup when useful. Error text sits below the input and must be connected with `aria-describedby` when implemented.
 
+Field variants, shared by Input, Textarea, DatePicker, Select, MultiSelect, and AutoComplete:
+
+| Variant | Rest | Hover | Placeholder |
+| --- | --- | --- | --- |
+| `outline` | `field-bg`, `field-border` | `field-border-hover` | `field-placeholder` |
+| `filled` | `field-bg-filled`, no border | No change; the fill alone separates the field | `text-tertiary` (4.6:1 light, 6.2:1 dark) |
+| `ghost` | Transparent, no border, no shadow | `border` edge on `surface-raised` | `field-placeholder` |
+
+### Option Lists
+
+Select, MultiSelect, and DropdownMenu share one row anatomy: an optional 16px leading slot (icon, checkbox, or radio), the label, and an optional trailing slot (shortcut, selected check, submenu chevron). The leading slot stays in the flow with one gap, so labels line up across mixed rows; `inset` pads a row without leading content to match.
+
+1. The panel has no visible edge: `surface-raised` plus `component-popover-shadow`.
+2. Highlighted rows use `component-option-highlight`; separators run full-bleed in `component-option-divider`. In dark theme both take the step above `surface-raised`, which `hover-surface` and `divider` equal.
+3. Group labels are uppercase `eyebrow` in `text-tertiary`.
+4. Select marks the chosen row with a trailing accent check and semibold text. MultiSelect and DropdownMenu checkbox rows use a leading checkbox filled with `primary` when checked.
+5. Shortcuts render as a small keycap with tabular figures.
+
 ### Card
 
 Cards are structural surfaces, not decoration. Default card style is surface plus border, no shadow. Use raised elevation only for floating or interactive hierarchy.
@@ -321,18 +354,30 @@ Cards are structural surfaces, not decoration. Default card style is surface plu
 
 Modals must trap focus, close by keyboard, use an accessible title, and render on a raised surface. If content becomes multi-section and complex, use a route/page instead.
 
+The panel reads by elevation, not by a heavy outline: its edge is `component-modal-border` (one step below `border-strong` in light, `neutral.700` in dark) and its shadow is `component-modal-shadow`. The close button is a filled circle (`component-modal-close-bg`). Title is `heading-lg`, description `body-md`; body sits 20px below the header and the footer 32px below the body. Dark theme raises `--overlay-alpha` to `0.64`, since the canvas is already near-black.
+
 ### Tabs
 
 Use tabs for related content, not for multi-select filters. Implement `role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`, `role="tabpanel"`, and keyboard behavior in production.
 
 Variants: `underline`, `segmented`, `rail`, `ghost`.
 
+`appearance` sets the selected treatment of `segmented` and `rail`: `solid` (default) or `soft`. `underline` and `ghost` ignore it.
+
 | Variant | Wrapper | Selected item |
 | --- | --- | --- |
-| `segmented` | `surface-sunken` track, `border`, radius, `4px` padding | `accent-bg`, `accent-border`, `accent-text` |
-| `ghost` | Transparent, no border, no visible padding | `surface-sunken`, no border, icon on `icon-accent` |
+| `segmented` / `rail`, `solid` | `segmented`: `surface-sunken` track, `border`, radius, `4px` padding. `rail`: vertical list with a `divider` side line | `neutral-solid` fill with `on-solid` text, no border |
+| `segmented` / `rail`, `soft` | Same | `accent-bg`, `accent-border`, `accent-text` |
+| `ghost` | Transparent, no border, no visible padding | `surface-sunken`, no border, `text-primary` text and icon |
 
-Hover uses `hover-surface` in both. In light theme `hover-surface` and `surface-sunken` can coincide, so a selected `ghost` item keeps its icon on the accent to stay distinguishable from hover.
+Hover uses `hover-surface`, except `ghost`, which hovers on `hover-subtle`: in light theme `hover-surface` and `surface-sunken` coincide, so the lighter hover keeps it apart from selection. Selection never changes font weight, so a solid fill never shifts the row's width.
+
+Count and dot badges (`count`, `dot`, `badgeLabel` on `TabsTrigger`):
+
+1. Badges are always `accent-solid` with `on-solid` text, so the charcoal fill stays reserved for selection.
+2. `count` shows `99+` above 99 and hides at 0. `count` wins over `dot`.
+3. Icon-only triggers carry the badge on the icon's corner with a 2px ring of the surface behind the trigger (the selected solid fill, when selected). Labelled triggers place it after the text, pushed to the end in `rail`.
+4. The badge joins the accessible name: `badgeLabel` when given, else the count. A `dot` without `badgeLabel` is visual only.
 
 Icon-only tabs (`iconOnly` on `Tabs`, `icon` and `label` on each `TabsTrigger`):
 
@@ -347,6 +392,13 @@ Focus is a halo, never a lone ring that can read as selection: `1px` of the surf
 ### Badge And Alert
 
 Badges are metadata, not CTAs. Alerts must explain what happened and what the user can do next. Feedback variants use feedback tokens, not brand colors.
+
+Alert, Badge, Tag, and Chip take `appearance`: `solid` (default) fills with the tone's `*-solid` and `on-solid`; `soft` is the quieter tinted surface (`*-bg`, `*-border`, `*-text`). On solid, icons and dots follow the text color.
+
+1. Solid Alert drops the side bar, since the fill already carries the tone.
+2. Solid Tag uses medium weight, so classification stays quieter than a solid Badge's status.
+3. A custom-color Badge on solid keeps white text in both themes, so the color must hold 4.5:1 against white.
+4. Solid Chip fills only when selected or static. An unselected interactive chip is outlined (`border`, `text-secondary`), so the fill alone marks selection. Hover and press on a solid fill darken it with a neutral-950 overlay, which reads on both themes.
 
 ## Code Rules
 

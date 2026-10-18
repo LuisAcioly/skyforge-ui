@@ -8,6 +8,10 @@ const meta = {
   component: Badge,
   tags: ["autodocs"],
   argTypes: {
+    appearance: {
+      control: "inline-radio",
+      options: ["soft", "solid"]
+    },
     dot: {
       control: "boolean"
     },
@@ -24,6 +28,7 @@ const meta = {
     }
   },
   args: {
+    appearance: "solid",
     children: "Stable",
     customColor: "#147672",
     dot: false,
@@ -48,6 +53,27 @@ export const Variants: Story = {
       <Badge variant="warning">Review</Badge>
       <Badge variant="error">Blocked</Badge>
       <Badge customColor="#147672" variant="custom">Custom</Badge>
+    </div>
+  )
+};
+
+export const Soft: Story = {
+  render: () => (
+    <div className="grid gap-sf-12">
+      <div className="flex max-w-modal-md flex-wrap items-center gap-sf-8">
+        <Badge appearance="soft" variant="neutral">Draft</Badge>
+        <Badge appearance="soft" variant="accent">Pinned</Badge>
+        <Badge appearance="soft" variant="info">Queued</Badge>
+        <Badge appearance="soft" variant="success">Validated</Badge>
+        <Badge appearance="soft" variant="warning">Review</Badge>
+        <Badge appearance="soft" variant="error">Blocked</Badge>
+        <Badge appearance="soft" customColor="#147672" variant="custom">Custom</Badge>
+      </div>
+      <div className="flex max-w-modal-md flex-wrap items-center gap-sf-8">
+        <Badge appearance="soft" dot size="sm" variant="success">Online</Badge>
+        <Badge appearance="soft" icon={<ShieldCheckIcon />} size="sm" variant="info">Verified</Badge>
+        <Badge appearance="soft" size="sm" variant="error">Failed</Badge>
+      </div>
     </div>
   )
 };

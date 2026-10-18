@@ -15,8 +15,15 @@ import { normalizeIcon } from "../../utils/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../Tooltip/Tooltip";
 
 export type TabsVariant = "underline" | "segmented" | "rail" | "ghost";
+/**
+ * Selected-trigger treatment for `segmented` and `rail`: `solid` (default)
+ * fills it with charcoal (neutral-solid); `soft` is the tinted accent surface.
+ * `underline` and `ghost` ignore it.
+ */
+export type TabsAppearance = "soft" | "solid";
 
 export interface TabsProps extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
+  appearance?: TabsAppearance;
   variant?: TabsVariant;
   /**
    * Renders every trigger as a 32×32 icon button whose `label` becomes the
@@ -30,7 +37,20 @@ export interface TabsListProps extends ComponentPropsWithoutRef<typeof TabsPrimi
   fullWidth?: boolean;
 }
 
-type TabsTriggerBaseProps = Omit<ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>, "children">;
+type TabsTriggerBaseProps = Omit<ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>, "children"> & {
+  /**
+   * Unread or pending items, shown in an accent badge (99+ above 99). Hidden at
+   * 0. Icon-only triggers carry it on the icon's corner; others after the text.
+   */
+  count?: number;
+  /** A dot for "something new" without a number. `count` wins when both are set. */
+  dot?: boolean;
+  /**
+   * What the badge means, appended to the accessible name (for example
+   * "3 novidades"). Defaults to the count; a `dot` without it is only visual.
+   */
+  badgeLabel?: string;
+};
 
 /**
  * A trigger is driven either by `label` (text, accessible name and tooltip) or
@@ -44,11 +64,12 @@ export type TabsTriggerProps = TabsTriggerBaseProps &
   );
 
 interface TabsContextValue {
+  appearance: TabsAppearance;
   variant: TabsVariant;
   iconOnly: boolean;
 }
 
-const TabsContext = createContext<TabsContextValue>({ variant: "underline", iconOnly: false });
+const TabsContext = createContext<TabsContextValue>({ appearance: "solid", variant: "underline", iconOnly: false });
 
 const listClasses: Record<TabsVariant, string> = {
   underline: "flex h-sf-40 items-end gap-sf-4 border-b border-divider",
@@ -73,10 +94,17 @@ const triggerToneClasses: Record<TabsVariant, string> = {
     "border border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary aria-selected:border-accent-border aria-selected:bg-accent-bg aria-selected:text-accent-text aria-selected:hover:bg-accent-bg aria-selected:hover:text-accent-text",
   rail:
     "border border-transparent bg-transparent hover:border-border hover:bg-hover-surface hover:text-content-primary aria-selected:border-accent-border aria-selected:bg-accent-bg aria-selected:text-accent-text",
-  // hover-surface and surface-sunken can share a value (light theme), so the
-  // selected item also keeps its icon on the accent colour.
+  // Selection is sunken with primary text and icon; hover-surface can equal
+  // sunken (light theme), so hover reads from the lighter hover-subtle.
   ghost:
-    "border border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary aria-selected:bg-surface-sunken aria-selected:text-content-primary aria-selected:hover:bg-surface-sunken"
+    "border border-transparent bg-transparent hover:bg-hover-subtle hover:text-content-primary aria-selected:bg-surface-sunken aria-selected:text-content-primary aria-selected:hover:bg-surface-sunken"
+};
+
+// Weight stays put on selection so the solid fill does not shift the row's width.
+const solidTriggerToneClasses: Partial<Record<TabsVariant, string>> = {
+  segmented:
+    "border border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary aria-selected:bg-neutral-solid aria-selected:text-on-solid aria-selected:hover:bg-neutral-solid aria-selected:hover:text-on-solid",
+  rail: "border border-transparent bg-transparent hover:bg-hover-surface hover:text-content-primary aria-selected:bg-neutral-solid aria-selected:text-on-solid aria-selected:hover:bg-neutral-solid aria-selected:hover:text-on-solid"
 };
 
 const triggerLayoutClasses: Record<TabsVariant, string> = {
@@ -88,17 +116,19 @@ const triggerLayoutClasses: Record<TabsVariant, string> = {
 
 const iconOnlyLayoutClasses = "h-control-sm w-control-sm min-w-control-sm p-0";
 
-const iconToneClasses: Record<TabsVariant, string> = {
-  underline: "",
-  segmented: "",
-  rail: "",
-  ghost: "group-aria-selected:text-icon-accent"
-};
+// The badge sits on the icon's corner, so a 2px ring of the surface behind the
+// trigger separates them; on a solid selected fill the ring takes the fill.
+const badgeRingClasses = "shadow-[0_0_0_2px_rgb(var(--sf-focus-gap,var(--color-background)))]";
+const solidSelectedBadgeRingClasses = "group-aria-selected:shadow-[0_0_0_2px_rgb(var(--color-neutral-solid))]";
+
+function formatCount(count: number) {
+  return count > 99 ? "99+" : String(count);
+}
 
 export const Tabs = forwardRef<ElementRef<typeof TabsPrimitive.Root>, TabsProps>(
-  ({ className, iconOnly = false, variant = "underline", ...props }, ref) => (
-    <TabsContext.Provider value={{ variant, iconOnly }}>
-      <TabsPrimitive.Root ref={ref} className={cn("w-full", className)} {...props} />
+  ({ appearance = "solid", className, iconOnly = false, variant = "underline", ...props }, ref) => (
+    <TabsContext.Provider value={{ appearance, variant, iconOnly }}>
+      <TabsPrimitive.Root ref={ref} data-appearance={appearance} className={cn("w-full", className)} {...props} />
     </TabsContext.Provider>
   )
 );
@@ -122,11 +152,18 @@ export const TabsList = forwardRef<ElementRef<typeof TabsPrimitive.List>, TabsLi
 TabsList.displayName = "TabsList";
 
 export const TabsTrigger = forwardRef<ElementRef<typeof TabsPrimitive.Trigger>, TabsTriggerProps>(
-  ({ children, className, icon, label, ...props }, ref) => {
-    const { variant, iconOnly } = useContext(TabsContext);
+  ({ badgeLabel, children, className, count, dot = false, icon, label, ...props }, ref) => {
+    const { appearance, variant, iconOnly } = useContext(TabsContext);
+    const solidTone = appearance === "solid" ? solidTriggerToneClasses[variant] : undefined;
+    const toneClasses = solidTone ?? triggerToneClasses[variant];
     const hasLabel = typeof label === "string" && label.trim() !== "";
     const hasIcon = icon !== null && icon !== undefined && icon !== false;
     const renderIconOnly = iconOnly && hasLabel && hasIcon;
+    const hasCount = typeof count === "number" && count > 0;
+    const showDot = !hasCount && dot;
+    const countText = hasCount ? formatCount(count) : undefined;
+    const badgeText = badgeLabel ?? countText;
+    const ringClasses = cn(badgeRingClasses, solidTone && solidSelectedBadgeRingClasses);
 
     useEffect(() => {
       if (!iconOnly || renderIconOnly) {
@@ -140,21 +177,21 @@ export const TabsTrigger = forwardRef<ElementRef<typeof TabsPrimitive.Trigger>, 
       );
     }, [iconOnly, renderIconOnly, hasLabel, props.value]);
 
-    const iconClasses = cn("inline-flex shrink-0 text-current", iconToneClasses[variant]);
+    const iconClasses = "inline-flex shrink-0 text-current";
 
     const trigger = (
       <TabsPrimitive.Trigger
         ref={ref}
         className={cn(
-          "group inline-flex max-w-full shrink-0 select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-sf-md font-body text-label text-content-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-1 focus-visible:ring-offset-focus-gap disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 aria-selected:translate-y-0",
-          triggerToneClasses[variant],
+          "group relative inline-flex max-w-full shrink-0 select-none items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap rounded-sf-md font-body text-label text-content-secondary outline-none transition duration-sf-slow ease-sf-standard hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-1 focus-visible:ring-offset-focus-gap disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:text-disabled-text disabled:opacity-100 aria-selected:translate-y-0",
+          toneClasses,
           renderIconOnly ? iconOnlyLayoutClasses : triggerLayoutClasses[variant],
           className
         )}
         {...props}
         {...(renderIconOnly
           ? {
-              "aria-label": label,
+              "aria-label": badgeText ? `${label}, ${badgeText}` : label,
               // Explicit key so the tooltip does not also describe the trigger
               // with the text that is already its name.
               "aria-describedby": props["aria-describedby"]
@@ -162,9 +199,27 @@ export const TabsTrigger = forwardRef<ElementRef<typeof TabsPrimitive.Trigger>, 
           : null)}
       >
         {renderIconOnly ? (
-          <span aria-hidden="true" className={iconClasses}>
-            {normalizeIcon(icon, "h-sf-20 w-sf-20")}
-          </span>
+          <>
+            <span aria-hidden="true" className={iconClasses}>
+              {normalizeIcon(icon, "h-sf-20 w-sf-20")}
+            </span>
+            {hasCount ? (
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "pointer-events-none absolute right-0 top-0 inline-flex h-sf-16 min-w-[16px] items-center justify-center rounded-sf-full bg-accent-solid px-[4px] text-[10px] font-bold leading-none tabular-nums text-on-solid",
+                  ringClasses
+                )}
+              >
+                {countText}
+              </span>
+            ) : showDot ? (
+              <span
+                aria-hidden="true"
+                className={cn("pointer-events-none absolute right-[5px] top-[5px] h-[7px] w-[7px] rounded-sf-full bg-accent-solid", ringClasses)}
+              />
+            ) : null}
+          </>
         ) : (
           <>
             {hasIcon ? (
@@ -173,6 +228,23 @@ export const TabsTrigger = forwardRef<ElementRef<typeof TabsPrimitive.Trigger>, 
               </span>
             ) : null}
             {label !== undefined ? <span className="min-w-0 truncate">{label}</span> : children}
+            {hasCount ? (
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "inline-flex h-[20px] min-w-[20px] shrink-0 items-center justify-center rounded-sf-full bg-accent-solid px-[6px] text-label-sm font-semibold leading-none tabular-nums text-on-solid",
+                  variant === "rail" && "ml-auto"
+                )}
+              >
+                {countText}
+              </span>
+            ) : showDot ? (
+              <span
+                aria-hidden="true"
+                className={cn("h-sf-8 w-sf-8 shrink-0 rounded-sf-full bg-accent-solid", variant === "rail" && "ml-auto")}
+              />
+            ) : null}
+            {badgeText ? <span className="sr-only">{`, ${badgeText}`}</span> : null}
           </>
         )}
       </TabsPrimitive.Trigger>

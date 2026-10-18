@@ -8,6 +8,10 @@ const meta = {
   component: Alert,
   tags: ["autodocs"],
   argTypes: {
+    appearance: {
+      control: "inline-radio",
+      options: ["soft", "solid"]
+    },
     variant: {
       control: "select",
       options: ["info", "success", "warning", "error"]
@@ -17,6 +21,7 @@ const meta = {
     }
   },
   args: {
+    appearance: "solid",
     children: "Semantic tokens are available for light and dark runtime themes.",
     title: "Tokens synchronized",
     variant: "info"
@@ -42,6 +47,25 @@ export const Variants: Story = {
         Publishing is still in progress for two dependent packages.
       </Alert>
       <Alert title="Error" variant="error">
+        Contract check failed for this state reference.
+      </Alert>
+    </div>
+  )
+};
+
+export const Soft: Story = {
+  render: () => (
+    <div className="grid max-w-modal-lg gap-sf-12">
+      <Alert appearance="soft" title="Status" variant="info">
+        System notes are available for this release.
+      </Alert>
+      <Alert appearance="soft" title="Success" variant="success">
+        Release passed validation and can move to review.
+      </Alert>
+      <Alert appearance="soft" title="Warning" variant="warning">
+        Publishing is still in progress for two dependent packages.
+      </Alert>
+      <Alert appearance="soft" title="Error" variant="error">
         Contract check failed for this state reference.
       </Alert>
     </div>
