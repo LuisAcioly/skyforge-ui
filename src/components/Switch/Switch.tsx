@@ -79,7 +79,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
           >
             <SwitchPrimitive.Thumb
               className={cn(
-                "block rounded-sf-full bg-surface-raised shadow-[0_1px_4px_rgb(var(--color-surface-inverse)_/_0.18)] transition duration-sf-slow ease-sf-standard data-[state=checked]:bg-primary-foreground",
+                "block rounded-sf-full bg-surface-raised transition duration-sf-slow ease-sf-standard data-[state=checked]:bg-primary-foreground",
                 thumbSizeClasses[size]
               )}
             />

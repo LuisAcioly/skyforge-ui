@@ -211,7 +211,7 @@ Elevation is border-first:
 
 If everything is elevated, nothing is elevated. Standard cards must be flat unless elevation communicates functional hierarchy.
 
-Dark theme: shadows tinted with `neutral.900` vanish on a dark canvas, so the component shadows (popover, modal, button) switch to a black-based stack, and popover and modal add a 1px light line on the top edge. That line is internal to those components and is the only sanctioned inset; the inner shadow rule below still applies everywhere else.
+Dark theme: shadows tinted with `neutral.900` vanish on a dark canvas, so popover and modal shadows switch to a black-based stack and add a 1px light line on the top edge. That line is internal to those components and is the only sanctioned inset; the inner shadow rule below still applies everywhere else.
 
 Inner shadow rule:
 
@@ -315,7 +315,7 @@ Sizes:
 | `md` | `40px` | `16px` |
 | `lg` | `48px` | `24px` |
 
-Labels must be short verbs. Loading must preserve width. Danger is a solid fill built on the error family (`component-button-danger*`, base = `error-icon`). Editorial uses the linen editorial family, so it never duplicates `primary`. Secondary is outline-only: transparent fill, `control-border` edge, `secondary-hover` fill on hover (not `hover-surface`, which equals the dark modal surface). Every variant shares the same hover: 1px lift, 1.01 scale and the `sf-premium-control` shadow. Button focus is a 2px `focus` ring with a 2px `focus-gap` offset.
+Labels must be short verbs. Loading must preserve width. Danger is a solid fill built on the error family (`component-button-danger*`, base = `error-icon`). Editorial uses the linen editorial family, so it never duplicates `primary`. Secondary is outline-only: transparent fill, `control-border` edge, `secondary-hover` fill on hover (not `hover-surface`, which equals the dark modal surface). Every variant shares the same hover: 1px lift and 1.01 scale, without a shadow. Button focus is a 2px `focus` ring with a 2px `focus-gap` offset.
 
 Premium CTA rule:
 
